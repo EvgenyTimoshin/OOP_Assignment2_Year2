@@ -1,8 +1,9 @@
 void setup()
 {
-  size(1920, 1080);
+  size(1920, 1080, P3D);
   Player player = new Player(width / 2, height / 2, 0, 50, 255);
   gameObjects.add(player);
+  camera();
 }
 
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();

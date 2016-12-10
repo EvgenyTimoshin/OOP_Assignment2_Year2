@@ -38,6 +38,7 @@ class Player extends GameObject
     ellipse(0, 0, size, size);
     line(0, 0, 0, size*1.5);
     popMatrix();
+    //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }
   
   void update()
@@ -56,20 +57,23 @@ class Player extends GameObject
     }
     if (checkKey('a'))  
     {
-      forward.x = sin(QUARTER_PI);
-      forward.y = -cos(QUARTER_PI);
+      forward.x = sin(HALF_PI);
+      forward.y = -cos(HALF_PI);
       force.add(PVector.mult(forward, -power));
        
     }
     if (checkKey('d'))
     {
-      forward.x = sin(QUARTER_PI);
-      forward.y = -cos(QUARTER_PI);
+      forward.x = sin(HALF_PI);
+      forward.y = -cos(HALF_PI);
       force.add(PVector.mult(forward, power));
     }
     if (mousePressed && elapsed > toPass && ammo > 0)
     {
-      Bullet b = new Bullet(pos.x, pos.y, theta, 10, 4);
+      forward.x = sin(theta);
+      forward.y = -cos(theta);
+      PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4);
       gameObjects.add(b);
       elapsed = 0;
       ammo--;
@@ -81,6 +85,8 @@ class Player extends GameObject
     force.x = force.y = 0;
     velocity.mult(0.99f);
     elapsed += timeDelta;
+    
+    camera(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0 ), width/2.0, height/2.0, 0, 0, 1, 0);
   }
 
 }
