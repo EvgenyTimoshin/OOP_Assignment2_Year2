@@ -8,7 +8,7 @@ class Player extends GameObject
   int ammo;
   PVector force;
   color c;
-  float power = 100;
+  float power = 200;
   float fireRate = 2;
   float toPass = 1.0 / fireRate;
   float elapsed = toPass;
@@ -23,7 +23,7 @@ class Player extends GameObject
     this.theta = theta;
     this.size = size;
     this.health = 100;
-    this.ammo = 0;
+    this.ammo = 100;
     this.c = c;
     
   }
@@ -66,6 +66,13 @@ class Player extends GameObject
       forward.x = sin(QUARTER_PI);
       forward.y = -cos(QUARTER_PI);
       force.add(PVector.mult(forward, power));
+    }
+    if (mousePressed && elapsed > toPass && ammo > 0)
+    {
+      Bullet b = new Bullet(pos.x, pos.y, theta, 10, 4);
+      gameObjects.add(b);
+      elapsed = 0;
+      ammo--;
     }
     
     accel = PVector.div(force, mass);
