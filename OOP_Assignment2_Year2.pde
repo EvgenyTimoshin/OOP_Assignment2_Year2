@@ -6,6 +6,8 @@ void setup()
 }
 
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
+boolean[] keys = new boolean[1000];
+float timeDelta = 1.0f / 60.0f;
 
 void draw()
 {

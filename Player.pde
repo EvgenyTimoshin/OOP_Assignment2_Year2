@@ -8,6 +8,10 @@ class Player extends GameObject
   int ammo;
   PVector force;
   color c;
+  float power = 100;
+  float fireRate = 2;
+  float toPass = 1.0 / fireRate;
+  float elapsed = toPass;
   
   Player(float x, float y, float theta, float size, color c)
   {
@@ -28,7 +32,7 @@ class Player extends GameObject
   {
     pushMatrix();
     translate(pos.x, pos.y);
-    rotate(-theta);
+    rotate(theta);
     fill(c);
     stroke(c);
     ellipse(0, 0, size, size);
@@ -38,7 +42,38 @@ class Player extends GameObject
   
   void update()
   {
-    theta = atan2(mouseX - pos.x, mouseY - pos.y);
+    forward.x = 0;
+    forward.y = -1;
+    theta = -atan2(mouseX - pos.x, mouseY - pos.y);
+    
+    if (checkKey('w'))
+    {
+      force.add(PVector.mult(forward, power));
+    }
+    if (checkKey('s'))
+    {
+      force.add(PVector.mult(forward, -power));      
+    }
+    if (checkKey('a'))  
+    {
+      forward.x = sin(QUARTER_PI);
+      forward.y = -cos(QUARTER_PI);
+      force.add(PVector.mult(forward, -power));
+       
+    }
+    if (checkKey('d'))
+    {
+      forward.x = sin(QUARTER_PI);
+      forward.y = -cos(QUARTER_PI);
+      force.add(PVector.mult(forward, power));
+    }
+    
+    accel = PVector.div(force, mass);
+    velocity.add(PVector.mult(accel, timeDelta));
+    pos.add(PVector.mult(velocity, timeDelta));
+    force.x = force.y = 0;
+    velocity.mult(0.99f);
+    elapsed += timeDelta;
   }
 
 }
