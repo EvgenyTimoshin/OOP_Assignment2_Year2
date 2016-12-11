@@ -86,7 +86,7 @@ class Player extends GameObject
     velocity.mult(0.99f);
     elapsed += timeDelta;
     
-    camera(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0 ), width/2.0, height/2.0, 0, 0, 1, 0);
+    camera(pos.x, pos.y, (height/2.0) / tan(PI*30.0 / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
   }
 
 }
