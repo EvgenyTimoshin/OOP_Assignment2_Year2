@@ -37,6 +37,6 @@ class Bullet extends GameObject
     {
       gameObjects.remove(this);
     }
-  
+    
   }
 }

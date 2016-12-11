@@ -13,6 +13,9 @@ class Player extends GameObject
   float toPass = 1.0 / fireRate;
   float elapsed = toPass;
   
+  Player()
+  {};
+  
   Player(float x, float y, float theta, float size, color c)
   {
     pos = new PVector(x, y);
@@ -30,6 +33,8 @@ class Player extends GameObject
   
   void render()
   {
+    fill(0,255,0);
+    rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(theta);
@@ -86,7 +91,26 @@ class Player extends GameObject
     velocity.mult(0.99f);
     elapsed += timeDelta;
     
-    camera(pos.x, pos.y, (height/2.0) / tan(PI*30.0 / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
+    if(health < 0)
+    {
+      gameObjects.remove(this);
+    }
+    
+    for(int i = 0 ; i < gameObjects.size() ; i ++)
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Bullet)
+      {
+        Bullet b = (Bullet) go;
+        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
+        {
+          health -=34;
+          gameObjects.remove(b);
+        }
+      }
+   }
+    
+    //camera(pos.x, pos.y, (height/2.0) / tan(PI*30.0 / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
   }
 
 }
