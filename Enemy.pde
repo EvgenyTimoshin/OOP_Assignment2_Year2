@@ -4,6 +4,15 @@ class Enemy extends Player
   
   Enemy(float x, float y, float theta, float size, color c,int gunner)
   {
+    if(gunner == 1)
+    {
+      power = 60;
+    }
+    else
+    {
+      power = 120;
+    }
+    
     pos = new PVector(x, y);
     forward = new PVector(0, -1);
     accel = new PVector(0,0);
@@ -14,7 +23,6 @@ class Enemy extends Player
     this.health = 100;
     this.ammo = 100;
     this.c = c;
-    power = 70;
     health = 100;
     this.gunner = gunner;
   }
@@ -26,7 +34,14 @@ class Enemy extends Player
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(theta);
-    fill(255,0,0);
+    if(gunner == 1)
+    {
+      fill(255,0,0);
+    }
+    else
+    {
+      fill(0,255,0);
+    }
     stroke(255,0,0);
     ellipse(0, 0, size, size);
     if(gunner == 1)
@@ -56,7 +71,7 @@ class Enemy extends Player
     float random;
     random = (int)random(0,10);
     
-    if (elapsed > toPass && random % 3 == 0)
+    if (elapsed > toPass && random % 3 == 0 && gunner == 1)
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);
