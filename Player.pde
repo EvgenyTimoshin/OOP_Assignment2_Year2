@@ -12,6 +12,7 @@ class Player extends GameObject
   float fireRate = 2;
   float toPass = 1.0 / fireRate;
   float elapsed = toPass;
+  float cameraZoom;
   
   Player()
   {};
@@ -26,8 +27,9 @@ class Player extends GameObject
     this.theta = theta;
     this.size = size;
     this.health = 100;
-    this.ammo = 100;
+    this.ammo = 20;
     this.c = c;
+    cameraZoom = 30;
     
   }
   
@@ -35,6 +37,7 @@ class Player extends GameObject
   {
     fill(0,255,0);
     rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
+    text("ammo:" + ammo ,pos.x + size * 1.2, pos.y );
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(theta);
@@ -50,7 +53,7 @@ class Player extends GameObject
   {
     forward.x = 0;
     forward.y = -1;
-    theta = -atan2(mouseX - pos.x, mouseY - pos.y);
+    theta = (-atan2(mouseX  - width/2, mouseY - height/2));
     
     if (checkKey('w'))
     {
@@ -72,6 +75,19 @@ class Player extends GameObject
       forward.x = sin(HALF_PI);
       forward.y = -cos(HALF_PI);
       force.add(PVector.mult(forward, power));
+    }
+    
+    if (checkKey('1'))
+    {
+      cameraZoom = 30;
+    }
+    if (checkKey('2'))
+    {
+      cameraZoom = 23;
+    }
+    if (checkKey('3'))
+    {
+      cameraZoom = 16;
     }
     if (mousePressed && elapsed > toPass && ammo > 0)
     {
@@ -104,13 +120,28 @@ class Player extends GameObject
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
-          health -=34;
+          health -=12;
           gameObjects.remove(b);
         }
       }
    }
+   
+    for(int i = 0 ; i < gameObjects.size() ; i ++)
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Ammo)
+      {
+        Ammo item = (Ammo) go;
+        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
+        {
+          ammo += size/5;
+          gameObjects.remove(item);
+        }
+      }
+   }
     
-    //camera(pos.x, pos.y, (height/2.0) / tan(PI*30.0 / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
+    camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
+    text("p.X:  " + (int)pos.x + "  p.Y:  " +(int)pos.y, pos.x - size*1.5, pos.y + 200);
   }
 
 }

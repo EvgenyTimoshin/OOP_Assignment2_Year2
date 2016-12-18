@@ -54,8 +54,12 @@ class Enemy extends Player
   
   void update()
   {
-    Player p = (Player)gameObjects.get(0);
-    theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
+    if(gameObjects.get(0) instanceof Player)
+    {
+      Player p = (Player)gameObjects.get(0);
+      theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
+    }
+    
     forward.x = -sin(theta);
     forward.y = cos(theta);
     
@@ -71,7 +75,7 @@ class Enemy extends Player
     float random;
     random = (int)random(0,10);
     
-    if (elapsed > toPass && random % 3 == 0 && gunner == 1)
+    if (elapsed > toPass && random % 10 == 0 && gunner == 1)
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);
@@ -86,6 +90,7 @@ class Enemy extends Player
     if(health < 0)
     {
       gameObjects.remove(this);
+      score++;
     }
     
     for(int i = 0 ; i < gameObjects.size() ; i ++)

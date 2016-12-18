@@ -9,10 +9,16 @@ void setup()
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
+int score = 0;
 
 void draw()
 {
   background(0);
+  noFill();
+  rect(0,0,width,height);
+  fill(255);
+  textSize(30);
+  text("Score:" + score, 10, 40);
   
   line(0-1000000,0,100000,0);
   line(0-1000000,height,1000000,height);
@@ -21,11 +27,19 @@ void draw()
     stroke(255);
     line(i,0,i,height);
   }
-  if(frameCount % 120 == 0)
+  
+  /*if(frameCount % 120 == 0)
   {
     Enemy m = new Enemy(random(0,width), random(0,height), 0, 50, 255,((int)random(0,2)));
     gameObjects.add(m);
+  }*/
+  
+  if(frameCount % 320 == 0)
+  {
+    Ammo i = new Ammo(random(0,width), random(0,height), random(10, 40));
+    gameObjects.add(i);
   }
+  
   for (int i = gameObjects.size() -1 ; i >= 0  ; i --)
   {
     GameObject go = gameObjects.get(i); 
