@@ -3,7 +3,7 @@ class Player extends GameObject
   PVector velocity;
   PVector accel;
   float theta;
-  float mass = 1;
+  float mass = 2;
   int health;
   int ammo;
   PVector force;
@@ -159,13 +159,8 @@ class Player extends GameObject
             && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
             && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
         {
-          playerWallCollision = true;
-          fill(255);
           text("Collision",width/2,height/2);
-        }
-        else
-        {
-          playerWallCollision = false;
+          
         }
       }
    }

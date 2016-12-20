@@ -109,3 +109,12 @@ class Enemy extends Player
   
 }
 }
+
+void enemiesSpawn()
+{
+  if(frameCount % 120 == 0)
+  {
+    Enemy m = new Enemy(random(0,width), random(0,height), 0, 50, 255,((int)random(0,2)));
+    gameObjects.add(m);
+  }
+}

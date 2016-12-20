@@ -26,3 +26,12 @@ class Ammo extends GameObject
   }
   
 }
+
+void ammoSpawn()
+{
+  if(frameCount % 320 == 0)
+  {
+    Ammo i = new Ammo(random(0,width), random(0,height), random(10, 40));
+    gameObjects.add(i);
+  }
+}
