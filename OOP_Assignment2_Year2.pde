@@ -3,11 +3,9 @@ void setup()
   size(1920, 1080, P3D);
   Player player = new Player(width / 2, height / 2, 0, 50, 255);
   gameObjects.add(player);
-  Wall wall = new Wall(width/2,height/2-300,100,50);
-  Wall wall2 = new Wall(width/2,height/2+300,100,50);
-  gameObjects.add(wall);
-  gameObjects.add(wall2);
+  createBuilding(300, 300, 500, 10);
   camera();
+  frameRate(120);
 }
 
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
@@ -19,6 +17,7 @@ void draw()
 {
   background(0);
   noFill();
+  println(frameRate);
   rect(0,0,width,height);
   fill(255);
   textSize(30);
