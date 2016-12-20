@@ -3,6 +3,10 @@ void setup()
   size(1920, 1080, P3D);
   Player player = new Player(width / 2, height / 2, 0, 50, 255);
   gameObjects.add(player);
+  Wall wall = new Wall(width/2,height/2-300,100,50);
+  Wall wall2 = new Wall(width/2,height/2+300,100,50);
+  gameObjects.add(wall);
+  gameObjects.add(wall2);
   camera();
 }
 
@@ -20,19 +24,21 @@ void draw()
   textSize(30);
   text("Score:" + score, 10, 40);
   
-  line(0-1000000,0,100000,0);
-  line(0-1000000,height,1000000,height);
-  for(int i = 0 - 1000000; i < 1000000; i +=100)
-  {
-    stroke(255);
-    line(i,0,i,height);
-  }
+  //line(0-1000000,0,100000,0);
+  //line(0-1000000,height,1000000,height);
+  //for(int i = 0 - 1000000; i < 1000000; i +=100)
+  //{
+    //stroke(255);
+    //line(i,0,i,height);
+  //}
   
   /*if(frameCount % 120 == 0)
   {
     Enemy m = new Enemy(random(0,width), random(0,height), 0, 50, 255,((int)random(0,2)));
     gameObjects.add(m);
   }*/
+  
+  
   
   if(frameCount % 320 == 0)
   {

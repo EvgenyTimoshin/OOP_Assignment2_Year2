@@ -13,6 +13,7 @@ class Player extends GameObject
   float toPass = 1.0 / fireRate;
   float elapsed = toPass;
   float cameraZoom;
+  Boolean playerWallCollision = false;
   
   Player()
   {};
@@ -55,64 +56,71 @@ class Player extends GameObject
     forward.y = -1;
     theta = (-atan2(mouseX  - width/2, mouseY - height/2));
     
-    if (checkKey('w'))
+      if (checkKey('w'))
+      {
+        force.add(PVector.mult(forward, power));
+      }
+      if (checkKey('s'))
+      {
+        force.add(PVector.mult(forward, -power));      
+      }
+      if (checkKey('a'))  
+      {
+        forward.x = sin(HALF_PI);
+        forward.y = -cos(HALF_PI);
+        force.add(PVector.mult(forward, -power));
+         
+      }
+      if (checkKey('d'))
+      {
+        forward.x = sin(HALF_PI);
+        forward.y = -cos(HALF_PI);
+        force.add(PVector.mult(forward, power));
+      }
+      
+      if (checkKey('1'))
+      {
+        cameraZoom = 30;
+      }
+      if (checkKey('2'))
+      {
+        cameraZoom = 23;
+      }
+      if (checkKey('3'))
+      {
+        cameraZoom = 16;
+      }
+      if (checkKey('4'))
+      {
+        this.pos.x = width/2;
+        this.pos.y = height/2;
+      }
+      if (mousePressed && elapsed > toPass && ammo > 0)
+      {
+        forward.x = sin(theta);
+        forward.y = -cos(theta);
+        PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+        Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4);
+        gameObjects.add(b);
+        elapsed = 0;
+        ammo--;
+      }
+    if(playerWallCollision == false)
     {
-      force.add(PVector.mult(forward, power));
-    }
-    if (checkKey('s'))
-    {
-      force.add(PVector.mult(forward, -power));      
-    }
-    if (checkKey('a'))  
-    {
-      forward.x = sin(HALF_PI);
-      forward.y = -cos(HALF_PI);
-      force.add(PVector.mult(forward, -power));
-       
-    }
-    if (checkKey('d'))
-    {
-      forward.x = sin(HALF_PI);
-      forward.y = -cos(HALF_PI);
-      force.add(PVector.mult(forward, power));
-    }
-    
-    if (checkKey('1'))
-    {
-      cameraZoom = 30;
-    }
-    if (checkKey('2'))
-    {
-      cameraZoom = 23;
-    }
-    if (checkKey('3'))
-    {
-      cameraZoom = 16;
-    }
-    if (mousePressed && elapsed > toPass && ammo > 0)
-    {
-      forward.x = sin(theta);
-      forward.y = -cos(theta);
-      PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
-      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4);
-      gameObjects.add(b);
-      elapsed = 0;
-      ammo--;
-    }
-    
-    accel = PVector.div(force, mass);
-    velocity.add(PVector.mult(accel, timeDelta));
-    pos.add(PVector.mult(velocity, timeDelta));
-    force.x = force.y = 0;
-    velocity.mult(0.99f);
-    elapsed += timeDelta;
+      accel = PVector.div(force, mass);
+      velocity.add(PVector.mult(accel, timeDelta));
+      pos.add(PVector.mult(velocity, timeDelta));
+      force.x = force.y = 0;
+      velocity.mult(0.99f);
+      elapsed += timeDelta;
+    }//end collision
     
     if(health < 0)
     {
       gameObjects.remove(this);
     }
     
-    for(int i = 0 ; i < gameObjects.size() ; i ++)
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//checks for collision between player and bullets
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Bullet)
@@ -126,7 +134,7 @@ class Player extends GameObject
       }
    }
    
-    for(int i = 0 ; i < gameObjects.size() ; i ++)
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition with ammo pickups
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Ammo)
@@ -139,9 +147,34 @@ class Player extends GameObject
         }
       }
    }
+   
+   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          playerWallCollision = true;
+          fill(255);
+          text("Collision",width/2,height/2);
+        }
+        else
+        {
+          playerWallCollision = false;
+        }
+      }
+   }
+   
+   
     
+    //Updates the camera to follow the player
     camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
-    text("p.X:  " + (int)pos.x + "  p.Y:  " +(int)pos.y, pos.x - size*1.5, pos.y + 200);
+   // text("p.X:  " + (int)pos.x + "  p.Y:  " +(int)pos.y, pos.x - size*1.5, pos.y + 200);
   }
 
 }
