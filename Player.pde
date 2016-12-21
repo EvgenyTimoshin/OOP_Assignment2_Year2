@@ -50,6 +50,94 @@ class Player extends GameObject
     //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }
   
+  Boolean north()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 2)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          stopMovement();
+          text("Collision NORTH",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
+  }
+  
+  Boolean south()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 2))
+        {
+          stopMovement();
+          text("Collision SOUTH",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
+  }
+  
+  Boolean west()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          stopMovement();
+          text("Collision WEST",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
+  }
+  
+  Boolean east()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 2)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          stopMovement();
+          text("Collision EAST",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
+  }
+  
   void update()
   {
     forward.x = 0;
@@ -58,24 +146,39 @@ class Player extends GameObject
     
       if (checkKey('w'))
       {
-        force.add(PVector.mult(forward, power));
+        if(north())
+        {
+          force.add(PVector.mult(forward, power));
+          playerWallCollision = false;
+        }
       }
       if (checkKey('s'))
       {
-        force.add(PVector.mult(forward, -power));      
+        if(south())
+        {
+          force.add(PVector.mult(forward, -power));
+          playerWallCollision = false;
+        }
       }
       if (checkKey('a'))  
       {
-        forward.x = sin(HALF_PI);
-        forward.y = -cos(HALF_PI);
-        force.add(PVector.mult(forward, -power));
-         
+        if(west())
+        {
+          forward.x = sin(HALF_PI);
+          forward.y = -cos(HALF_PI);
+          force.add(PVector.mult(forward, -power));
+          playerWallCollision = false;
+        }
       }
       if (checkKey('d'))
       {
-        forward.x = sin(HALF_PI);
-        forward.y = -cos(HALF_PI);
-        force.add(PVector.mult(forward, power));
+        if(east())
+        {
+          forward.x = sin(HALF_PI);
+          forward.y = -cos(HALF_PI);
+          force.add(PVector.mult(forward, power));
+          playerWallCollision = false;
+        }
       }
       
       if (checkKey('1'))
@@ -105,6 +208,7 @@ class Player extends GameObject
         elapsed = 0;
         ammo--;
       }
+      
     if(playerWallCollision == false)
     {
       accel = PVector.div(force, mass);
@@ -148,7 +252,7 @@ class Player extends GameObject
       }
    }
    
-   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+   /*for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Wall)
@@ -163,13 +267,17 @@ class Player extends GameObject
           
         }
       }
-   }
+   }*/
    
-   
-    
     //Updates the camera to follow the player
     camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
    // text("p.X:  " + (int)pos.x + "  p.Y:  " +(int)pos.y, pos.x - size*1.5, pos.y + 200);
+  }
+  
+  void stopMovement()
+  {
+    playerWallCollision = true;
+    velocity.mult(0);
   }
 
 }
