@@ -106,6 +106,23 @@ class Enemy extends Player
         }
       }
    }
+   
+   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 1)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 1)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 1)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 1))
+        {
+          text("Collision",width/2,height/2);
+          velocity.mult(-1);
+        }
+      }
+   }
   
 }
 }

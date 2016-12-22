@@ -3,7 +3,7 @@ class Player extends GameObject
   PVector velocity;
   PVector accel;
   float theta;
-  float mass = 2;
+  float mass = 4;
   int health;
   int ammo;
   PVector force;
@@ -232,7 +232,7 @@ class Player extends GameObject
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
-          health -=12;
+          //health -=12;
           gameObjects.remove(b);
         }
       }
@@ -252,22 +252,22 @@ class Player extends GameObject
       }
    }
    
-   /*for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Wall)
       {
         Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 2)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 2)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 2))
         {
           text("Collision",width/2,height/2);
-          
+          velocity.mult(-1);
         }
       }
-   }*/
+   }
    
     //Updates the camera to follow the player
     camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
