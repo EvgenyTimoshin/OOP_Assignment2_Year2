@@ -1,5 +1,7 @@
 class GunEnemy extends Player
 {
+  Boolean stuck;
+  Boolean spotted;
   
   GunEnemy(float x, float y, float theta, float size, color c)
   {
@@ -16,6 +18,8 @@ class GunEnemy extends Player
     this.ammo = 100;
     this.c = c;
     health = 100;
+    stuck = false;
+    spotted = false;
   }
   
   void render()
@@ -43,7 +47,11 @@ class GunEnemy extends Player
     forward.x = -sin(theta);
     forward.y = cos(theta);
     
-    force.add(PVector.mult(forward, power));
+    
+    if(spotted == true)
+    {
+      force.add(PVector.mult(forward, power));
+    }
     
     accel = PVector.div(force, mass);
     velocity.add(PVector.mult(accel, timeDelta));
@@ -55,11 +63,11 @@ class GunEnemy extends Player
     float random;
     random = (int)random(0,10);
     
-    if (elapsed > toPass && random % 10 == 0)
+    if (elapsed > toPass && random % 10 == 0 && spotted == true)
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);
-      PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+      PVector bp = PVector.sub(pos, PVector.mult(forward, size + 5));
       Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4);
       gameObjects.add(b);
       elapsed = 0;
@@ -93,15 +101,28 @@ class GunEnemy extends Player
       if (go instanceof Wall)
       {
         Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 1)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 1)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 1)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 1))
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 2)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 2)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 2))
         {
-          forward.x = sin(HALF_PI);
-          forward.y = -cos(HALF_PI);
           text("Collision",width/2,height/2);
           velocity.mult(-1);
+        }
+      }
+   }
+   
+   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Player)
+      {
+        GameObject g = gameObjects.get(0);
+        Player p = (Player) g;
+        if (dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y) < 200)
+        {
+          spotted = true;
+          break;
         }
       }
    }

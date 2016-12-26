@@ -40,5 +40,22 @@ class Bullet extends GameObject
       gameObjects.remove(this);
     }
     
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x)
+            && (wall.pos.x) <= (this.pos.x)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y)
+            && (wall.pos.y) <= (this.pos.y))
+        {
+          gameObjects.remove(this);
+        }
+      }
+   }
+    
   }
+  
 }
