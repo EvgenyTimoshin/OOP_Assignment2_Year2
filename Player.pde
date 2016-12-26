@@ -3,7 +3,7 @@ class Player extends GameObject
   PVector velocity;
   PVector accel;
   float theta;
-  float mass = 4;
+  float mass = 2;
   int health;
   int ammo;
   PVector force;
@@ -258,11 +258,12 @@ class Player extends GameObject
       if (go instanceof Wall)
       {
         Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 2)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 2)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 2)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 2))
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 1)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 1)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 1)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 1))
         {
+          
           text("Collision",width/2,height/2);
           velocity.mult(-1);
         }

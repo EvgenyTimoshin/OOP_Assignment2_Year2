@@ -1,17 +1,9 @@
-class Enemy extends Player
+class GunEnemy extends Player
 {
-  int gunner;
   
-  Enemy(float x, float y, float theta, float size, color c,int gunner)
+  GunEnemy(float x, float y, float theta, float size, color c)
   {
-    if(gunner == 1)
-    {
-      power = 60;
-    }
-    else
-    {
-      power = 120;
-    }
+   
     
     pos = new PVector(x, y);
     forward = new PVector(0, -1);
@@ -24,7 +16,6 @@ class Enemy extends Player
     this.ammo = 100;
     this.c = c;
     health = 100;
-    this.gunner = gunner;
   }
   
   void render()
@@ -34,20 +25,9 @@ class Enemy extends Player
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(theta);
-    if(gunner == 1)
-    {
-      fill(255,0,0);
-    }
-    else
-    {
-      fill(0,255,0);
-    }
     stroke(255,0,0);
     ellipse(0, 0, size, size);
-    if(gunner == 1)
-    {
-      line(0, 0, 0, size*1.5);
-    }
+    
     popMatrix();
     //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }
@@ -75,7 +55,7 @@ class Enemy extends Player
     float random;
     random = (int)random(0,10);
     
-    if (elapsed > toPass && random % 10 == 0 && gunner == 1)
+    if (elapsed > toPass && random % 10 == 0)
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);
@@ -118,6 +98,8 @@ class Enemy extends Player
             && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 1)
             && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 1))
         {
+          forward.x = sin(HALF_PI);
+          forward.y = -cos(HALF_PI);
           text("Collision",width/2,height/2);
           velocity.mult(-1);
         }
@@ -131,7 +113,26 @@ void enemiesSpawn()
 {
   if(frameCount % 120 == 0)
   {
-    Enemy m = new Enemy(random(0,width), random(0,height), 0, 50, 255,((int)random(0,2)));
-    gameObjects.add(m);
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      int x = (int)random(0,width);
+      int y = (int)random(0,height);
+      GunEnemy m = new GunEnemy(x, y, 0, 50, 255);
+      
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) < (x - 100 )
+            || (wall.pos.x) > (x + 100)
+            && (wall.pos.y + wall.wallHeight) > (y - 100)
+            || (wall.pos.y) < (y + 100))
+        {
+         gameObjects.add(m);
+         break;
+        }
+      }
+   }
+    
   }
 }
