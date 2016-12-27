@@ -41,6 +41,7 @@ void drawBuildingFloor()
 {
    for(int i = 0; i < 1080; i += 350)
    {
+    stroke(0);
     fill(100);
     rect(i , 300, 300, 300);
    }

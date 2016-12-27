@@ -19,7 +19,7 @@ Boolean enemies = false;
 
 void draw()
 {
-  background(255);
+  background(#0D6F01);
   noFill();
   println(frameRate);
   rect(0,0,width,height);
