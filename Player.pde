@@ -234,6 +234,9 @@ class Player extends GameObject
       }
       if (mousePressed && elapsed > toPass && ammo > 0)
       {
+        gunShot.rewind();
+        gunShot.setGain(-5);
+        gunShot.play();
         forward.x = sin(theta);
         forward.y = -cos(theta);
         PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
@@ -266,8 +269,11 @@ class Player extends GameObject
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
+          playerShot.rewind();
+          playerShot.setGain(-10);
+          playerShot.play();
           //health -=10;
-          gameOver();
+          gameObjects.remove(b);
         }
       }
    }
@@ -309,6 +315,9 @@ class Player extends GameObject
      xp = 0;
      levelCap = levelCap * 1.5;
      level++;
+     levelUp.rewind();
+     //levelUp.setGain(-10);
+     levelUp.play();
    }
    
     //Updates the camera to follow the player

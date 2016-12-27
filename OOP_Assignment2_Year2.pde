@@ -1,3 +1,5 @@
+import ddf.minim.*;
+
 void setup()
 {
   //size(1920, 1080, P3D);
@@ -10,8 +12,19 @@ void setup()
   }
   camera();
   frameRate(120);
+  
+  minim = new Minim(this);
+  gunShot = minim.loadSnippet("gunShot.mp3");
+  death = minim.loadSnippet("death.mp3");
+  levelUp = minim.loadSnippet("levelUp.mp3");
+  playerShot = minim.loadSnippet("playerShot.mp3");
 }
 
+AudioSnippet gunShot;
+AudioSnippet death;
+AudioSnippet levelUp;
+AudioSnippet playerShot;
+Minim minim;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;

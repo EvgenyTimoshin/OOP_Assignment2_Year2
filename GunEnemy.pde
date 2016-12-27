@@ -77,6 +77,9 @@ class GunEnemy extends Player
     //Display xp and 
     if(health < 0)
     {
+      death.rewind();
+      death.setGain(-10);
+      death.play();
       gameObjects.remove(this);
       GameObject go = gameObjects.get(0);
       Player p = (Player) go;
@@ -137,7 +140,7 @@ class GunEnemy extends Player
 
 void enemiesSpawn()
 {
-  if(frameCount % 2 == 0)
+  if(frameCount % 200 == 0)
   {
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
