@@ -326,6 +326,23 @@ class Player extends GameObject
    
    displayXp();
    
+   
+   if(health < 25)
+   {
+     heartBeat.play();
+   }
+   else
+   {
+     heartBeat.pause();
+     heartBeat.rewind();
+   }
+   
+   
+   if(keyPressed && key == 't')
+   {
+     health = 100;
+   }
+   
   }//end update
   
   void showXp(int enemyType)

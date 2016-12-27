@@ -13,7 +13,7 @@ void setup()
     createBuilding(i , 300, 300, 10);
   }
   camera();
-  frameRate(120);
+  frameRate(60);
   font = loadFont("Zombie-Noize-48.vlw");
   minim = new Minim(this);
   gunShot = minim.loadSnippet("gunShot.mp3");
@@ -22,6 +22,7 @@ void setup()
   playerShot = minim.loadSnippet("playerShot.mp3");
   forestAmbience = minim.loadFile("forestAmbience.mp3");
   nightSong = minim.loadFile("nightSong.mp3");
+  heartBeat = minim.loadSnippet("heartBeat.mp3");
   forestAmbience.play();
 }
 
@@ -31,6 +32,7 @@ AudioSnippet levelUp;
 AudioSnippet playerShot;
 AudioPlayer forestAmbience;
 AudioPlayer nightSong;
+AudioSnippet heartBeat;
 Minim minim;
 PFont font;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();

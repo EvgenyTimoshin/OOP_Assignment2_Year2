@@ -93,12 +93,19 @@ class Clock extends GameObject
         playNightSong = true;
       }
         dayLight += 0.1;
-        audioVol += 0.1;
+        
+        if(audioVol < -15)
+        {
+          audioVol += 0.05;
+        }
     }
-    else if(hrOne == 0 && hrTwo > 5 && dayLight > 10)
+    else if(hrOne == 0 && hrTwo > 5 && dayLight > 0)
     {
       dayLight -=0.5;
-      audioVol -= 0.5;
+      if(audioVol > -80)
+      {
+        audioVol -= 0.5;
+      }
       forestAmbience.setGain(-5);
     }
     
@@ -109,6 +116,12 @@ class Clock extends GameObject
       playNightSong = false;
     }
     
+    if(hrTwo == 7)
+    {
+      nightSong.setGain(-80);
+      nightSong.rewind();
+      nightSong.pause();
+    }
     nightSong.setGain(audioVol);
   }
 }
