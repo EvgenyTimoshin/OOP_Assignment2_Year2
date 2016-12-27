@@ -2,6 +2,7 @@ class GunEnemy extends Player
 {
   Boolean stuck;
   Boolean spotted;
+  float distanceFromPlayer;
   
   GunEnemy(float x, float y, float theta, float size, color c)
   {
@@ -20,6 +21,8 @@ class GunEnemy extends Player
     health = 100;
     stuck = false;
     spotted = false;
+    mass = 12;
+    distanceFromPlayer = 201;
   }
   
   void render()
@@ -27,7 +30,7 @@ class GunEnemy extends Player
     fill(0,255,0);
     rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
     pushMatrix();
-    translate(pos.x, pos.y);
+    translate(pos.x, pos.y,+2);
     rotate(theta);
     stroke(255,0,0);
     ellipse(0, 0, size, size);
@@ -70,6 +73,7 @@ class GunEnemy extends Player
       PVector bp = PVector.sub(pos, PVector.mult(forward, size + 5));
       Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 120);
       gameObjects.add(b);
+      
       elapsed = 0;
       ammo--;
     }
@@ -129,8 +133,8 @@ class GunEnemy extends Player
       {
         GameObject g = gameObjects.get(0);
         Player p = (Player) go;
-        
-        if (dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y) < 200)
+        distanceFromPlayer = dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y);
+        if (distanceFromPlayer < 200)
         {
           spotted = true;
           break;
@@ -157,7 +161,7 @@ void enemiesSpawn()
         Wall wall = (Wall) go;
         if ((wall.pos.x + wall.wallWidth) < (x - 150 )
             || (wall.pos.x) > (x + 150)
-            && (wall.pos.y + wall.wallHeight) < (y - 150)
+            || (wall.pos.y + wall.wallHeight) < (y - 150)
             || (wall.pos.y) > (y + 150))
         {
          gameObjects.add(m);
