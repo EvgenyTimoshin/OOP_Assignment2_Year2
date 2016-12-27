@@ -240,7 +240,7 @@ class Player extends GameObject
         forward.x = sin(theta);
         forward.y = -cos(theta);
         PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
-        Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4);
+        Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
         gameObjects.add(b);
         elapsed = 0;
         ammo--;
@@ -272,7 +272,7 @@ class Player extends GameObject
           playerShot.rewind();
           playerShot.setGain(-10);
           playerShot.play();
-          //health -=10;
+          health -=10;
           gameObjects.remove(b);
         }
       }

@@ -2,11 +2,11 @@ class Bullet extends GameObject
 {
   float theta;
   float size;
-  float speed = 400;
+  float speed;
   float timeToLive;
   float alive;
   
-  Bullet(float x, float y, float theta, float size, float timeToLive)
+  Bullet(float x, float y, float theta, float size, float timeToLive, float speed)
   {
     pos = new PVector(x, y);
     forward = new PVector(0, 1);
@@ -14,6 +14,7 @@ class Bullet extends GameObject
     this.size = size;
     this.timeToLive = timeToLive;    
     this.alive = 0;
+    this.speed = speed;
   }
   
   void render()

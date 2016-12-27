@@ -6,6 +6,8 @@ void setup()
   fullScreen(P3D);
   Player player = new Player(width / 2, height / 2, 0, 50, color(0,0,255));
   gameObjects.add(player);
+  Clock clock = new Clock();
+  gameObjects.add(clock);
   for(int i = 0; i < 1080; i += 350)
   {
     createBuilding(i , 300, 300, 10);
@@ -18,12 +20,16 @@ void setup()
   death = minim.loadSnippet("death.mp3");
   levelUp = minim.loadSnippet("levelUp.mp3");
   playerShot = minim.loadSnippet("playerShot.mp3");
+  forestAmbience = minim.loadFile("forestAmbience.mp3");
+  forestAmbience.play();
+  
 }
 
 AudioSnippet gunShot;
 AudioSnippet death;
 AudioSnippet levelUp;
 AudioSnippet playerShot;
+AudioPlayer forestAmbience;
 Minim minim;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];

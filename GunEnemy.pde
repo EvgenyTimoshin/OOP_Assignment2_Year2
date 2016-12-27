@@ -68,7 +68,7 @@ class GunEnemy extends Player
       forward.x = sin(theta);
       forward.y = -cos(theta);
       PVector bp = PVector.sub(pos, PVector.mult(forward, size + 5));
-      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4);
+      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 120);
       gameObjects.add(b);
       elapsed = 0;
       ammo--;
@@ -87,6 +87,7 @@ class GunEnemy extends Player
       p.showXp(4);
     }
     
+    //checks for collision between enemy and bullet
     for(int i = 0 ; i < gameObjects.size() ; i ++)
     {
       GameObject go = gameObjects.get(i);
@@ -96,6 +97,7 @@ class GunEnemy extends Player
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
           health -=34;
+          spotted = true;
           gameObjects.remove(b);
         }
       }
@@ -126,7 +128,8 @@ class GunEnemy extends Player
       if (go instanceof Player)
       {
         GameObject g = gameObjects.get(0);
-        Player p = (Player) g;
+        Player p = (Player) go;
+        
         if (dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y) < 200)
         {
           spotted = true;
