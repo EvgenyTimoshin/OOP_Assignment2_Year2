@@ -14,7 +14,7 @@ void setup()
   }
   camera();
   frameRate(120);
-  
+  font = loadFont("Zombie-Noize-48.vlw");
   minim = new Minim(this);
   gunShot = minim.loadSnippet("gunShot.mp3");
   death = minim.loadSnippet("death.mp3");
@@ -31,6 +31,7 @@ AudioSnippet levelUp;
 AudioSnippet playerShot;
 AudioPlayer forestAmbience;
 Minim minim;
+PFont font;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;

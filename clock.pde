@@ -16,16 +16,24 @@ class Clock extends GameObject
   
   void render()
   {
-    textSize(35);
-    fill(255);
+
+    noStroke();
     GameObject go = gameObjects.get(0);
     Player p = (Player) go;
-    text(hrOne +""+ hrTwo + "  :  " + minuteOne + minuteTwo , p.pos.x + width/2 - 200, p.pos.y - height/2 + 100);
+    fill(0,160);
+    noFill();
+    pushMatrix();
+    translate(0,0,+3);
+    rect(p.pos.x - width/2, p.pos.y - height/2, width, height);
+    textFont(font, 80);
+    fill(255);
+    text(hrOne +""+ hrTwo + "  :  " + minuteOne + minuteTwo , p.pos.x + width/2 - 250, p.pos.y - height/2 + 100);
+    popMatrix();
   }
   
   void update()
   {
-    if(frameCount % 2 == 0)
+    if(frameCount % 25 == 0)
     {
       minuteTwo++;
     }
