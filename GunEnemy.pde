@@ -74,11 +74,14 @@ class GunEnemy extends Player
       ammo--;
     }
     
-    
+    //Display xp and 
     if(health < 0)
     {
       gameObjects.remove(this);
-      score++;
+      GameObject go = gameObjects.get(0);
+      Player p = (Player) go;
+      p.xp += 10;
+      p.showXp(4);
     }
     
     for(int i = 0 ; i < gameObjects.size() ; i ++)
@@ -95,7 +98,8 @@ class GunEnemy extends Player
       }
    }
    
-   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+   //Checks for collition between PLayer and wall
+   for(int i = 0 ; i < gameObjects.size() ; i ++)
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Wall)
@@ -112,7 +116,8 @@ class GunEnemy extends Player
       }
    }
    
-   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+   //Checks for collition between PLayer and wall
+   for(int i = 0 ; i < gameObjects.size() ; i ++)
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Player)
@@ -132,7 +137,7 @@ class GunEnemy extends Player
 
 void enemiesSpawn()
 {
-  if(frameCount % 120 == 0)
+  if(frameCount % 100 == 0)
   {
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
@@ -144,10 +149,10 @@ void enemiesSpawn()
       if (go instanceof Wall)
       {
         Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) < (x - 100 )
-            || (wall.pos.x) > (x + 100)
-            && (wall.pos.y + wall.wallHeight) > (y - 100)
-            || (wall.pos.y) < (y + 100))
+        if ((wall.pos.x + wall.wallWidth) < (x - 150 )
+            && (wall.pos.x) > (x + 150)
+            && (wall.pos.y + wall.wallHeight) < (y - 150)
+            && (wall.pos.y) > (y + 150))
         {
          gameObjects.add(m);
          break;

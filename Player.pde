@@ -14,6 +14,15 @@ class Player extends GameObject
   float elapsed = toPass;
   float cameraZoom;
   Boolean playerWallCollision = false;
+  int level;
+  int xp;
+  Boolean showXp;
+  float displayCounter;
+  int enemyTypeKilled;
+  float textS;
+  float levelCap;
+  int skillPoints;
+  int killCount;
   
   Player()
   {};
@@ -28,17 +37,37 @@ class Player extends GameObject
     this.theta = theta;
     this.size = size;
     this.health = 100;
-    this.ammo = 20;
+    this.ammo = 1000;
     this.c = c;
     cameraZoom = 30;
-    
+    level = 1;
+    xp = 0;
+    displayCounter = 60;
+    enemyTypeKilled = 0;
+    textS = 0;
+    levelCap = 100;
+    skillPoints = 0;
+    killCount = 0;
   }
   
   void render()
   {
-    fill(0,255,0);
-    rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
-    text("ammo:" + ammo ,pos.x + size * 1.2, pos.y );
+    if(cameraZoom == 30)
+    {
+      pushMatrix();
+      translate(0,0,+2);
+      fill(255, 0, 0);
+      rect(pos.x - width/2 + 20, pos.y - height/2 + 50,map(health,0,100,0,300),60); // health bar
+      textSize(30);
+      fill(#FF0011);
+      text("ammo:" + ammo ,pos.x + size * 1.8, pos.y );
+      fill(#DAE300);
+      textSize(30);
+      text("lvl: " + level ,pos.x - 50, pos.y + height/2 - 70);
+      rect(pos.x - width/2 + 50, pos.y + height/2 - 50,map(xp,0,levelCap,0,width-100),20);
+      popMatrix();
+    }
+    
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(theta);
@@ -144,6 +173,11 @@ class Player extends GameObject
     forward.y = -1;
     theta = (-atan2(mouseX  - width/2, mouseY - height/2));
     
+    if(level % 100 == 0)
+    {
+      level = 0;
+    }
+    
       if (checkKey('w'))
       {
         if(north())
@@ -232,7 +266,7 @@ class Player extends GameObject
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
-          //health -=12;
+          health -=10;
           gameObjects.remove(b);
         }
       }
@@ -270,15 +304,52 @@ class Player extends GameObject
       }
    }
    
+   if(xp > levelCap)
+   {
+     xp = 0;
+     levelCap = levelCap * 1.5;
+     level++;
+   }
+   
     //Updates the camera to follow the player
     camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
    // text("p.X:  " + (int)pos.x + "  p.Y:  " +(int)pos.y, pos.x - size*1.5, pos.y + 200);
+   
+   displayXp();
+   
+  }//end update
+  
+  void showXp(int enemyType)
+  {
+    showXp = true;
+    displayCounter = 60;
+    this.enemyTypeKilled = enemyType;
+    killCount++;
+  }
+  
+  void displayXp()
+  {
+    if(enemyTypeKilled == 4 && showXp && displayCounter > -1)
+    {
+      displayCounter--;
+      textS+=0.5;
+      textSize(textS);
+      fill(#ECF502);
+      text("40xp",pos.x - size / 2, pos.y + size*2);
+    }
+    
+    if(displayCounter < 0)
+    {
+      textS = 0;
+      displayCounter = 60;
+      showXp = false;
+    }
   }
   
   void stopMovement()
   {
     playerWallCollision = true;
     velocity.mult(0);
-  }
+  }//end sopMovement
 
 }
