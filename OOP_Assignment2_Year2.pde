@@ -36,10 +36,15 @@ void draw()
   
   drawBuildingFloor();
   
-  for (int i = gameObjects.size() -1 ; i >= 0  ; i --)
+  for (int i = gameObjects.size() - 1 ; i >= 0  ; i --)
   {
     GameObject go = gameObjects.get(i); 
     go.update();
     go.render();    
   }
+}
+
+void gameOver()
+{
+  
 }

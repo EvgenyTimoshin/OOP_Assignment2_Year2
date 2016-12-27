@@ -137,7 +137,7 @@ class GunEnemy extends Player
 
 void enemiesSpawn()
 {
-  if(frameCount % 100 == 0)
+  if(frameCount % 2 == 0)
   {
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
@@ -150,9 +150,9 @@ void enemiesSpawn()
       {
         Wall wall = (Wall) go;
         if ((wall.pos.x + wall.wallWidth) < (x - 150 )
-            && (wall.pos.x) > (x + 150)
+            || (wall.pos.x) > (x + 150)
             && (wall.pos.y + wall.wallHeight) < (y - 150)
-            && (wall.pos.y) > (y + 150))
+            || (wall.pos.y) > (y + 150))
         {
          gameObjects.add(m);
          break;

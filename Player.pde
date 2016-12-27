@@ -266,8 +266,8 @@ class Player extends GameObject
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
-          health -=10;
-          gameObjects.remove(b);
+          //health -=10;
+          gameOver();
         }
       }
    }
