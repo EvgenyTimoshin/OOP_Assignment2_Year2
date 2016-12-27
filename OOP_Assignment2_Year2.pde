@@ -21,8 +21,8 @@ void setup()
   levelUp = minim.loadSnippet("levelUp.mp3");
   playerShot = minim.loadSnippet("playerShot.mp3");
   forestAmbience = minim.loadFile("forestAmbience.mp3");
+  nightSong = minim.loadFile("nightSong.mp3");
   forestAmbience.play();
-  
 }
 
 AudioSnippet gunShot;
@@ -30,6 +30,7 @@ AudioSnippet death;
 AudioSnippet levelUp;
 AudioSnippet playerShot;
 AudioPlayer forestAmbience;
+AudioPlayer nightSong;
 Minim minim;
 PFont font;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();

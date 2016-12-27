@@ -55,7 +55,7 @@ class Player extends GameObject
     if(cameraZoom == 30)
     {
       pushMatrix();
-      translate(0,0,+2);
+      translate(0,0,+5);
       fill(255, 0, 0);
       rect(pos.x - width/2 + 20, pos.y - height/2 + 50,map(health,0,100,0,300),60); // health bar
       textSize(60);
@@ -69,7 +69,7 @@ class Player extends GameObject
     }
     
     pushMatrix();
-    translate(pos.x, pos.y);
+    translate(pos.x, pos.y,+4);
     rotate(theta);
     fill(c);
     stroke(c);
