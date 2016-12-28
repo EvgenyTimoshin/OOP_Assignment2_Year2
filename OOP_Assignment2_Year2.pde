@@ -55,7 +55,8 @@ void draw()
 {
   background(#0D6F01);
   noFill();
-  println(frameRate);
+  //println(frameRate);
+  println(gameObjects.size());
   rect(0,0,width,height);
   fill(255);
   if(keyPressed && key == 'e')
