@@ -23,6 +23,7 @@ class Player extends GameObject
   float levelCap;
   int skillPoints;
   int killCount;
+  color gunC;
   
   Player()
   {};
@@ -318,6 +319,7 @@ class Player extends GameObject
      levelUp.rewind();
      //levelUp.setGain(-10);
      levelUp.play();
+     textSize(50);
    }
    
     //Updates the camera to follow the player
@@ -345,6 +347,8 @@ class Player extends GameObject
    
   }//end update
   
+  ////////////////////////////////////////////////
+  
   void showXp(int enemyType)
   {
     showXp = true;
@@ -358,10 +362,13 @@ class Player extends GameObject
     if(enemyTypeKilled == 4 && showXp && displayCounter > -1)
     {
       displayCounter--;
-      textS+=0.5;
+      textS+=1;
       textSize(textS);
       fill(#ECF502);
-      text("40xp",pos.x - size / 2, pos.y + size*2);
+      pushMatrix();
+      translate(0,0,+4);
+      text("40xp",pos.x - size / 2 - 20, pos.y + size*2);
+      popMatrix();
     }
     
     if(displayCounter < 0)

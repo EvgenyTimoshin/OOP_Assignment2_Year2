@@ -147,7 +147,7 @@ class GunEnemy extends Player
 
 void enemiesSpawn()
 {
-  if(frameCount % 200 == 0)
+ 
   {
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
