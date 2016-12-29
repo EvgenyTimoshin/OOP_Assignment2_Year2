@@ -63,6 +63,7 @@ class Player extends GameObject
       rect(pos.x - width/2 + 20, pos.y - height/2 + 50,map(health,0,100,0,300),60); // health bar
       textSize(60);
       fill(#FF0011);
+      
       text("A M M O :  " + ammo ,pos.x + width/2 - 300, pos.y + height/2 - 80 );//ammo
       fill(#DAE300);
       textSize(60);
