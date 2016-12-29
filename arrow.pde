@@ -14,7 +14,7 @@ class Arrow extends Bullet
   void render()
   {
     pushMatrix();
-    translate(pos.x, pos.y);
+    translate(pos.x, pos.y, +4);
     fill(255);
     rotate(theta);
     fill(255,0,0);
@@ -22,8 +22,23 @@ class Arrow extends Bullet
     strokeWeight(2);
     line(0, - size, 0, 20);
     noFill();
-    triangle(0, - size+20, 20, -size, -20, -size);
+    triangle(0, - size-20, 20, -size, -20, -size);
     strokeWeight(1);
     popMatrix();
+  }
+  
+  void update() // Overrides the method in the base class
+  {
+    forward.x = +sin(theta);
+    forward.y = -cos(theta);
+    
+    pos.add(PVector.mult(PVector.mult(forward, speed), timeDelta));
+    
+    alive += timeDelta;
+    if (alive > timeToLive)
+    {
+      gameObjects.remove(this);
+    }
+    
   }
 }

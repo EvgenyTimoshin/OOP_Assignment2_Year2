@@ -18,7 +18,7 @@ class Bow extends GameObject
   void render()
   {
     pushMatrix();
-    translate(pos.x, pos.y);
+    translate(pos.x, pos.y,+4);
     rotate(theta);
     stroke(255);
     strokeWeight(10);
@@ -31,10 +31,8 @@ class Bow extends GameObject
     if(mousePressed)
     {
       strokeWeight(2);
-      line(100, 0, mouseX - mouseX,stretchDist);
-      line( - 100, 0, mouseX - mouseX,stretchDist);
-      prevMouseX = mouseX - mouseX;
-      stretchDist = dist(mouseX, mouseY, pos.x, pos.y);
+      line(100, 0, 0,stretchDist);
+      line( - 100, 0, 0,stretchDist);
     }
     else if(stretchDist > 0)
     {
@@ -42,13 +40,16 @@ class Bow extends GameObject
       line(100, 0, prevMouseX,stretchDist);
       line( - 100, 0, prevMouseX,stretchDist);
     }
-    popMatrix();
-    
-    
+    popMatrix();    
   }
   
   void update()
   {
+    GameObject go = gameObjects.get(0);
+    Player p = (Player) go;
+    
+    pos.x = p.pos.x;
+    pos.y = p.pos.y;
     forward.x = 0;
     forward.y = -1;
     theta = (-atan2(mouseX  - width/2, mouseY - height/2));
@@ -57,6 +58,8 @@ class Bow extends GameObject
     {
       holding = true;
       shoot = true;
+      prevMouseX = 0;
+      stretchDist = dist(mouseX, mouseY,width/2,height/2);
     }
     else if(stretchDist > 0)
     {

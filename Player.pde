@@ -265,7 +265,7 @@ class Player extends GameObject
     for(int i = 0 ; i < gameObjects.size() ; i ++)//checks for collision between player and bullets
     {
       GameObject go = gameObjects.get(i);
-      if (go instanceof Bullet)
+      if (go instanceof Bullet && !(go instanceof Arrow))
       {
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
