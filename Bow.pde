@@ -20,25 +20,27 @@ class Bow extends GameObject
     pushMatrix();
     translate(pos.x, pos.y,+4);
     rotate(theta);
-    stroke(255);
+    stroke(#584834);
     strokeWeight(10);
     noFill();
     pushMatrix();
     rotate(3.14);
-    arc(0, 0, 200, 100, 0, PIE);
+    strokeWeight(2);
     popMatrix();
     
     if(mousePressed)
     {
       strokeWeight(2);
-      line(100, 0, 0,stretchDist);
-      line( - 100, 0, 0,stretchDist);
+      stroke(#A59A8C);
+      line(60, 0, 0,stretchDist);
+      line( - 60, 0, 0,stretchDist);
     }
     else if(stretchDist > 0)
     {
+      stroke(#A59A8C);
       strokeWeight(2);
-      line(100, 0, prevMouseX,stretchDist);
-      line( - 100, 0, prevMouseX,stretchDist);
+      line(60, 0, prevMouseX,stretchDist);
+      line( - 60, 0, prevMouseX,stretchDist);
     }
     popMatrix();    
   }
@@ -59,7 +61,7 @@ class Bow extends GameObject
       holding = true;
       shoot = true;
       prevMouseX = 0;
-      stretchDist = dist(mouseX, mouseY,width/2,height/2);
+      stretchDist = map(dist(mouseX, mouseY,width/2,height/2),0,500,0,200);
     }
     else if(stretchDist > 0)
     {
@@ -69,7 +71,7 @@ class Bow extends GameObject
       println(bp);
       if(shoot == true)
       {
-        Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 2);
+        Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 4);
         gameObjects.add(b);
         shoot = false;
       }

@@ -24,6 +24,7 @@ class Player extends GameObject
   int skillPoints;
   int killCount;
   color gunC;
+  Boolean gunEquipped;
   
   Player()
   {};
@@ -49,6 +50,7 @@ class Player extends GameObject
     levelCap = 100;
     skillPoints = 0;
     killCount = 0;
+    gunEquipped = false;
   }
   
   void render()
@@ -75,7 +77,10 @@ class Player extends GameObject
     fill(c);
     stroke(c);
     ellipse(0, 0, size, size);
-    line(0, 0, 0, size*1.5);
+    if(gunEquipped)
+    {
+      line(0, 0, 0, size*1.5);
+    }
     popMatrix();
     //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }
@@ -233,7 +238,7 @@ class Player extends GameObject
         this.pos.x = width/2;
         this.pos.y = height/2;
       }
-      if (mousePressed && elapsed > toPass && ammo > 0)
+      if (mousePressed && elapsed > toPass && ammo > 0 && gunEquipped == true)
       {
         gunShot.rewind();
         gunShot.setGain(-5);

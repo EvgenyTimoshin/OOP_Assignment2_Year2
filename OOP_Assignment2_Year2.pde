@@ -50,7 +50,7 @@ ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 Bow bow;
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
-Boolean enemies = false;
+Boolean enemies = true;
 
 void draw()
 {
@@ -63,7 +63,26 @@ void draw()
   fill(255);
   if(keyPressed && key == 'e')
   {
-    enemies = true;
+    
+    Player p = (Player) gameObjects.get(0);
+    
+    if(enemies == false)
+    {
+      enemies = true;
+    }
+    else
+    {
+      enemies = false;
+    }
+    
+    if(p.gunEquipped == true)
+    {
+      p.gunEquipped = false;
+    }
+    else
+    {
+      p.gunEquipped = true;
+    }
   }
   if(enemies == true)
   {

@@ -98,9 +98,16 @@ class GunEnemy extends Player
       if (go instanceof Bullet)
       {
         Bullet b = (Bullet) go;
-        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
+        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < b.size)
         {
-          health -=34;
+          if(go instanceof Arrow)
+          {
+            health = -1;
+          }
+          else
+          {
+            health -=34;
+          }
           spotted = true;
           gameObjects.remove(b);
         }

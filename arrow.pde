@@ -17,12 +17,12 @@ class Arrow extends Bullet
     translate(pos.x, pos.y, +4);
     fill(255);
     rotate(theta);
-    fill(255,0,0);
-    stroke(255,0,0);
+    stroke(#553000);
     strokeWeight(2);
     line(0, - size, 0, 20);
-    noFill();
-    triangle(0, - size-20, 20, -size, -20, -size);
+    fill(#818181);
+    stroke(#818181);
+    triangle(0, - size-6, 6, -size, -6, -size);
     strokeWeight(1);
     popMatrix();
   }
@@ -39,6 +39,22 @@ class Arrow extends Bullet
     {
       gameObjects.remove(this);
     }
+    
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - 1)
+            && (wall.pos.x) <= (this.pos.x + 2)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - 2)
+            && (wall.pos.y) <= (this.pos.y + 1))
+        {
+          gameObjects.remove(this);
+        }
+      }
+   }
     
   }
 }
