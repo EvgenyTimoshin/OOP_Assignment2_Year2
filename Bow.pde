@@ -35,21 +35,9 @@ class Bow extends GameObject
       line( - 100, 0, mouseX - mouseX,stretchDist);
       prevMouseX = mouseX - mouseX;
       stretchDist = dist(mouseX, mouseY, pos.x, pos.y);
-      
     }
     else if(stretchDist > 0)
     {
-      forward.x = sin(theta);
-      forward.y = -cos(theta);
-      PVector bp = PVector.sub(pos, PVector.mult(forward, stretchDist));
-      println(bp);
-      if(shoot == true)
-      {
-        Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, stretchDist * 2);
-        gameObjects.add(b);
-        shoot = false;
-      }
-      stretchDist-=20f;
       strokeWeight(2);
       line(100, 0, prevMouseX,stretchDist);
       line( - 100, 0, prevMouseX,stretchDist);
@@ -70,9 +58,19 @@ class Bow extends GameObject
       holding = true;
       shoot = true;
     }
-    else
+    else if(stretchDist > 0)
     {
-      holding = false;
+      forward.x = sin(theta);
+      forward.y = -cos(theta);
+      PVector bp = PVector.sub(pos, PVector.mult(forward, stretchDist));
+      println(bp);
+      if(shoot == true)
+      {
+        Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 2);
+        gameObjects.add(b);
+        shoot = false;
+      }
+      stretchDist-=20f;
     }
   }
 }

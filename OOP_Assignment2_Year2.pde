@@ -34,7 +34,7 @@ void setup()
   nightSong = minim.loadFile("nightSong.mp3");
   heartBeat = minim.loadSnippet("heartBeat.mp3");
   forestAmbience.play();
-  
+  bow = new Bow();
 }
 
 AudioSnippet gunShot;
@@ -47,6 +47,7 @@ AudioSnippet heartBeat;
 Minim minim;
 PFont font;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
+Bow bow;
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
 Boolean enemies = false;
@@ -66,7 +67,9 @@ void draw()
   }
   if(enemies == true)
   {
-  enemiesSpawn();
+  //enemiesSpawn();
+  bow.render();
+  bow.update();
   }
   //ammoSpawn();
   

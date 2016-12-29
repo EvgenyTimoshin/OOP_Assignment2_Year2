@@ -6,6 +6,8 @@ class Bullet extends GameObject
   float timeToLive;
   float alive;
   
+  Bullet(){};
+  
   Bullet(float x, float y, float theta, float size, float timeToLive, float speed)
   {
     pos = new PVector(x, y);
