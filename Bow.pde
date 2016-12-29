@@ -5,6 +5,7 @@ class Bow extends GameObject
   float prevMouseX;
   Boolean shoot;
   float theta;
+  int arrowAmmo;
   
   Bow()
   {
@@ -13,6 +14,7 @@ class Bow extends GameObject
     theta = 0;
     forward = new PVector(0, -1);
     shoot = false;
+    arrowAmmo = 15;
   }
   
   void render()
@@ -25,8 +27,10 @@ class Bow extends GameObject
     noFill();
     pushMatrix();
     rotate(3.14);
+    arc(0, 0, 120, 70, 0, 3.15);
     strokeWeight(2);
     popMatrix();
+    
     
     if(mousePressed)
     {
@@ -43,6 +47,13 @@ class Bow extends GameObject
       line( - 60, 0, prevMouseX,stretchDist);
     }
     popMatrix();    
+    
+    pushMatrix();
+    translate(0,0,+5);
+    textSize(50);
+    fill(#584834);
+    text("ARROWS :  " + arrowAmmo ,pos.x + width/2 - 300, pos.y + height/2 - 130 );
+    popMatrix();
   }
   
   void update()
@@ -74,6 +85,9 @@ class Bow extends GameObject
         Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 4);
         gameObjects.add(b);
         shoot = false;
+        arrowAmmo--;
+        bowFired.rewind();
+        bowFired.play();
       }
       stretchDist-=20f;
     }
