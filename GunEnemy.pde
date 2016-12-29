@@ -21,7 +21,7 @@ class GunEnemy extends Player
     health = 100;
     stuck = false;
     spotted = false;
-    mass = 12;
+    mass = 2;
     distanceFromPlayer = 201;
   }
   
@@ -133,8 +133,7 @@ class GunEnemy extends Player
       {
         GameObject g = gameObjects.get(0);
         Player p = (Player) go;
-        distanceFromPlayer = dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y);
-        if (distanceFromPlayer < 200)
+        if (distanceFromPlayer < 100)
         {
           spotted = true;
           break;
@@ -147,7 +146,8 @@ class GunEnemy extends Player
 
 void enemiesSpawn()
 {
- 
+  if(frameCount % 200 == 0)
+  {
   {
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
@@ -170,5 +170,6 @@ void enemiesSpawn()
       }
    }
     
+  }
   }
 }

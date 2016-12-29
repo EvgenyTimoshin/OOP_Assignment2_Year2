@@ -51,7 +51,7 @@ class Clock extends GameObject
   
   void update()
   {
-    if(frameCount % 5 == 0)
+    if(frameCount % 30 == 0)
     {
       minuteTwo++;
     }

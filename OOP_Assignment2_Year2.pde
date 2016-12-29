@@ -19,7 +19,7 @@ void setup()
     createBuilding(i , 300, 300, 10);
   }
   camera();
-  frameRate(60);
+  frameRate(120);
   
   font = loadFont("Zombie-Noize-48.vlw");
   ///////////
@@ -53,6 +53,7 @@ Boolean enemies = false;
 
 void draw()
 {
+  //println(frameRate);
   background(#0D6F01);
   noFill();
   //println(frameRate);
@@ -77,6 +78,14 @@ void draw()
     go.update();
     go.render();    
   }
+  
+  stroke(255, 0, 0);
+  line(mouseX , mouseY , mouseX + 15, mouseY);
+  line(mouseX, mouseY , mouseX, mouseY - 15);
+  line(mouseX, mouseY, mouseX - 15, mouseY);
+  line(mouseX, mouseY, mouseX, mouseY+ 15);
+  noFill();
+  ellipse(mouseX, mouseY, 30, 30);
 }
 
 void gameOver()
