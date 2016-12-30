@@ -92,7 +92,7 @@ class Clock extends GameObject
       {
         playNightSong = true;
       }
-        dayLight += 1;
+        dayLight += .5;
         
         if(audioVol < -15)
         {

@@ -35,8 +35,15 @@ class Bow extends GameObject
     {
       strokeWeight(2);
       stroke(#A59A8C);
+      pushMatrix();
+      translate(0,0, +4);
       line(60, 0, 0,stretchDist);
       line( - 60, 0, 0,stretchDist);
+      stroke(#483B29);
+      line(0, stretchDist - 70, 0 , stretchDist);
+      fill(#BCB9B4);
+      triangle(0,stretchDist - 90, -6, stretchDist - 70, 6, stretchDist - 70);
+      popMatrix();
     }
     else if(stretchDist > 0)
     {

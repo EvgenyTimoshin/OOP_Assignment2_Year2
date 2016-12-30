@@ -28,13 +28,13 @@ class Torch extends GameObject
       }
       beginShape();
       vertex(0,0);
-      curveVertex(300, 320);
+      curveVertex(500, 320);
       curveVertex(200, 400);
       curveVertex(100, 450);
       curveVertex(0,480);
       curveVertex(-100, 450);
       curveVertex(-200, 400);
-      curveVertex(-300, 320);
+      curveVertex(-500, 320);
       vertex(0,0);
       endShape(CLOSE);
       popMatrix();

@@ -2,7 +2,7 @@ class Player extends GameObject
 {
   PVector velocity;
   PVector accel;
-  float mass = 2;
+  float mass = 1;
   int health;
   int ammo;
   PVector force;
