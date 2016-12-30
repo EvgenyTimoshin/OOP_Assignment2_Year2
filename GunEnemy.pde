@@ -30,9 +30,10 @@ class GunEnemy extends Player
     fill(0,255,0);
     rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
     pushMatrix();
-    translate(pos.x, pos.y,+2);
+    translate(pos.x, pos.y,+4);
     rotate(theta);
-    stroke(255,0,0);
+    //stroke(255,0,0);
+    stroke(0);
     ellipse(0, 0, size, size);
     
     popMatrix();

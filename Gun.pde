@@ -1,7 +1,6 @@
 class Gun extends GameObject
 {
   float fireRate = 2;
-  float theta;
   
   Gun()
   {

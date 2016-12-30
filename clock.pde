@@ -51,7 +51,7 @@ class Clock extends GameObject
   
   void update()
   {
-    if(frameCount % 30 == 0)
+    if(frameCount % 4 == 0)
     {
       minuteTwo++;
     }
@@ -92,7 +92,7 @@ class Clock extends GameObject
       {
         playNightSong = true;
       }
-        dayLight += 0.1;
+        dayLight += 1;
         
         if(audioVol < -15)
         {

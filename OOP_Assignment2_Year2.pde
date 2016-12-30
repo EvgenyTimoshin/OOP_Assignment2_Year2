@@ -36,6 +36,7 @@ void setup()
   bowFired = minim.loadSnippet("bow.mp3");
   forestAmbience.play();
   bow = new Bow();
+  torch = new Torch();
 }
 
 AudioSnippet gunShot;
@@ -50,6 +51,7 @@ Minim minim;
 PFont font;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 Bow bow;
+Torch torch;
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
 Boolean enemies = true;
@@ -58,6 +60,7 @@ void draw()
 {
   //println(frameRate);
   background(#0D6F01);
+  
   noFill();
   //println(frameRate);
   println(gameObjects.size());
@@ -102,6 +105,8 @@ void draw()
     go.update();
     go.render();    
   }
+  torch.update();
+  torch.render();
   
   stroke(255, 0, 0);
   line(mouseX , mouseY , mouseX + 15, mouseY);

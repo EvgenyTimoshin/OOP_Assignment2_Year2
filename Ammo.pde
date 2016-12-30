@@ -1,6 +1,5 @@
 class Ammo extends GameObject
 {
-  float theta;
   String type;
   
   Ammo(float x, float y, float size)

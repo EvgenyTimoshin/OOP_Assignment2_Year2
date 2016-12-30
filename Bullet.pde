@@ -1,6 +1,5 @@
 class Bullet extends GameObject
 {
-  float theta;
   float size;
   float speed;
   float timeToLive;

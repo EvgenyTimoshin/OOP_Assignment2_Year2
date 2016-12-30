@@ -2,7 +2,6 @@ class Player extends GameObject
 {
   PVector velocity;
   PVector accel;
-  float theta;
   float mass = 2;
   int health;
   int ammo;
@@ -25,6 +24,7 @@ class Player extends GameObject
   int killCount;
   color gunC;
   Boolean gunEquipped;
+  Boolean torch;
   
   Player()
   {};
@@ -51,6 +51,7 @@ class Player extends GameObject
     skillPoints = 0;
     killCount = 0;
     gunEquipped = false;
+    torch = false;
   }
   
   void render()
@@ -222,6 +223,17 @@ class Player extends GameObject
         }
       }
       
+      if (checkKey('t'))
+      {
+        if(torch == false)
+        {
+          torch = true;
+        }
+        else
+        {
+          torch = false;
+        }
+      }
       if (checkKey('1'))
       {
         cameraZoom = 30;

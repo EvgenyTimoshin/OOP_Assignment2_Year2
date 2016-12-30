@@ -3,6 +3,7 @@ class GameObject
   PVector pos;
   PVector forward;
   float size;
+  float theta;
   
   GameObject()
   {

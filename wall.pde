@@ -12,9 +12,12 @@ class Wall extends GameObject
   
   void render()
   {
+    pushMatrix();
+    translate(0,0,+4);
     stroke(0);
     fill(0);
     rect(pos.x,pos.y,wallWidth,wallHeight);
+    popMatrix();
   }
   
   void update()

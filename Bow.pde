@@ -4,7 +4,6 @@ class Bow extends GameObject
   float stretchDist;
   float prevMouseX;
   Boolean shoot;
-  float theta;
   int arrowAmmo;
   
   Bow()
