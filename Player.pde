@@ -353,8 +353,8 @@ class Player extends GameObject
    }
    else
    {
-     heartBeat.pause();
-     heartBeat.rewind();
+     //heartBeat.pause();
+     //heartBeat.rewind();
    }
    
    
