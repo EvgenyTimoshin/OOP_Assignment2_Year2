@@ -12,24 +12,34 @@ class Torch extends GameObject
   
   void render()
   {
-    pushMatrix();
-    translate(pos.x,pos.y,+4);
-    rotate(theta);
-    fill(255,220);
-    //noFill();
-    noStroke();
-    beginShape();
-    vertex(0,0);
-    curveVertex(300, 320);
-    curveVertex(200, 400);
-    curveVertex(100, 450);
-    curveVertex(0,480);
-    curveVertex(-100, 450);
-    curveVertex(-200, 400);
-    curveVertex(-300, 320);
-    vertex(0,0);
-    endShape(CLOSE);
-    popMatrix();
+    if(state)
+    {
+      Player p = (Player)gameObjects.get(0);
+      pushMatrix();
+      translate(pos.x,pos.y,+4);
+      rotate(theta);
+      fill(255,220);
+      //noFill();
+      noStroke();
+      pushMatrix();
+      if(p.gunEquipped == false)
+      {
+        rotate(3.14);
+      }
+      beginShape();
+      vertex(0,0);
+      curveVertex(300, 320);
+      curveVertex(200, 400);
+      curveVertex(100, 450);
+      curveVertex(0,480);
+      curveVertex(-100, 450);
+      curveVertex(-200, 400);
+      curveVertex(-300, 320);
+      vertex(0,0);
+      endShape(CLOSE);
+      popMatrix();
+      popMatrix();
+    }
   }
   
   void update()

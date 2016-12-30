@@ -105,6 +105,7 @@ void draw()
     go.update();
     go.render();    
   }
+  
   torch.update();
   torch.render();
   
@@ -115,6 +116,8 @@ void draw()
   line(mouseX, mouseY, mouseX, mouseY+ 15);
   noFill();
   ellipse(mouseX, mouseY, 30, 30);
+  
+  globalInput();
 }
 
 void gameOver()

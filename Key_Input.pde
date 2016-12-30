@@ -16,3 +16,18 @@ boolean checkKey(int k)
   }
   return false;
 }
+
+void globalInput()
+{
+  if(checkKey('t'))
+  {
+    if(torch.state == false)
+    {
+      torch.state = true;
+    }
+    else
+    {
+      torch.state = false;
+    }
+  }
+}
