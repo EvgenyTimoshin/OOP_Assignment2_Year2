@@ -19,7 +19,7 @@ void setup()
     createBuilding(i , 300, 300, 10);
   }
   camera();
-  frameRate(120);
+  frameRate(60);
   
   font = loadFont("Zombie-Noize-48.vlw");
   ///////////
@@ -34,10 +34,12 @@ void setup()
   nightSong = minim.loadFile("nightSong.mp3");
   heartBeat = minim.loadSnippet("heartBeat.mp3");
   bowFired = minim.loadSnippet("bow.mp3");
+  zombieSpotted = minim.loadSnippet("zombieSpotted.mp3");
   forestAmbience.play();
   bow = new Bow();
   torch = new Torch();
   background = loadImage("grass.jpg");
+  road = loadImage("road.jpg");
   background.resize(width,height);
 }
 
@@ -49,9 +51,11 @@ AudioPlayer forestAmbience;
 AudioPlayer nightSong;
 AudioSnippet heartBeat;
 AudioSnippet bowFired;
+AudioSnippet zombieSpotted;
 Minim minim;
 PFont font;
 PImage background;
+PImage road;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 Bow bow;
 Torch torch;
@@ -62,19 +66,18 @@ Boolean enemies = true;
 void draw()
 {
   //println(frameRate);
-  //background(#0D6F01);
-  for(int j = -height*3; j < height*4; j+= height)
-  {
-    for(int i = -width*3; i < width*4; i +=width)
-    {
-    image(background,i,j);
-  }
-  }
+  background(0);
+  stroke(255,0,0);
+  
+  mapTextures();
   
   noFill();
   //println(frameRate);
   println(gameObjects.size());
-  rect(0,0,width,height);
+  pushMatrix();
+  translate(0,0,+5);
+    rect(0,0,width,height);
+  popMatrix();
   fill(255);
   if(keyPressed && key == 'e')
   {
@@ -92,14 +95,14 @@ void draw()
   }
   if(enemies == true)
   {
-    gunEnemySpawn();
+   gunEnemySpawn();
     zombieSpawn();
     bow.render();
     bow.update();
   }
   ammoSpawn();
   
-  drawBuildingFloor();
+ //drawBuildingFloor();
   
   for (int i = gameObjects.size() - 1 ; i >= 0  ; i --)
   {
@@ -120,9 +123,4 @@ void draw()
   ellipse(mouseX, mouseY, 30, 30);
   
   globalInput();
-}
-
-void gameOver()
-{
-  
 }

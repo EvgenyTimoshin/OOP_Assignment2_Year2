@@ -40,7 +40,7 @@ class Zombie extends Enemy
       Player p = (Player)gameObjects.get(0);
       theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
       
-      if(dist(pos.x,pos.y,p.pos.x,p.pos.y) < 400)//check if player is close to enemy
+      if(dist(pos.x,pos.y,p.pos.x,p.pos.y) < 400 && spotted == false)//check if player is close to enemy
       {
         spotted = true;
       }

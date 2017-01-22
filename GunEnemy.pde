@@ -1,8 +1,8 @@
-class GunEnemy extends Player
+class GunEnemy extends Enemy
 {
-  Boolean stuck;
-  Boolean spotted;
-  float distanceFromPlayer;
+  float fireRate = 2;
+  float toPass = 1.0 / fireRate;
+  float elapsed = toPass;
   
   GunEnemy(float x, float y, float theta, float size, color c)
   { 
@@ -14,7 +14,6 @@ class GunEnemy extends Player
     this.theta = theta;
     this.size = size;
     this.health = 100;
-    this.ammo = 100;
     this.c = c;
     health = 100;
     stuck = false;
@@ -25,7 +24,7 @@ class GunEnemy extends Player
   
   void render()
   {
-    fill(0,255,0);
+    fill(255,0,0);
     rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
     pushMatrix();
     translate(pos.x, pos.y,+4);
@@ -40,7 +39,7 @@ class GunEnemy extends Player
   
   void update()
   {
-    if(gameObjects.get(0) instanceof Player)
+    if(gameObjects.get(0) instanceof Player)//set enemy to face player and sif spots enemy
     {
       Player p = (Player)gameObjects.get(0);
       theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
@@ -60,6 +59,7 @@ class GunEnemy extends Player
       force.add(PVector.mult(forward, power));
     }
     
+    //Used to move enemy towards player
     accel = PVector.div(force, mass);
     velocity.add(PVector.mult(accel, timeDelta));
     pos.add(PVector.mult(velocity, timeDelta));
@@ -152,32 +152,32 @@ class GunEnemy extends Player
 }
 }//end class
 
-void enemiesSpawn()
+void gunEnemySpawn()
 {
   if(frameCount % 200 == 0)
   {
-  {
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
-      int x = (int)random(0,width);
-      int y = (int)random(0,height);
-      GunEnemy m = new GunEnemy(x, y, 0, 50, 255);
-      
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
+      for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
       {
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) < (x - 150 )
-            || (wall.pos.x) > (x + 150)
-            || (wall.pos.y + wall.wallHeight) < (y - 150)
-            || (wall.pos.y) > (y + 150))
+        int x = (int)random(0,width);
+        int y = (int)random(0,height);
+        GunEnemy m = new GunEnemy(x, y, 0, 50, 255);
+        
+        GameObject go = gameObjects.get(i);
+        if (go instanceof Wall)
         {
-         gameObjects.add(m);
-         break;
+          Wall wall = (Wall) go;
+          if ((wall.pos.x + wall.wallWidth) < (x - 150 )
+              || (wall.pos.x) > (x + 150)
+              || (wall.pos.y + wall.wallHeight) < (y - 150)
+              || (wall.pos.y) > (y + 150))
+          {
+           gameObjects.add(m);
+           break;
+          }
         }
       }
-   }
-    
-  }
+      
+    }
   }
 }
