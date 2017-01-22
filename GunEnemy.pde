@@ -5,9 +5,7 @@ class GunEnemy extends Player
   float distanceFromPlayer;
   
   GunEnemy(float x, float y, float theta, float size, color c)
-  {
-   
-    
+  { 
     pos = new PVector(x, y);
     forward = new PVector(0, -1);
     accel = new PVector(0,0);
@@ -46,13 +44,18 @@ class GunEnemy extends Player
     {
       Player p = (Player)gameObjects.get(0);
       theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
+      
+      if(dist(pos.x,pos.y,p.pos.x,p.pos.y) < 400)//check if player is close to enemy
+      {
+        spotted = true;
+      }
     }
     
     forward.x = -sin(theta);
     forward.y = cos(theta);
     
     
-    if(spotted == true)
+    if(spotted == true)//movee enemy towards player if spotted
     {
       force.add(PVector.mult(forward, power));
     }
@@ -67,16 +70,13 @@ class GunEnemy extends Player
     float random;
     random = (int)random(0,10);
     
-    if (elapsed > toPass && random % 10 == 0 && spotted == true)
+    if (elapsed > toPass && random % 10 == 0 && spotted == true)//fire a bullet
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);
       PVector bp = PVector.sub(pos, PVector.mult(forward, size + 5));
-      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 120);
+      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 160);
       gameObjects.add(b);
-      
-      elapsed = 0;
-      ammo--;
     }
     
     //Display xp and 
@@ -115,7 +115,7 @@ class GunEnemy extends Player
       }
    }
    
-   //Checks for collition between PLayer and wall
+   //Checks for collition between enemy and wall
    for(int i = 0 ; i < gameObjects.size() ; i ++)
     {
       GameObject go = gameObjects.get(i);
@@ -150,7 +150,7 @@ class GunEnemy extends Player
    }
   
 }
-}
+}//end class
 
 void enemiesSpawn()
 {

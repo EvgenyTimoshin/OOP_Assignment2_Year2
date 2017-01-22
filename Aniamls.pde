@@ -1,7 +1,5 @@
 class Animal extends GameObject
 {
-  
-  
   void render()
   {
   }

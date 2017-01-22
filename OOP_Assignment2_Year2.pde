@@ -37,6 +37,8 @@ void setup()
   forestAmbience.play();
   bow = new Bow();
   torch = new Torch();
+  background = loadImage("grass.jpg");
+  background.resize(width,height);
 }
 
 AudioSnippet gunShot;
@@ -49,6 +51,7 @@ AudioSnippet heartBeat;
 AudioSnippet bowFired;
 Minim minim;
 PFont font;
+PImage background;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 Bow bow;
 Torch torch;
@@ -59,7 +62,14 @@ Boolean enemies = true;
 void draw()
 {
   //println(frameRate);
-  background(#0D6F01);
+  //background(#0D6F01);
+  for(int j = -height*3; j < height*4; j+= height)
+  {
+    for(int i = -width*3; i < width*4; i +=width)
+    {
+    image(background,i,j);
+  }
+  }
   
   noFill();
   //println(frameRate);
@@ -70,15 +80,6 @@ void draw()
   {
     
     Player p = (Player) gameObjects.get(0);
-    
-    if(enemies == false)
-    {
-      enemies = true;
-    }
-    else
-    {
-      enemies = false;
-    }
     
     if(p.gunEquipped == true)
     {

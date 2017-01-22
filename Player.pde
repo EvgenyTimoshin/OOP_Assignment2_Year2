@@ -251,6 +251,7 @@ class Player extends GameObject
         this.pos.x = width/2;
         this.pos.y = height/2;
       }
+      
       if (mousePressed && elapsed > toPass && ammo > 0 && gunEquipped == true)
       {
         gunShot.rewind();
