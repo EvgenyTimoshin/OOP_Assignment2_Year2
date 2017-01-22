@@ -25,6 +25,7 @@ class Player extends GameObject
   color gunC;
   Boolean gunEquipped;
   Boolean torch;
+  int arrowAmmo;
   
   Player()
   {};
@@ -52,6 +53,7 @@ class Player extends GameObject
     killCount = 0;
     gunEquipped = false;
     torch = false;
+    arrowAmmo = 15;
   }
   
   void render()
@@ -70,6 +72,13 @@ class Player extends GameObject
       textSize(60);
       text("lvl: " + level ,pos.x - 50, pos.y + height/2 - 70);
       rect(pos.x - width/2 + 50, pos.y + height/2 - 50,map(xp,0,levelCap,0,width-100),20); /// xp bar
+      popMatrix();
+      
+      pushMatrix();
+      translate(0,0,+5);
+      textSize(50);
+      fill(#584834);
+      text("ARROWS :  " + arrowAmmo ,pos.x + width/2 - 300, pos.y + height/2 - 130 );
       popMatrix();
     }
     
@@ -263,7 +272,15 @@ class Player extends GameObject
         Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
         gameObjects.add(b);
         elapsed = 0;
-        ammo--;
+        if(gunEquipped)
+        {
+          ammo--;
+        }
+        else
+        {
+          arrowAmmo--;
+        }
+        
       }
       
     if(playerWallCollision == false)

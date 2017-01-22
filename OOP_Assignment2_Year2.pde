@@ -92,11 +92,12 @@ void draw()
   }
   if(enemies == true)
   {
-  enemiesSpawn();
-  bow.render();
-  bow.update();
+    gunEnemySpawn();
+    zombieSpawn();
+    bow.render();
+    bow.update();
   }
-  //ammoSpawn();
+  ammoSpawn();
   
   drawBuildingFloor();
   
