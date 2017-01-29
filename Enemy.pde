@@ -12,7 +12,7 @@ class Enemy extends GameObject
   float power = 200;
   float fireRate = 2;
   float toPass = 1.0 / fireRate;
-  float elapsed = toPass;
+  float elapsed = toPass; 
   
   void render(){};
   

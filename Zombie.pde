@@ -14,7 +14,7 @@ class Zombie extends Enemy
     health = 100;
     stuck = false;
     spotted = false;
-    mass = 2;
+    mass = 1.4;
     distanceFromPlayer = 201;
   }
   
@@ -45,6 +45,7 @@ class Zombie extends Enemy
       player.showXp(4);
     }
     
+   //calls inherited methods
    movement();
    collisionCheck();
    

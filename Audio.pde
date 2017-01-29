@@ -1,7 +1,6 @@
 @SuppressWarnings( "deprecation" )
 class Audio
-{
-  
+{ 
   AudioSnippet gunShot;
   AudioSnippet death;
   AudioSnippet levelUp;

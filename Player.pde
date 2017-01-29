@@ -1,4 +1,4 @@
-class Player extends GameObject
+class Player extends GameObject implements Wound
 {
   PVector velocity;
   PVector accel;
@@ -420,5 +420,10 @@ class Player extends GameObject
     playerWallCollision = true;
     velocity.mult(0);
   }//end sopMovement
+  
+  void bleed()
+  {
+    
+  }
 
 }

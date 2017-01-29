@@ -1,4 +1,0 @@
-interface Blood
-{
-  void bleed();
-}

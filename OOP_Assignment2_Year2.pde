@@ -51,9 +51,7 @@ void draw()
   //println(frameRate);
   background(0);
   stroke(255,0,0);
-  
   mapTextures();
-  
   noFill();
   //println(frameRate);
   println(gameObjects.size());
@@ -62,26 +60,10 @@ void draw()
     rect(0,0,width,height);
   popMatrix();
   fill(255);
-  if(keyPressed && key == 'e')
-  {
-    
-    if(player.gunEquipped == true)
-    {
-      player.gunEquipped = false;
-    }
-    else
-    {
-      player.gunEquipped = true;
-    }
-  }
-  if(enemies == true)
-  {
+  
    gunEnemySpawn();
-    zombieSpawn();
-    bow.render();
-    bow.update();
-  }
-  ammoSpawn();
+   zombieSpawn();
+   ammoSpawn();
   
  //drawBuildingFloor();
   
@@ -91,10 +73,7 @@ void draw()
     go.update();
     go.render();    
   }
-  
-  torch.update();
-  torch.render();
-  
+    
   stroke(255, 0, 0);
   line(mouseX , mouseY , mouseX + 15, mouseY);
   line(mouseX, mouseY , mouseX, mouseY - 15);

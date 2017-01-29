@@ -1,4 +1,4 @@
-class Bow extends GameObject
+class Bow extends GameObject implements Weapon
 {
   Boolean holding;
   float stretchDist;
@@ -17,7 +17,7 @@ class Bow extends GameObject
   void render()
   {
     pushMatrix();
-    translate(pos.x, pos.y,+4);
+    translate(pos.x, pos.y,+5);
     rotate(theta);
     stroke(#584834);
     strokeWeight(10);
@@ -53,15 +53,8 @@ class Bow extends GameObject
     popMatrix();
   }
   
-  void update()
+  void shoot()
   {
-    
-    pos.x = player.pos.x;
-    pos.y = player.pos.y;
-    forward.x = 0;
-    forward.y = -1;
-    theta = (-atan2(mouseX  - width/2, mouseY - height/2));
-    
     if(mousePressed)
     {
       holding = true;
@@ -86,5 +79,24 @@ class Bow extends GameObject
       }
       stretchDist-=20f;
     }
+  }
+  
+  void reload()
+  {
+  }
+  
+  void update()
+  {
+    pos.x = player.pos.x;
+    pos.y = player.pos.y;
+    forward.x = 0;
+    forward.y = -1;
+    theta = (-atan2(mouseX  - width/2, mouseY - height/2));
+    
+    if(mousePressed)
+    {
+      shoot();
+    }
+    
   }
 }
