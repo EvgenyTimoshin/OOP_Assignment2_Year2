@@ -8,7 +8,7 @@ void setup()
   /////////////////////
   //Spawn Game Objects on launch
   ///////////////////////
-  Player player = new Player(width / 2, height / 2, 0, 50, color(0,0,255));
+  player = new Player(width / 2, height / 2, 0, 50, color(0,0,255));
   gameObjects.add(player);
   Clock clock = new Clock();
   gameObjects.add(clock);
@@ -63,6 +63,8 @@ boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
 Boolean enemies = true;
 
+Player player;
+
 void draw()
 {
   //println(frameRate);
@@ -82,15 +84,13 @@ void draw()
   if(keyPressed && key == 'e')
   {
     
-    Player p = (Player) gameObjects.get(0);
-    
-    if(p.gunEquipped == true)
+    if(player.gunEquipped == true)
     {
-      p.gunEquipped = false;
+      player.gunEquipped = false;
     }
     else
     {
-      p.gunEquipped = true;
+      player.gunEquipped = true;
     }
   }
   if(enemies == true)

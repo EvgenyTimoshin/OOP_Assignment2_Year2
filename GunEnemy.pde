@@ -39,12 +39,12 @@ class GunEnemy extends Enemy
   
   void update()
   {
-    if(gameObjects.get(0) instanceof Player)//set enemy to face player and sif spots enemy
+    //spot enemy
     {
-      Player p = (Player)gameObjects.get(0);
-      theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
       
-      if(dist(pos.x,pos.y,p.pos.x,p.pos.y) < 400)//check if player is close to enemy
+      theta = -atan2(player.pos.x - pos.x, player.pos.y - pos.y);
+      
+      if(dist(pos.x,pos.y,player.pos.x,player.pos.y) < 400)//check if player is close to enemy
       {
         spotted = true;
       }
@@ -86,10 +86,8 @@ class GunEnemy extends Enemy
       death.setGain(-10);
       death.play();
       gameObjects.remove(this);
-      GameObject go = gameObjects.get(0);
-      Player p = (Player) go;
-      p.xp += 10;
-      p.showXp(4);
+      player.xp += 10;
+      player.showXp(4);
     }
     
    collisionCheck();//calls the superClass collision checking

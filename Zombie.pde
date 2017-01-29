@@ -35,12 +35,11 @@ class Zombie extends Enemy
   
   void update()
   {
-    if(gameObjects.get(0) instanceof Player)//set enemy to face player and sif spots enemy
+    //set enemy to face player and sif spots enemy
     {
-      Player p = (Player)gameObjects.get(0);
-      theta = -atan2(p.pos.x - pos.x, p.pos.y - pos.y);
+      theta = -atan2(player.pos.x - pos.x, player.pos.y - pos.y);
       
-      if(dist(pos.x,pos.y,p.pos.x,p.pos.y) < 400 && spotted == false)//check if player is close to enemy
+      if(dist(pos.x,pos.y,player.pos.x,player.pos.y) < 400 && spotted == false)//check if player is close to enemy
       {
         spotted = true;
       }
@@ -62,28 +61,21 @@ class Zombie extends Enemy
     force.x = force.y = 0;
     velocity.mult(0.99f);
     
-    float random;
-    random = (int)random(0,10);
-    
-    
-    
-    //Display xp and 
     if(health < 0)
     {
       death.rewind();
       death.setGain(-10);
       death.play();
       gameObjects.remove(this);
-      GameObject go = gameObjects.get(0);
-      Player p = (Player) go;
-      p.xp += 10;
-      p.showXp(4);
+      player.xp += 10;
+      player.showXp(4);
     }
    
    collisionCheck();
    
   }//end udpate method
-}
+}//end class
+
 
 void zombieSpawn()
 {

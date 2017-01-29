@@ -24,12 +24,10 @@ class Clock extends GameObject
   {
     
     noStroke();
-    GameObject go = gameObjects.get(0);
-    Player p = (Player) go;
     fill(0,dayLight);
     pushMatrix();
     translate(0,0,+4);
-    rect(p.pos.x - width/2, p.pos.y - height/2, width, height);
+    rect(player.pos.x - width/2, player.pos.y - height/2, width, height);
     popMatrix();
     
     pushMatrix();
@@ -43,9 +41,9 @@ class Clock extends GameObject
     {
       fill(255);
     }
-    text(hrOne +""+ hrTwo + "  :  " + minuteOne + minuteTwo , p.pos.x + width/2 - 250, p.pos.y - height/2 + 100);
+    text(hrOne +""+ hrTwo + "  :  " + minuteOne + minuteTwo , player.pos.x + width/2 - 250, player.pos.y - height/2 + 100);
     fill(#2002AA);
-    text("Day :  " + dayCount, p.pos.x - 100 , p.pos.y - height/2 + 100);
+    text("Day :  " + dayCount, player.pos.x - 100 , player.pos.y - height/2 + 100);
     popMatrix();
   }
   

@@ -1,0 +1,4 @@
+interface Blood
+{
+  void bleed();
+}

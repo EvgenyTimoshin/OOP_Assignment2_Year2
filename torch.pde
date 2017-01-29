@@ -4,8 +4,7 @@ class Torch extends GameObject
   
   Torch()
   {
-    Player p = (Player) gameObjects.get(0);
-    pos = new PVector(p.pos.x,p.pos.y);
+    pos = new PVector(player.pos.x, player.pos.y);
     theta = 0;
     state = false;
   }
@@ -14,7 +13,6 @@ class Torch extends GameObject
   {
     if(state)
     {
-      Player p = (Player)gameObjects.get(0);
       pushMatrix();
       translate(pos.x,pos.y,+4);
       rotate(theta);
@@ -22,7 +20,7 @@ class Torch extends GameObject
       //noFill();
       noStroke();
       pushMatrix();
-      if(p.gunEquipped == false)
+      if(player.gunEquipped == false)
       {
         rotate(3.14);
       }
@@ -44,9 +42,8 @@ class Torch extends GameObject
   
   void update()
   {
-    Player p = (Player) gameObjects.get(0);
-    pos.x = p.pos.x;
-    pos.y = p.pos.y;
-    theta = p.theta;
+    pos.x = player.pos.x;
+    pos.y = player.pos.y;
+    theta = player.theta;
   }
 }

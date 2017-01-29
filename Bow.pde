@@ -55,11 +55,9 @@ class Bow extends GameObject
   
   void update()
   {
-    GameObject go = gameObjects.get(0);
-    Player p = (Player) go;
     
-    pos.x = p.pos.x;
-    pos.y = p.pos.y;
+    pos.x = player.pos.x;
+    pos.y = player.pos.y;
     forward.x = 0;
     forward.y = -1;
     theta = (-atan2(mouseX  - width/2, mouseY - height/2));
@@ -82,7 +80,7 @@ class Bow extends GameObject
         Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 4);
         gameObjects.add(b);
         shoot = false;
-        p.arrowAmmo--;
+        player.arrowAmmo--;
         bowFired.rewind();
         bowFired.play();
       }

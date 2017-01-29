@@ -40,7 +40,7 @@ class Arrow extends Bullet
       gameObjects.remove(this);
     }
     
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collision between arrow and wall
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Wall)
