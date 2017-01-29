@@ -35,18 +35,20 @@ class Entity extends GameObject
               audio.playerShot.setGain(-10);
               audio.playerShot.play();
               health -= 10;
+              gameObjects.remove(b);
             }
             else
             {
               health -=34;
             }
           }
+          
           if(this instanceof Enemy)
           {
             spotted = true;
           }
           
-          if(!(this instanceof Player) && !(b instanceof Arrow) )
+          if(!(this instanceof Player) && !(b instanceof Arrow))
           {
             gameObjects.remove(b);
           }

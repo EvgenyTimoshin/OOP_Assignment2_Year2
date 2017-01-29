@@ -35,7 +35,6 @@ class Bullet extends GameObject
   {
     forward.x = -sin(theta);
     forward.y = +cos(theta);
-    
     pos.add(PVector.mult(PVector.mult(forward, speed), timeDelta));
     
     alive += timeDelta;
@@ -44,7 +43,12 @@ class Bullet extends GameObject
       gameObjects.remove(this);
     }
     
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    bulletWallCollision();
+ }
+ 
+   void bulletWallCollision()
+   {
+     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
     {
       GameObject go = gameObjects.get(i);
       if (go instanceof Wall)
@@ -59,7 +63,6 @@ class Bullet extends GameObject
         }
       }
    }
-    
-  }
+   }
   
 }

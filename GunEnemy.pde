@@ -16,6 +16,7 @@ class GunEnemy extends Enemy
     spotted = false;
     mass = 2;
     distanceFromPlayer = 201;
+    fireRate = 10;
   }
   
   void render()
@@ -36,9 +37,9 @@ class GunEnemy extends Enemy
   void update()
   {
     float random;
-    random = (int)random(0,10);
+    random = (int)random(0,20);
     
-    if (elapsed > toPass && random % 10 == 0 && spotted == true)//fire a bullet
+    if (elapsed > toPass && random % 20 == 0 && spotted == true)//fire a bullet
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);

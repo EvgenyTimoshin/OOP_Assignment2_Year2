@@ -39,22 +39,6 @@ class Arrow extends Bullet
     {
       gameObjects.remove(this);
     }
-    
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collision between arrow and wall
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
-      {
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - 1)
-            && (wall.pos.x) <= (this.pos.x + 2)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - 2)
-            && (wall.pos.y) <= (this.pos.y + 1))
-        {
-          gameObjects.remove(this);
-        }
-      }
-   }
-    
+    bulletWallCollision();
   }
 }

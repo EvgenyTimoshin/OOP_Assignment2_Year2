@@ -16,11 +16,10 @@ class Enemy extends Entity
      {
        spotted = true;
      }
-    
+   
     forward.x = -sin(theta);
     forward.y = cos(theta);
-    
-    
+     
     if(spotted == true)//movee enemy towards player if spotted
     {
       force.add(PVector.mult(forward, power));

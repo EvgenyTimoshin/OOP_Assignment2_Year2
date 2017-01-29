@@ -1,4 +1,4 @@
-class Player extends Entity implements Wound
+class Player extends Entity
 {
   float cameraZoom;
   Boolean playerWallCollision = false;
@@ -271,7 +271,6 @@ class Player extends Entity implements Wound
         {
           arrowAmmo--;
         }
-        
       }
       
     if(playerWallCollision == false)
@@ -317,7 +316,6 @@ class Player extends Entity implements Wound
    camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
     
    displayXp();
-   
    
    if(health < 25)
    {
@@ -381,10 +379,4 @@ class Player extends Entity implements Wound
     playerWallCollision = true;
     velocity.mult(0);
   }//end sopMovement
-  
-  void bleed()
-  {
-    
-  }
-
 }
