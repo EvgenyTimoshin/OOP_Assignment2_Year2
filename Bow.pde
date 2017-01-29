@@ -28,7 +28,6 @@ class Bow extends GameObject implements Weapon
     strokeWeight(2);
     popMatrix();
     
-    
     if(mousePressed)
     {
       strokeWeight(2);
@@ -53,38 +52,6 @@ class Bow extends GameObject implements Weapon
     popMatrix();
   }
   
-  void shoot()
-  {
-    if(mousePressed)
-    {
-      holding = true;
-      shoot = true;
-      prevMouseX = 0;
-      stretchDist = map(dist(mouseX, mouseY,width/2,height/2),0,500,0,200);
-    }
-    else if(stretchDist > 0)
-    {
-      forward.x = sin(theta);
-      forward.y = -cos(theta);
-      PVector bp = PVector.sub(pos, PVector.mult(forward, stretchDist));
-      println(bp);
-      if(shoot == true)
-      {
-        Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 4);
-        gameObjects.add(b);
-        shoot = false;
-        player.arrowAmmo--;
-        audio.bowFired.rewind();
-        audio.bowFired.play();
-      }
-      stretchDist-=20f;
-    }
-  }
-  
-  void reload()
-  {
-  }
-  
   void update()
   {
     pos.x = player.pos.x;
@@ -95,8 +62,36 @@ class Bow extends GameObject implements Weapon
     
     if(mousePressed)
     {
-      shoot();
+      holding = true;
+      shoot = true;
+      prevMouseX = 0;
+      stretchDist = map(dist(mouseX, mouseY,width/2,height/2),0,500,0,200);
+    }
+    else if(stretchDist > 0)
+    {
+      if(shoot == true)
+      {
+         shoot(); 
+      }
+      stretchDist-=20f;
     }
     
+  }
+  
+  void shoot()
+  {
+    forward.x = sin(theta);
+    forward.y = -cos(theta);
+    PVector bp = PVector.sub(pos, PVector.mult(forward, stretchDist));
+    Bullet b = new Arrow(bp.x, bp.y, theta, 70, 4, stretchDist * 4);
+    gameObjects.add(b);
+    shoot = false;
+    player.arrowAmmo--;
+    audio.bowFired.rewind();
+    audio.bowFired.play();
+  }
+  
+  void reload()
+  {
   }
 }

@@ -73,6 +73,9 @@ void draw()
     go.update();
     go.render();    
   }
+  
+  bow.render();
+  bow.update();
     
   stroke(255, 0, 0);
   line(mouseX , mouseY , mouseX + 15, mouseY);
