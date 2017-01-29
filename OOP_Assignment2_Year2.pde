@@ -11,6 +11,7 @@ void setup()
   /////////////////////
   //Spawn Game Objects on launch
   ///////////////////////
+  ui = new GUI();
   player = new Player(width / 2, height / 2, 0, 50, color(0,0,255));
   gameObjects.add(player);
   Clock clock = new Clock();
@@ -39,6 +40,7 @@ Minim minim;
 Audio audio;
 Bow bow;
 Torch torch;
+GUI ui;
 PFont font;
 PImage background;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
