@@ -81,8 +81,8 @@ class Bow extends GameObject
         gameObjects.add(b);
         shoot = false;
         player.arrowAmmo--;
-        bowFired.rewind();
-        bowFired.play();
+        audio.bowFired.rewind();
+        audio.bowFired.play();
       }
       stretchDist-=20f;
     }

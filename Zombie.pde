@@ -63,9 +63,9 @@ class Zombie extends Enemy
     
     if(health < 0)
     {
-      death.rewind();
-      death.setGain(-10);
-      death.play();
+      audio.death.rewind();
+      audio.death.setGain(-10);
+      audio.death.play();
       gameObjects.remove(this);
       player.xp += 10;
       player.showXp(4);

@@ -4,7 +4,10 @@ void setup()
 {
   //size(1920, 1080, P3D);
   fullScreen(P3D);
-  
+  camera();
+  frameRate(60);
+  minim = new Minim(this);
+  audio = new Audio();
   /////////////////////
   //Spawn Game Objects on launch
   ///////////////////////
@@ -14,56 +17,34 @@ void setup()
   gameObjects.add(clock);
   Gun gun = new Gun();
   gameObjects.add(gun);
+  bow = new Bow();
+  torch = new Torch();
+  
   for(int i = 0; i < 1080; i += 350)
   {
     createBuilding(i , 300, 300, 10);
   }
-  camera();
-  frameRate(60);
   
   font = loadFont("Zombie-Noize-48.vlw");
   ///////////
   //Sounds
   ////////
-  minim = new Minim(this);
-  gunShot = minim.loadSnippet("gunShot.mp3");
-  death = minim.loadSnippet("death.mp3");
-  levelUp = minim.loadSnippet("levelUp.mp3");
-  playerShot = minim.loadSnippet("playerShot.mp3");
-  forestAmbience = minim.loadFile("forestAmbience.mp3");
-  nightSong = minim.loadFile("nightSong.mp3");
-  heartBeat = minim.loadSnippet("heartBeat.mp3");
-  bowFired = minim.loadSnippet("bow.mp3");
-  zombieSpotted = minim.loadSnippet("zombieSpotted.mp3");
-  forestAmbience.play();
-  bow = new Bow();
-  torch = new Torch();
+  audio.forestAmbience.play();
   background = loadImage("grass.jpg");
-  road = loadImage("road.jpg");
   background.resize(width,height);
 }
 
-AudioSnippet gunShot;
-AudioSnippet death;
-AudioSnippet levelUp;
-AudioSnippet playerShot;
-AudioPlayer forestAmbience;
-AudioPlayer nightSong;
-AudioSnippet heartBeat;
-AudioSnippet bowFired;
-AudioSnippet zombieSpotted;
+Player player;
 Minim minim;
-PFont font;
-PImage background;
-PImage road;
-ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
+Audio audio;
 Bow bow;
 Torch torch;
+PFont font;
+PImage background;
+ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
 Boolean enemies = true;
-
-Player player;
 
 void draw()
 {

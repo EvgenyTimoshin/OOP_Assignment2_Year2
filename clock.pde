@@ -104,22 +104,22 @@ class Clock extends GameObject
       {
         audioVol -= 0.5;
       }
-      forestAmbience.setGain(-5);
+      audio.forestAmbience.setGain(-5);
     }
     
     if(playNightSong)
     {
-      nightSong.rewind();
-      nightSong.play();
+      audio.nightSong.rewind();
+      audio.nightSong.play();
       playNightSong = false;
     }
     
     if(hrTwo == 7)
     {
-      nightSong.setGain(-80);
-      nightSong.rewind();
-      nightSong.pause();
+      audio.nightSong.setGain(-80);
+      audio.nightSong.rewind();
+      audio.nightSong.pause();
     }
-    nightSong.setGain(audioVol);
+    //audio.nightSong.setGain(audioVol);
   }
 }

@@ -10,8 +10,4 @@ void mapTextures()
   }
   }
   
-  for(int i = -height*3; i < height*3; i+=600)
-  {
-    image(road,0,i);
-  }
 }

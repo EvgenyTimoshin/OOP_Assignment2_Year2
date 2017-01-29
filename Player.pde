@@ -263,9 +263,9 @@ class Player extends GameObject
       
       if (mousePressed && elapsed > toPass && ammo > 0 && gunEquipped == true)
       {
-        gunShot.rewind();
-        gunShot.setGain(-5);
-        gunShot.play();
+        audio.gunShot.rewind();
+        audio.gunShot.setGain(-5);
+        audio.gunShot.play();
         forward.x = sin(theta);
         forward.y = -cos(theta);
         PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
@@ -306,9 +306,9 @@ class Player extends GameObject
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
-          playerShot.rewind();
-          playerShot.setGain(-10);
-          playerShot.play();
+          audio.playerShot.rewind();
+          audio.playerShot.setGain(-10);
+          audio.playerShot.play();
           health -=10;
           gameObjects.remove(b);
         }
@@ -352,9 +352,9 @@ class Player extends GameObject
      xp = 0;
      levelCap = levelCap * 1.5;
      level++;
-     levelUp.rewind();
+     audio.levelUp.rewind();
      //levelUp.setGain(-10);
-     levelUp.play();
+     audio.levelUp.play();
      textSize(50);
    }
    
@@ -367,7 +367,7 @@ class Player extends GameObject
    
    if(health < 25)
    {
-     heartBeat.play();
+     audio.heartBeat.play();
    }
    else
    {
