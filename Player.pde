@@ -1,16 +1,5 @@
-class Player extends GameObject implements Wound
+class Player extends Entity implements Wound
 {
-  PVector velocity;
-  PVector accel;
-  float mass = 1;
-  int health;
-  int ammo;
-  PVector force;
-  color c;
-  float power = 200;
-  float fireRate = 2;
-  float toPass = 1.0 / fireRate;
-  float elapsed = toPass;
   float cameraZoom;
   Boolean playerWallCollision = false;
   int level;
@@ -24,6 +13,7 @@ class Player extends GameObject implements Wound
   int killCount;
   color gunC;
   Boolean gunEquipped;
+  Boolean bowEquipped;
   Boolean torch;
   int arrowAmmo;
   
@@ -51,7 +41,8 @@ class Player extends GameObject implements Wound
     levelCap = 100;
     skillPoints = 0;
     killCount = 0;
-    gunEquipped = false;
+    gunEquipped = true;
+    bowEquipped = false;
     torch = false;
     arrowAmmo = 15;
   }
@@ -297,24 +288,7 @@ class Player extends GameObject implements Wound
     {
       gameObjects.remove(this);
     }
-    
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//checks for collision between player and bullets
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Bullet && !(go instanceof Arrow))
-      {
-        Bullet b = (Bullet) go;
-        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
-        {
-          audio.playerShot.rewind();
-          audio.playerShot.setGain(-10);
-          audio.playerShot.play();
-          health -=10;
-          gameObjects.remove(b);
-        }
-      }
-   }
-   
+      
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition with ammo pickups
     {
       GameObject go = gameObjects.get(i);
@@ -325,24 +299,6 @@ class Player extends GameObject implements Wound
         {
           ammo += size/5;
           gameObjects.remove(item);
-        }
-      }
-   }
-   
-   for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
-      {
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 1)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 1)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 1)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 1))
-        {
-          
-          text("Collision",width/2,height/2);
-          velocity.mult(-1);
         }
       }
    }
@@ -358,10 +314,8 @@ class Player extends GameObject implements Wound
      textSize(50);
    }
    
-    //Updates the camera to follow the player
-    camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
-   // text("p.X:  " + (int)pos.x + "  p.Y:  " +(int)pos.y, pos.x - size*1.5, pos.y + 200);
-   
+   camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
+    
    displayXp();
    
    
@@ -374,12 +328,19 @@ class Player extends GameObject implements Wound
      //heartBeat.pause();
      //heartBeat.rewind();
    }
-   
-   
-   if(keyPressed && key == 't')
+  
+   if(bowEquipped)
    {
-     health = 100;
+     bow.update();
+     bow.render();
    }
+   else
+   {
+     //gun render
+   }
+   
+   projectileCollision();
+   wallCollision();
    
   }//end update
   

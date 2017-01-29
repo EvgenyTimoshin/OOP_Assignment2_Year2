@@ -59,7 +59,6 @@ class GunEnemy extends Enemy
     }
    
    movement();
-   collisionCheck();//calls the superClass collision checking
 }
 }//end class
 

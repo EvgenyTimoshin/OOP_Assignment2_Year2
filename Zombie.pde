@@ -47,8 +47,6 @@ class Zombie extends Enemy
     
    //calls inherited methods
    movement();
-   collisionCheck();
-   
   }//end udpate method
 }//end class
 
