@@ -35,32 +35,6 @@ class Zombie extends Enemy
   
   void update()
   {
-    //set enemy to face player and sif spots enemy
-    {
-      theta = -atan2(player.pos.x - pos.x, player.pos.y - pos.y);
-      
-      if(dist(pos.x,pos.y,player.pos.x,player.pos.y) < 400 && spotted == false)//check if player is close to enemy
-      {
-        spotted = true;
-      }
-    }
-    
-    forward.x = -sin(theta);
-    forward.y = cos(theta);
-    
-    
-    if(spotted == true)//movee enemy towards player if spotted
-    {
-      force.add(PVector.mult(forward, power));
-    }
-    
-    //Used to move enemy towards player
-    accel = PVector.div(force, mass);
-    velocity.add(PVector.mult(accel, timeDelta));
-    pos.add(PVector.mult(velocity, timeDelta));
-    force.x = force.y = 0;
-    velocity.mult(0.99f);
-    
     if(health < 0)
     {
       audio.death.rewind();
@@ -70,7 +44,8 @@ class Zombie extends Enemy
       player.xp += 10;
       player.showXp(4);
     }
-   
+    
+   movement();
    collisionCheck();
    
   }//end udpate method
