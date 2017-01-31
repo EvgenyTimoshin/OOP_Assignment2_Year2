@@ -55,6 +55,8 @@ class GunEnemy extends Enemy
       audio.death.setGain(-10);
       audio.death.play();
       gameObjects.remove(this);
+      Cash c = new Cash(pos.x, pos.y);
+      gameObjects.add(c);
       player.xp += 10;
       player.showXp(4);
     }

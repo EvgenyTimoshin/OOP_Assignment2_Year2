@@ -23,10 +23,10 @@ void setup()
   torch = new Torch();
   trader = new Trader(200, 300);
   
-  /*for(int i = 0; i < 1080; i += 350)
+  for(int i = 0; i < 1080; i += 350)
   {
     createBuilding(i , 300, 300, 10);
-  }*/
+  }
   
   font = loadFont("Zombie-Noize-48.vlw");
   ///////////

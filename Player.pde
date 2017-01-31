@@ -56,7 +56,7 @@ class Player extends Entity
   {
     if(cameraZoom == 30)
     {
-      ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo);
+      ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money);
     }
     
     pushMatrix();

@@ -2,12 +2,14 @@ class GUI extends GameObject
 {
   GUI(){};
   
-  void render(PVector pos, int ammo, int level, int health, int xp, float levelCap, int arrowAmmo)
+  void render(PVector pos, int ammo, int level, int health, int xp, float levelCap, int arrowAmmo, int money)
   {
     pushMatrix();
       translate(0,0,+5);
       fill(255, 0, 0);
       rect(pos.x - width/2 + 20, pos.y - height/2 + 50,map(health,0,100,0,300),60); // health bar
+      fill(0);
+      text("Cashhh: " + money, pos.x - width/2 + 20, pos.y - height/2 + 200);
       textSize(60);
       fill(#FF0011);
       
