@@ -17,6 +17,7 @@ class Player extends Entity
   Boolean torchEquipped;
   int arrowAmmo;
   Boolean controlling;
+  int money;
   
   Player()
   {};
@@ -47,6 +48,8 @@ class Player extends Entity
     torchEquipped = false;
     arrowAmmo = 15;
     controlling = true;
+    money = 50;
+    fireRate = 2;
   }
   
   void render()
@@ -241,7 +244,7 @@ class Player extends Entity
     }//end Controlling
       
      
-      if (checkKey('1'))
+      /*if (checkKey('1'))
       {
         cameraZoom = 30;
       }
@@ -252,12 +255,8 @@ class Player extends Entity
       if (checkKey('3'))
       {
         cameraZoom = 16;
-      }
-      if (checkKey('4'))
-      {
-        this.pos.x = width/2;
-        this.pos.y = height/2;
-      }
+      }*/
+     
       
       if(checkKey ('r'))
       {
@@ -278,6 +277,7 @@ class Player extends Entity
         torch.render();
         torch.update();
       }
+      toPass = 1.0 / fireRate;
       
       if (mousePressed && elapsed > toPass && ammo > 0 && gunEquipped == true)
       {
