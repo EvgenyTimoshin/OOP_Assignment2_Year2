@@ -34,7 +34,7 @@ void setup()
   ////////
   audio.forestAmbience.play();
   background = loadImage("grass.jpg");
-  background.resize(width,height);
+  background.resize(300, 300);
 }
 
 Player player;
