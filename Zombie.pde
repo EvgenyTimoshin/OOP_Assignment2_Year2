@@ -28,6 +28,11 @@ class Zombie extends Enemy
     //stroke(255,0,0);
     stroke(0);
     ellipse(0, 0, size, size);
+    pushMatrix();
+    translate(0,0,-1);
+    rect(-30,0,20,40);
+    rect(10,0,20,40);
+    popMatrix();
     
     popMatrix();
     //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);

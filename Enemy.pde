@@ -1,7 +1,6 @@
 class Enemy extends Entity
 {
   Boolean stuck;
-  Boolean spotted;
   float distanceFromPlayer;
   
   void render(){};

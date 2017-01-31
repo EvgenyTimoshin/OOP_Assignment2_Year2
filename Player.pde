@@ -14,8 +14,9 @@ class Player extends Entity
   color gunC;
   Boolean gunEquipped;
   Boolean bowEquipped;
-  Boolean torch;
+  Boolean torchEquipped;
   int arrowAmmo;
+  Boolean controlling;
   
   Player()
   {};
@@ -41,16 +42,17 @@ class Player extends Entity
     levelCap = 100;
     skillPoints = 0;
     killCount = 0;
-    gunEquipped = true;
-    bowEquipped = false;
-    torch = false;
+    gunEquipped = false;
+    bowEquipped = true;
+    torchEquipped = false;
     arrowAmmo = 15;
+    controlling = true;
   }
   
   void render()
   {
     if(cameraZoom == 30)
-    {  
+    {
       ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo);
     }
     
@@ -59,7 +61,14 @@ class Player extends Entity
     rotate(theta);
     fill(c);
     stroke(c);
-    ellipse(0, 0, size, size);
+    //ellipse(0, 0, size, size);
+    rect(-50,0,45,45);
+    rect(5,0,45,45);
+    fill(255,0,0);
+    pushMatrix();
+    translate(0, 0, +1);
+    ellipse(0,+20,60,60);
+    popMatrix();
     if(gunEquipped)
     {
       line(0, 0, 0, size*1.5);
@@ -158,14 +167,17 @@ class Player extends Entity
   
   void update()
   {
-    forward.x = 0;
-    forward.y = -1;
-    theta = (-atan2(mouseX  - width/2, mouseY - height/2));
-    
     if(level % 100 == 0)
     {
       level = 0;
     }
+    
+    if(controlling)
+    {
+    
+      forward.x = 0;
+      forward.y = -1;
+      theta = (-atan2(mouseX  - width/2, mouseY - height/2));
     
       if (checkKey('w'))
       {
@@ -206,15 +218,29 @@ class Player extends Entity
       
       if (checkKey('t'))
       {
-        if(torch == false)
+        if(torchEquipped == false)
         {
-          torch = true;
+          torchEquipped = true;
         }
         else
         {
-          torch = false;
+          torchEquipped = false;
         }
       }
+      
+      if(bowEquipped)
+       {
+          bow.update();
+          bow.render();
+       }
+       else
+       {
+           //gun render
+       }
+      
+    }//end Controlling
+      
+     
       if (checkKey('1'))
       {
         cameraZoom = 30;
@@ -231,6 +257,26 @@ class Player extends Entity
       {
         this.pos.x = width/2;
         this.pos.y = height/2;
+      }
+      
+      if(checkKey ('r'))
+      {
+         if(bowEquipped)
+         {
+           bowEquipped = false;
+           gunEquipped = true;
+         }
+         else
+         {
+           bowEquipped = true;
+           gunEquipped = false;
+         }
+      }
+      
+      if(torchEquipped)
+      {
+        torch.render();
+        torch.update();
       }
       
       if (mousePressed && elapsed > toPass && ammo > 0 && gunEquipped == true)
@@ -308,15 +354,6 @@ class Player extends Entity
      //heartBeat.rewind();
    }
   
-   if(bowEquipped)
-   {
-     bow.update();
-     bow.render();
-   }
-   else
-   {
-     //gun render
-   }
    
    projectileCollision();
    wallCollision();
