@@ -18,7 +18,7 @@ class Player extends Entity
   int arrowAmmo;
   Boolean controlling;
   int money;
-  
+  Boolean someKeyPressed = false;
   Player()
   {};
   
@@ -50,6 +50,8 @@ class Player extends Entity
     controlling = true;
     money = 50;
     fireRate = 2;
+    power = 350;
+    mass = 0.5;
   }
   
   void render()
@@ -72,6 +74,7 @@ class Player extends Entity
     translate(0, 0, +1);
     ellipse(0,+20,60,60);
     popMatrix();
+    
     if(gunEquipped)
     {
       line(0, 0, 0, size*1.5);
@@ -181,9 +184,18 @@ class Player extends Entity
       forward.x = 0;
       forward.y = -1;
       theta = (-atan2(mouseX  - width/2, mouseY - height/2));
-    
+      
+      if(someKeyPressed == false)
+      {
+        mass = 2000;
+      }
+      else
+      {
+        mass = 0.5;
+      }
       if (checkKey('w'))
       {
+        someKeyPressed = true;
         if(north())
         {
           force.add(PVector.mult(forward, power));
@@ -192,6 +204,7 @@ class Player extends Entity
       }
       if (checkKey('s'))
       {
+        someKeyPressed = true;
         if(south())
         {
           force.add(PVector.mult(forward, -power));
@@ -200,6 +213,7 @@ class Player extends Entity
       }
       if (checkKey('a'))  
       {
+        someKeyPressed = true;
         if(west())
         {
           forward.x = sin(HALF_PI);
@@ -210,6 +224,7 @@ class Player extends Entity
       }
       if (checkKey('d'))
       {
+        someKeyPressed = true;
         if(east())
         {
           forward.x = sin(HALF_PI);
@@ -230,6 +245,7 @@ class Player extends Entity
           torchEquipped = false;
         }
       }
+      
       
       if(bowEquipped)
        {
@@ -304,11 +320,27 @@ class Player extends Entity
     {
       accel = PVector.div(force, mass);
       velocity.add(PVector.mult(accel, timeDelta));
+      if(someKeyPressed == false)
+      {
+        velocity.x = velocity.x *0.80;
+        velocity.y = velocity.y * 0.80;
+      }
       pos.add(PVector.mult(velocity, timeDelta));
       force.x = force.y = 0;
       velocity.mult(0.99f);
       elapsed += timeDelta;
     }//end collision
+    else
+    {
+      /*forward.x =0;
+      forward.y = 0;
+      accel.x = 0;
+      accel.y = 0;
+      force.x =0;
+      force.y = 0;*/
+      //velocity.x -= 0.000000000001;
+      //velocity.y  =- 0.00000000001;
+    }
     
     if(health < 0)
     {
