@@ -13,7 +13,7 @@ class Zombie extends Enemy
     this.c = c;
     health = 100;
     stuck = false;
-    spotted = false;
+    spotted = true;
     mass = 1.4;
     distanceFromPlayer = 201;
   }
@@ -60,30 +60,14 @@ class Zombie extends Enemy
 
 void zombieSpawn()
 {
-  if(frameCount % 200 == 0)
+  if(frameCount % 60 == 0)
   {
-    {
-      for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-      {
-        int x = (int)random(0,width);
-        int y = (int)random(0,height);
-        Zombie m = new Zombie(x, y, 0, 50, 255);
-        
-        GameObject go = gameObjects.get(i);
-        if (go instanceof Wall)
-        {
-          Wall wall = (Wall) go;
-          if ((wall.pos.x + wall.wallWidth) < (x - 150 )
-              || (wall.pos.x) > (x + 150)
-              || (wall.pos.y + wall.wallHeight) < (y - 150)
-              || (wall.pos.y) > (y + 150))
-          {
-           gameObjects.add(m);
-           break;
-          }
-        }
-      }
-      
-    }
+    float angle = random(0,10);
+    
+    float x = cos(angle) * 1200 + player.pos.x;
+    float y = sin(angle) * 1200 + player.pos.y;
+    
+    Zombie m = new Zombie(x, y, 0, 50, 255);
+    gameObjects.add(m);
   }
 }

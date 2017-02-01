@@ -67,30 +67,14 @@ class GunEnemy extends Enemy
 
 void gunEnemySpawn()
 {
-  if(frameCount % 200 == 0)
+  if(frameCount % 300 == 0)
   {
-    {
-      for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-      {
-        int x = (int)random(0,width);
-        int y = (int)random(0,height);
-        GunEnemy m = new GunEnemy(x, y, 0, 50, 255);
-        
-        GameObject go = gameObjects.get(i);
-        if (go instanceof Wall)
-        {
-          Wall wall = (Wall) go;
-          if ((wall.pos.x + wall.wallWidth) < (x - 150 )
-              || (wall.pos.x) > (x + 150)
-              || (wall.pos.y + wall.wallHeight) < (y - 150)
-              || (wall.pos.y) > (y + 150))
-          {
-           gameObjects.add(m);
-           break;
-          }
-        }
-      }
-      
-    }
+    float angle = random(0,10);
+    
+    float x = cos(angle) * 1200 + player.pos.x;
+    float y = sin(angle) * 1200 + player.pos.y;
+    
+    GunEnemy g = new GunEnemy(x, y, 0, 50, 255);
+    gameObjects.add(g);
   }
 }
