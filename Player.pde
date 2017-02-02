@@ -48,8 +48,8 @@ class Player extends Entity
     levelCap = 100;
     skillPoints = 0;
     killCount = 0;
-    gunEquipped = false;
-    bowEquipped = true;
+    gunEquipped = true;
+    bowEquipped = false;
     torchEquipped = false;
     arrowAmmo = 15;
     controlling = true;
@@ -282,9 +282,25 @@ class Player extends Entity
         audio.gunShot.play();
         forward.x = sin(theta);
         forward.y = -cos(theta);
-        PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
-        Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
-        gameObjects.add(b);
+        
+        if(multiplier < 3.5)
+        {
+          PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
+          gameObjects.add(b);
+        }
+        else
+        {
+          PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
+          gameObjects.add(b);
+          bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          b = new Bullet(bp.x, bp.y, theta - 0.3, 10, 4, 300);
+          gameObjects.add(b);
+          bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          b = new Bullet(bp.x, bp.y, theta + 0.3, 10, 4, 300);
+          gameObjects.add(b);
+        }
         elapsed = 0;
         if(gunEquipped)
         {
