@@ -85,7 +85,6 @@ class Player extends Entity
       line(0, 0, 0, size*1.5);
     }
     popMatrix();
-    //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }
   
   Boolean north()
@@ -246,48 +245,28 @@ class Player extends Entity
           torchEquipped = false;
         }
       }
-      
-      
+  
       if(bowEquipped)
        {
           bow.update();
           bow.render();
        }
+       
+    }//end Controlling
+          
+    if(checkKey ('r'))
+    {
+       if(bowEquipped)
+       {
+         bowEquipped = false;
+         gunEquipped = true;
+       }
        else
        {
-           //gun render
+         bowEquipped = true;
+         gunEquipped = false;
        }
-      
-    }//end Controlling
-      
-     
-      /*if (checkKey('1'))
-      {
-        cameraZoom = 30;
-      }
-      if (checkKey('2'))
-      {
-        cameraZoom = 23;
-      }
-      if (checkKey('3'))
-      {
-        cameraZoom = 16;
-      }*/
-     
-      
-      if(checkKey ('r'))
-      {
-         if(bowEquipped)
-         {
-           bowEquipped = false;
-           gunEquipped = true;
-         }
-         else
-         {
-           bowEquipped = true;
-           gunEquipped = false;
-         }
-      }
+    }
       
       if(torchEquipped)
       {
@@ -331,17 +310,6 @@ class Player extends Entity
       velocity.mult(0.99f);
       elapsed += timeDelta;
     }//end collision
-    else
-    {
-      /*forward.x =0;
-      forward.y = 0;
-      accel.x = 0;
-      accel.y = 0;
-      force.x =0;
-      force.y = 0;*/
-      //velocity.x -= 0.000000000001;
-      //velocity.y  =- 0.00000000001;
-    }
     
     if(health < 0)
     {
@@ -379,9 +347,7 @@ class Player extends Entity
        ui.cameraLvl();
        cameraZoom -= 0.3;
      }
-     
      audio.levelUp.rewind();
-     //levelUp.setGain(-10);
      audio.levelUp.play();
      textSize(50);
    }
@@ -392,12 +358,6 @@ class Player extends Entity
    {
      audio.heartBeat.play();
    }
-   else
-   {
-     //heartBeat.pause();
-     //heartBeat.rewind();
-   }
-  
    
    projectileCollision();
    wallCollision();

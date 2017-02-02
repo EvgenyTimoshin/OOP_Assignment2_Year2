@@ -45,8 +45,7 @@ class Cash extends GameObject
     {
       size-=0.5;
     }
-    
-    
+   
     theta += 0.05f;
     if (dist(player.pos.x, player.pos.y,pos.x,pos.y) < 90)
         {

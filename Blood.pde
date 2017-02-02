@@ -8,9 +8,7 @@ class Blood extends GameObject
   float timeToLive = 600;
   float power;
   color c;
-  
-  
-  
+ 
   Blood(float x, float y, float theta)
   {
     pos = new PVector(x, y);

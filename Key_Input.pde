@@ -6,8 +6,6 @@ void keyPressed()
 void keyReleased()
 {
   keys[keyCode] = false; 
-  //player.velocity.x = player.velocity.x * 0.96;
-  //player.velocity.y = player.velocity.y * 0.96;
 }
 
 boolean checkKey(int k)

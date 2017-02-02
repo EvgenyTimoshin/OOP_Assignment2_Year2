@@ -23,7 +23,6 @@ class Ammo extends GameObject
   {
     theta += 0.01f;
   }
-  
 }
 
 void ammoSpawn()
