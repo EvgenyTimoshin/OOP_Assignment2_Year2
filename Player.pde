@@ -51,7 +51,7 @@ class Player extends Entity
     money = 50;
     fireRate = 2;
     power = 350;
-    mass = 0.5;
+    mass = 4;
   }
   
   void render()

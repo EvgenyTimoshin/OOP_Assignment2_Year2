@@ -14,14 +14,14 @@ class GunEnemy extends Enemy
     health = 100;
     stuck = false;
     spotted = false;
-    mass = 2;
+    mass = 10 ;
     distanceFromPlayer = 201;
     fireRate = 10;
   }
   
   void render()
   {
-    fill(255,0,0);
+    fill(0,0,255);
     rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
     pushMatrix();
     translate(pos.x, pos.y,+4);
@@ -29,7 +29,6 @@ class GunEnemy extends Enemy
     //stroke(255,0,0);
     stroke(0);
     ellipse(0, 0, size, size);
-    
     popMatrix();
     //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }

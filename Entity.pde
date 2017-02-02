@@ -2,12 +2,12 @@ class Entity extends GameObject implements Biological
 {
   PVector velocity;
   PVector accel;
-  float mass = 1;
+  float mass = 5;
   int health;
   int ammo;
   PVector force;
   color c;
-  float power = 200;
+  float power = 400;
   float fireRate = 2;
   float toPass = 1.0 / fireRate;
   float elapsed = toPass;
@@ -45,13 +45,21 @@ class Entity extends GameObject implements Biological
             }
           }
           
-          if(this instanceof Enemy)
+          if(this instanceof Enemy && !(b instanceof Arrow))
           {
             spotted = true;
+            this.bleed(b.theta);
+            gameObjects.remove(this);
+          }
+          else if(this instanceof Enemy && b instanceof Arrow)
+          {
+            this.bleed(-b.theta);
+            gameObjects.remove(b);
           }
           
           if(!(this instanceof Player) && !(b instanceof Arrow))
           {
+            
             gameObjects.remove(b);
           }
         }
@@ -89,9 +97,16 @@ class Entity extends GameObject implements Biological
   
   void bleed(float theta)
   {
-    for(int i = 0; i < 35; i++)
+    for(int i = 0; i < 30; i++)
     {
       Blood blood = new Blood(pos.x, pos.y, theta);
+      gameObjects.add(blood);
+    }
+    for(int i = 0; i < 4; i++)
+    {
+      Blood blood = new Blood(pos.x, pos.y, theta);
+      blood.size = random(38, 45);
+      blood.mass = 2;
       gameObjects.add(blood);
     }
   }

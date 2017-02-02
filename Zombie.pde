@@ -14,7 +14,7 @@ class Zombie extends Enemy
     health = 100;
     stuck = false;
     spotted = true;
-    mass = 1.4;
+    mass = 8;
     distanceFromPlayer = 201;
   }
   
