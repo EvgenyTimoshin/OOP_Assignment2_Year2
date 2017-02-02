@@ -35,4 +35,20 @@ class Enemy extends Entity
     projectileCollision();
     wallCollision();
   }
+  
+  void checkDeath()
+  {
+    if(health < 0)
+    {
+      audio.death.rewind();
+      audio.death.setGain(-10);
+      audio.death.play();
+      gameObjects.remove(this);
+      Cash c = new Cash(pos.x, pos.y);
+      gameObjects.add(c);
+      player.showXp(4);
+      player.killStreak();
+      player.xp += 10;
+    }
+  }
 }

@@ -23,7 +23,15 @@ class Entity extends GameObject implements Biological
         Bullet b = (Bullet) go;
         if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
         {
-          if(b instanceof Arrow && !(this instanceof Player))
+          
+          if (this instanceof Enemy &&  !(b instanceof Arrow))
+          {
+            this.health -= 34;
+            spotted = true;
+            this.bleed(b.theta);
+            gameObjects.remove(b);
+          }
+          else if(b instanceof Arrow && this instanceof Enemy)
           {
             health = -1;
           }
@@ -39,19 +47,10 @@ class Entity extends GameObject implements Biological
               gameObjects.remove(b);
               
             }
-            else
-            {
-              health -=34;
-            }
           }
           
-          if(this instanceof Enemy && !(b instanceof Arrow))
-          {
-            spotted = true;
-            this.bleed(b.theta);
-            gameObjects.remove(this);
-          }
-          else if(this instanceof Enemy && b instanceof Arrow)
+         
+          if(this instanceof Enemy && b instanceof Arrow)
           {
             this.bleed(-b.theta);
             gameObjects.remove(b);
@@ -89,15 +88,15 @@ class Entity extends GameObject implements Biological
   
   void update()
   {
-  
   }
   void render()
   {
   }
   
+  
   void bleed(float theta)
   {
-    for(int i = 0; i < 30; i++)
+    for(int i = 0; i < 10; i++)
     {
       Blood blood = new Blood(pos.x, pos.y, theta);
       gameObjects.add(blood);

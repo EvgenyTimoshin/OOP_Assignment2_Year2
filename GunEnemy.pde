@@ -14,7 +14,7 @@ class GunEnemy extends Enemy
     health = 100;
     stuck = false;
     spotted = false;
-    mass = 10 ;
+    mass = 18;
     distanceFromPlayer = 201;
     fireRate = 10;
   }
@@ -48,17 +48,7 @@ class GunEnemy extends Enemy
     }
     
     //Display xp and 
-    if(health < 0)
-    {
-      audio.death.rewind();
-      audio.death.setGain(-10);
-      audio.death.play();
-      gameObjects.remove(this);
-      Cash c = new Cash(pos.x, pos.y);
-      gameObjects.add(c);
-      player.xp += 10;
-      player.showXp(4);
-    }
+    checkDeath();
    
    movement();
 }

@@ -61,13 +61,10 @@ float timeDelta = 1.0f / 60.0f;
 
 void draw()
 {
-  //println(frameRate);
   background(255);
   stroke(255,0,0);
    mapTextures();
   noFill();
-  //println(frameRate);
-  println(gameObjects.size());
   pushMatrix();
   translate(0,0,+5);
   rect(-width*2,-height*2,width*4,height*4);
@@ -75,8 +72,8 @@ void draw()
   fill(255);
   frameRate(80);
   
-   gunEnemySpawn();
-    zombieSpawn();
+   //gunEnemySpawn();
+   zombieSpawn();
    //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   trader.render();

@@ -14,7 +14,7 @@ class Zombie extends Enemy
     health = 100;
     stuck = false;
     spotted = true;
-    mass = 8;
+    mass = 14;
     distanceFromPlayer = 201;
   }
   
@@ -40,17 +40,7 @@ class Zombie extends Enemy
   
   void update()
   {
-    if(health < 0)
-    {
-      audio.death.rewind();
-      audio.death.setGain(-10);
-      audio.death.play();
-      gameObjects.remove(this);
-      Cash c = new Cash(pos.x, pos.y);
-      gameObjects.add(c);
-      player.xp += 10;
-      player.showXp(4);
-    }
+    checkDeath();
     
    //calls inherited methods
    movement();
@@ -60,7 +50,7 @@ class Zombie extends Enemy
 
 void zombieSpawn()
 {
-  if(frameCount % 60 == 0)
+  if(frameCount % 100 == 0)
   {
     float angle = random(0,10);
     

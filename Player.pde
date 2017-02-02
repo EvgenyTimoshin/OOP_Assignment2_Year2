@@ -19,6 +19,11 @@ class Player extends Entity
   Boolean controlling;
   int money;
   Boolean someKeyPressed = false;
+  float multiplier;
+  float multiplierTime;
+  float maxMultiplierTime;
+  Boolean multiplierEnabled = false;
+  
   Player()
   {};
   
@@ -49,16 +54,19 @@ class Player extends Entity
     arrowAmmo = 15;
     controlling = true;
     money = 50;
-    fireRate = 2;
+    fireRate = 1.2;
     power = 350;
     mass = 4;
+    multiplier = 1.0f;
+    multiplierTime = 0;
+    maxMultiplierTime = 400;
   }
   
   void render()
   {
     if(cameraZoom == 30)
     {
-      ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money);
+      ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime);
     }
     
     pushMatrix();
@@ -173,6 +181,8 @@ class Player extends Entity
   
   void update()
   {
+    fireRate = 0.9 * multiplier;
+    
     if(level % 100 == 0)
     {
       level = 0;
@@ -384,6 +394,26 @@ class Player extends Entity
    projectileCollision();
    wallCollision();
    
+   if(multiplierEnabled && multiplierTime > 0)
+   {
+      if(multiplierTime > maxMultiplierTime)
+      {
+        multiplier += 0.5;
+        maxMultiplierTime *= 1.2;
+        multiplierTime = 100;
+      }
+   }
+   else
+   {
+     multiplierEnabled = false;
+     multiplier = 1;
+   }
+   
+   if(multiplierTime > 0)
+   {
+     multiplierTime -= 0.1 * multiplier;
+   }
+   
   }//end update
   
   ////////////////////////////////////////////////
@@ -401,12 +431,12 @@ class Player extends Entity
     if(enemyTypeKilled == 4 && showXp && displayCounter > -1)
     {
       displayCounter--;
-      textS+=1;
+      textS+=0.5;
       textSize(textS);
       fill(#ECF502);
       pushMatrix();
       translate(0,0,+4);
-      text("40xp",pos.x - size / 2 - 20, pos.y + size*2);
+      //text(((int)10 * multiplier) + "xp" + "  X " + String.format("%.1f", multiplier),pos.x - size / 2 - 30, pos.y + size*3);
       popMatrix();
     }
     
@@ -423,4 +453,10 @@ class Player extends Entity
     playerWallCollision = true;
     velocity.mult(0);
   }//end sopMovement
+  
+  void killStreak()
+  {
+    multiplierEnabled = true;
+    multiplierTime += 120;
+  }
 }
