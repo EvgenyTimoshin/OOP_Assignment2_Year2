@@ -2,6 +2,9 @@ class GUI extends GameObject
 {
   GUI(){};
   
+  void render()
+  {
+  }
   void render(PVector pos, int ammo, int level, int health, int xp, float levelCap, int arrowAmmo, int money)
   {
     pushMatrix();
@@ -27,4 +30,8 @@ class GUI extends GameObject
       text("ARROWS :  " + arrowAmmo ,pos.x + width/2 - 300, pos.y + height/2 - 130 );
       popMatrix();
   }
+  
+  void update()
+  {
+  };
 }

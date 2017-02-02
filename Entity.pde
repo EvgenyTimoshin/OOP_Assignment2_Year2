@@ -1,4 +1,4 @@
-class Entity extends GameObject
+class Entity extends GameObject implements Biological
 {
   PVector velocity;
   PVector accel;
@@ -35,7 +35,9 @@ class Entity extends GameObject
               audio.playerShot.setGain(-10);
               audio.playerShot.play();
               health -= 10;
+              player.bleed(b.theta);
               gameObjects.remove(b);
+              
             }
             else
             {
@@ -75,5 +77,22 @@ class Entity extends GameObject
         }
       }
    }
+  }
+  
+  void update()
+  {
+  
+  }
+  void render()
+  {
+  }
+  
+  void bleed(float theta)
+  {
+    for(int i = 0; i < 35; i++)
+    {
+      Blood blood = new Blood(pos.x, pos.y, theta);
+      gameObjects.add(blood);
+    }
   }
 }

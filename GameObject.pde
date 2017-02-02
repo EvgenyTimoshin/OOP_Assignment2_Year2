@@ -10,7 +10,7 @@ abstract class GameObject
     //default constructor for Super class
   }
   
-  void render(){};
+  abstract void render();
   
-  void update(){};
+  abstract void update();
 }

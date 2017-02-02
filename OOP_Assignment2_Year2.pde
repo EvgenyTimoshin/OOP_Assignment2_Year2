@@ -74,8 +74,8 @@ void draw()
   popMatrix();
   fill(255);
   
-   //gunEnemySpawn();
-   zombieSpawn();
+   gunEnemySpawn();
+  // zombieSpawn();
    //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   trader.render();

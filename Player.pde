@@ -178,6 +178,8 @@ class Player extends Entity
       level = 0;
     }
     
+    someKeyPressed = false;
+    
     if(controlling)
     {
     
@@ -185,14 +187,6 @@ class Player extends Entity
       forward.y = -1;
       theta = (-atan2(mouseX  - width/2, mouseY - height/2));
       
-      if(someKeyPressed == false)
-      {
-        mass = 2000;
-      }
-      else
-      {
-        mass = 0.5;
-      }
       if (checkKey('w'))
       {
         someKeyPressed = true;

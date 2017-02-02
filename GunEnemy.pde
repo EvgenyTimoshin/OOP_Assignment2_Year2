@@ -37,9 +37,9 @@ class GunEnemy extends Enemy
   void update()
   {
     float random;
-    random = (int)random(0,20);
+    random = (int)random(0,40);
     
-    if (elapsed > toPass && random % 20 == 0 && spotted == true)//fire a bullet
+    if (elapsed > toPass && random % 40 == 0 && spotted == true)//fire a bullet
     {
       forward.x = sin(theta);
       forward.y = -cos(theta);
@@ -67,7 +67,7 @@ class GunEnemy extends Enemy
 
 void gunEnemySpawn()
 {
-  if(frameCount % 300 == 0)
+  if(frameCount % 60 == 0)
   {
     float angle = random(0,10);
     
