@@ -8,7 +8,7 @@ class Cash extends GameObject
     pos = new PVector(x,y);
     size = 40;
     theta = 0;
-    timeToLive = 240;
+    timeToLive = 600;
   }
   
   void render()

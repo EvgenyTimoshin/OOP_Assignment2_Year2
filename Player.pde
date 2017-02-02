@@ -56,7 +56,7 @@ class Player extends Entity
     money = 50;
     fireRate = 1.2;
     power = 350;
-    mass = 4;
+    mass = 7;
     multiplier = 1.0f;
     multiplierTime = 0;
     maxMultiplierTime = 400;
@@ -64,10 +64,7 @@ class Player extends Entity
   
   void render()
   {
-    if(cameraZoom == 30)
-    {
-      ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime);
-    }
+    ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime);
     
     pushMatrix();
     translate(pos.x, pos.y,+4);
@@ -368,8 +365,21 @@ class Player extends Entity
    if(xp > levelCap)
    {
      xp = 0;
-     levelCap = levelCap * 1.5;
      level++;
+     if(level % 3 == 0)
+     {
+       ui.speedLvl();
+       mass -= 0.3;
+     }
+     
+     levelCap = levelCap * 1.5;
+     
+     if(level % 5 == 0)
+     {
+       ui.cameraLvl();
+       cameraZoom -= 0.3;
+     }
+     
      audio.levelUp.rewind();
      //levelUp.setGain(-10);
      audio.levelUp.play();
@@ -377,8 +387,6 @@ class Player extends Entity
    }
    
    camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
-    
-   displayXp();
    
    if(health < 25)
    {
@@ -424,28 +432,6 @@ class Player extends Entity
     displayCounter = 60;
     this.enemyTypeKilled = enemyType;
     killCount++;
-  }
-  
-  void displayXp()
-  {
-    if(enemyTypeKilled == 4 && showXp && displayCounter > -1)
-    {
-      displayCounter--;
-      textS+=0.5;
-      textSize(textS);
-      fill(#ECF502);
-      pushMatrix();
-      translate(0,0,+4);
-      //text(((int)10 * multiplier) + "xp" + "  X " + String.format("%.1f", multiplier),pos.x - size / 2 - 30, pos.y + size*3);
-      popMatrix();
-    }
-    
-    if(displayCounter < 0)
-    {
-      textS = 0;
-      displayCounter = 60;
-      showXp = false;
-    }
   }
   
   void stopMovement()

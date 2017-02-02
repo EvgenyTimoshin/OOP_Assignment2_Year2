@@ -27,7 +27,7 @@ class Clock extends GameObject
     fill(0,dayLight);
     pushMatrix();
     translate(0,0,+4);
-    rect(player.pos.x - width/2, player.pos.y - height/2, width, height);
+    rect(player.pos.x - width, player.pos.y - height, width*2, height*2);
     popMatrix();
     
     pushMatrix();
