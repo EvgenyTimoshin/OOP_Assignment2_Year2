@@ -14,9 +14,9 @@ class GunEnemy extends Enemy
     health = 100;
     stuck = false;
     spotted = false;
-    mass = 18;
+    mass = 2;
     distanceFromPlayer = 201;
-    fireRate = 10;
+    fireRate = 2;
   }
   
   void render()

@@ -6,7 +6,7 @@ void setup()
   //size(1920, 1080, P3D);
   fullScreen(P3D);
   camera();
-  frameRate(80);
+  frameRate(60);
   //noCursor();
   minim = new Minim(this);
   audio = new Audio();
@@ -78,7 +78,7 @@ void draw()
 
 void gameRunning()
 {
-  frameRate(80);
+  //frameRate(80);
   background(255);
   stroke(255,0,0);
   mapTextures();
@@ -90,7 +90,7 @@ void gameRunning()
   fill(255);
   
   zombieSpawn();
-  //gunEnemySpawn();
+  gunEnemySpawn();
   //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   //trader.render();
@@ -103,6 +103,7 @@ void gameRunning()
     go.render();    
   }  
   globalInput();
+  println(frameRate);
 }
 
 void mainMenu()

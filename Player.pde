@@ -54,9 +54,9 @@ class Player extends Entity
     arrowAmmo = 15;
     controlling = true;
     money = 50;
-    fireRate = 1.2;
+    fireRate = 4;
     power = 350;
-    mass = 4.5;
+    mass = 1;
     multiplier = 1.0f;
     multiplierTime = 0;
     maxMultiplierTime = 400;
@@ -186,7 +186,7 @@ class Player extends Entity
   
   void update()
   {
-    fireRate = 0.9 * multiplier;
+    fireRate = 2 * multiplier;
     
     if(level % 100 == 0)
     {
@@ -295,19 +295,19 @@ class Player extends Entity
         if(multiplier < 3.5)
         {
           PVector bp = PVector.sub(pos, PVector.mult(forward, size*2));
-          Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
+          Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 600);
           gameObjects.add(b);
         }
         else
         {
           PVector bp = PVector.sub(pos, PVector.mult(forward, size*2));
-          Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
+          Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 600);
           gameObjects.add(b);
           bp = PVector.sub(pos, PVector.mult(forward, size*2));
-          b = new Bullet(bp.x, bp.y, theta - 0.3, 10, 4, 300);
+          b = new Bullet(bp.x, bp.y, theta - 0.3, 10, 4, 600);
           gameObjects.add(b);
           bp = PVector.sub(pos, PVector.mult(forward, size*2));
-          b = new Bullet(bp.x, bp.y, theta + 0.3, 10, 4, 300);
+          b = new Bullet(bp.x, bp.y, theta + 0.3, 10, 4, 600);
           gameObjects.add(b);
         }
         elapsed = 0;
@@ -407,7 +407,7 @@ class Player extends Entity
    
    if(multiplierTime > 0)
    {
-     multiplierTime -= 0.1 * multiplier;
+     multiplierTime -= 0.8 * multiplier;
    }
    
   }//end update
