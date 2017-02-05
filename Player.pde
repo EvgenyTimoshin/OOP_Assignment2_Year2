@@ -65,18 +65,19 @@ class Player extends Entity
   void render()
   {
     ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime);
-    
+    strokeWeight(5);
     pushMatrix();
-    translate(pos.x, pos.y,+4);
+    translate(pos.x, pos.y,+5);
     rotate(theta);
     fill(c);
-    stroke(c);
+    stroke(0);
     //ellipse(0, 0, size, size);
     rect(-50,0,45,45);
     rect(5,0,45,45);
     fill(255,0,0);
     pushMatrix();
     translate(0, 0, +1);
+    ellipseMode(CENTER);
     ellipse(0,+20,60,60);
     popMatrix();
     

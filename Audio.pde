@@ -10,9 +10,11 @@ class Audio
   AudioSnippet bowFired;
   AudioSnippet zombieSpotted;
   AudioPlayer forestAmbience;
+  AudioSnippet coin;
   
   Audio()
   {
+    coin = minim.loadSnippet("coin.mp3");
     gunShot = minim.loadSnippet("gunShot.mp3");
     death = minim.loadSnippet("death.mp3");
     levelUp = minim.loadSnippet("levelUp.mp3");

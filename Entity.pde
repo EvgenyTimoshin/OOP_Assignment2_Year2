@@ -3,7 +3,7 @@ class Entity extends GameObject implements Biological
   PVector velocity;
   PVector accel;
   float mass = 5;
-  int health;
+  float health;
   int ammo;
   PVector force;
   color c;
@@ -52,7 +52,7 @@ class Entity extends GameObject implements Biological
          
           if(this instanceof Enemy && b instanceof Arrow)
           {
-            this.bleed(-b.theta);
+            this.bleed(b.theta+radians(180));
             gameObjects.remove(b);
           }
           

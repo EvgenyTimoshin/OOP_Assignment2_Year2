@@ -9,6 +9,7 @@ class Clock extends GameObject
   float audioVol;
   Boolean playNightSong = false;
   int dayCount = 1;
+  Boolean darkness = false;
   
   Clock()
   {
@@ -27,7 +28,10 @@ class Clock extends GameObject
     fill(0,dayLight);
     pushMatrix();
     translate(0,0,+4);
-    rect(player.pos.x - width, player.pos.y - height, width*2, height*2);
+    if(darkness)
+    {
+      rect(player.pos.x - width, player.pos.y - height, width*2, height*2);
+    }
     popMatrix();
     
     pushMatrix();
@@ -41,9 +45,9 @@ class Clock extends GameObject
     {
       fill(255);
     }
-    text(hrOne +""+ hrTwo + "  :  " + minuteOne + minuteTwo , player.pos.x + width/2 - 250, player.pos.y - height/2 + 100);
-    fill(#2002AA);
     text("Day :  " + dayCount, player.pos.x - 100 , player.pos.y - height/2 + 100);
+    text(hrOne +""+ hrTwo + "  :  " + minuteOne + minuteTwo , player.pos.x + width/2 - 250, player.pos.y - height/2 + 100);
+    fill(#2002AA);   
     popMatrix();
   }
   
@@ -67,7 +71,7 @@ class Clock extends GameObject
       minuteTwo = 0;
     }
     
-    if(hrTwo > 9  || (hrOne == 2 && hrTwo > 4))
+    if(hrTwo > 9  || (hrOne == 2 && hrTwo >= 4))
     {
       hrOne++;
       hrTwo = 0;
@@ -89,6 +93,7 @@ class Clock extends GameObject
       if(playNightSong == false && dayLight < 5)
       {
         playNightSong = true;
+        darkness = true;
       }
         dayLight += .5;
         
@@ -100,6 +105,7 @@ class Clock extends GameObject
     else if(hrOne == 0 && hrTwo > 5 && dayLight > 0)
     {
       dayLight -=0.5;
+      darkness = false;
       if(audioVol > -80)
       {
         audioVol -= 0.5;

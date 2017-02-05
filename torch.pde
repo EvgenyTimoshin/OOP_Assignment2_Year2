@@ -13,10 +13,11 @@ class Torch extends GameObject
   {
     if(state)
     {
+      noStroke();
       pushMatrix();
-      translate(pos.x,pos.y,+4);
+      translate(pos.x,pos.y,+5);
       rotate(theta);
-      fill(255,220);
+      fill(255,50);
       //noFill();
       noStroke();
       pushMatrix();
@@ -27,11 +28,11 @@ class Torch extends GameObject
       beginShape();
       vertex(0,0);
       curveVertex(500, 320);
-      curveVertex(200, 400);
-      curveVertex(100, 450);
-      curveVertex(0,480);
-      curveVertex(-100, 450);
-      curveVertex(-200, 400);
+      curveVertex(350, 500);
+      curveVertex(200, 550);
+      curveVertex(0,570);
+      curveVertex(-200, 550);
+      curveVertex(-350, 500);
       curveVertex(-500, 320);
       vertex(0,0);
       endShape(CLOSE);

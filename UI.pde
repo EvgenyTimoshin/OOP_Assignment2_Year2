@@ -10,12 +10,12 @@ class GUI extends GameObject
   void render()
   {
   }
-  void render(PVector pos, int ammo, int level, int health, int xp, float levelCap, 
+  void render(PVector pos, int ammo, int level, float health, int xp, float levelCap, 
               int arrowAmmo, int money,float multiplier, float multiplierTime, float maxMultiplierTime)
   {
-      
+      stroke(0);
       pushMatrix();
-      translate(0,0,+5);
+      translate(0,0,+6);
       fill(255, 0, 0);
       rect(pos.x - width/2 + 20, pos.y - height/2 + 50,map(health,0,100,0,300),60); // health bar
       fill(0);
@@ -63,6 +63,9 @@ class GUI extends GameObject
     
     speedLevelUp--;
     cameraLevelUp--;
+    
+    clock.render();
+    clock.update();
   }
   
   void showSpeedLevelUp()

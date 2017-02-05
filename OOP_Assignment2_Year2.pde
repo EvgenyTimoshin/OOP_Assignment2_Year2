@@ -5,7 +5,7 @@ void setup()
   //size(1920, 1080, P3D);
   fullScreen(P3D);
   camera();
-  frameRate(60);
+  frameRate(80);
   //noCursor();
   minim = new Minim(this);
   audio = new Audio();
@@ -15,8 +15,7 @@ void setup()
   ui = new GUI();
   player = new Player(width / 2, height / 2, 0, 50, color(0,0,255));
   gameObjects.add(player);
-  Clock clock = new Clock();
-  gameObjects.add(clock);
+  clock = new Clock();
   Gun gun = new Gun();
   gameObjects.add(gun);
   bow = new Bow();
@@ -44,8 +43,10 @@ void setup()
   audio.forestAmbience.play();
   background = loadImage("grass.jpg");
   background.resize(500, 500);
+  
 }
 
+Clock clock;
 Player player;
 Trader trader;
 Minim minim;
@@ -61,20 +62,20 @@ float timeDelta = 1.0f / 60.0f;
 
 void draw()
 {
+  frameRate(80);
   background(255);
   stroke(255,0,0);
-   mapTextures();
+  mapTextures();
   noFill();
   pushMatrix();
   translate(0,0,+5);
   rect(-width*2,-height*2,width*4,height*4);
   popMatrix();
   fill(255);
-  frameRate(80);
   
-   //gunEnemySpawn();
-   zombieSpawn();
-   //ammoSpawn();
+  zombieSpawn();
+  //gunEnemySpawn();
+  //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   trader.render();
   trader.update();

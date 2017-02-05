@@ -16,16 +16,15 @@ class Bow extends GameObject implements Weapon
   
   void render()
   {
+    strokeWeight(5);
     pushMatrix();
     translate(pos.x, pos.y,+5);
     rotate(theta);
     stroke(#584834);
-    strokeWeight(10);
     noFill();
     pushMatrix();
     rotate(3.14);
     arc(0, 0, 120, 70, 0, 3.15);
-    strokeWeight(2);
     popMatrix();
     
     if(mousePressed)
@@ -50,6 +49,7 @@ class Bow extends GameObject implements Weapon
       line( - 60, 0, prevMouseX,stretchDist);
     }
     popMatrix();
+    strokeWeight(5);
   }
   
   void update()

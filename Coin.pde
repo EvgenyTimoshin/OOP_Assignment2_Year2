@@ -8,11 +8,13 @@ class Cash extends GameObject
     pos = new PVector(x,y);
     size = 40;
     theta = 0;
-    timeToLive = 600;
+    timeToLive = 1200;
   }
   
   void render()
   {
+     stroke(0);
+     strokeWeight(2);
      pushMatrix();
      translate(pos.x, pos.y, + 2);
      rotate(theta);
@@ -47,11 +49,19 @@ class Cash extends GameObject
     }
    
     theta += 0.05f;
-    if (dist(player.pos.x, player.pos.y,pos.x,pos.y) < 90)
+    if (dist(player.pos.x, player.pos.y,pos.x,pos.y) < 60)
         {
           gameObjects.remove(this);
           player.money += 5;
+          audio.coin.rewind();
+           audio.coin.play();
         }
+        
+     if(dist(player.pos.x, player.pos.y,pos.x,pos.y) < 180)
+     {
+       pos.lerp(player.pos, 0.04);
+     }
+     
      timeToLive--;
         
      if(timeToLive < 0)

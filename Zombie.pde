@@ -11,27 +11,32 @@ class Zombie extends Enemy
     this.size = size;
     this.health = 100;
     this.c = c;
-    health = 100;
+    health = size * 1.8;
     stuck = false;
     spotted = true;
-    mass = 14;
+    mass = size/4;
     distanceFromPlayer = 201;
   }
   
   void render()
   {
-    fill(0,255,0);
-    rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
+    fill(0,255,0,map(health,0,100,0,255));
+    stroke(255,0,0);
+    strokeWeight(4);
+    rect(pos.x - size*1.2, pos.y - size*1.8,map(health,0,100,0,100),10);
     pushMatrix();
     translate(pos.x, pos.y,+4);
     rotate(theta);
     //stroke(255,0,0);
     stroke(0);
+    strokeWeight(5);
     ellipse(0, 0, size, size);
     pushMatrix();
     translate(0,0,-1);
-    rect(-30,0,20,40);
-    rect(10,0,20,40);
+     stroke(0);
+    strokeWeight(5);
+    rect(-30,0,20,size);
+    rect(10,0,20,size);
     popMatrix();
     
     popMatrix();
@@ -45,19 +50,21 @@ class Zombie extends Enemy
    //calls inherited methods
    movement();
   }//end udpate method
+  
 }//end class
 
 
 void zombieSpawn()
 {
-  if(frameCount % 100 == 0)
+  
+  if(frameCount % 200 == 0)
   {
     float angle = random(0,10);
     
     float x = cos(angle) * 1200 + player.pos.x;
     float y = sin(angle) * 1200 + player.pos.y;
     
-    Zombie m = new Zombie(x, y, 0, 50, 255);
+    Zombie m = new Zombie(x, y, 0, random(30,70), 255);
     gameObjects.add(m);
   }
 }

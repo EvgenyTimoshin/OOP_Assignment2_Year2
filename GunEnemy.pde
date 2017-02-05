@@ -28,6 +28,7 @@ class GunEnemy extends Enemy
     rotate(theta);
     //stroke(255,0,0);
     stroke(0);
+    strokeWeight(5);
     ellipse(0, 0, size, size);
     popMatrix();
     //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
