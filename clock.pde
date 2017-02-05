@@ -53,7 +53,7 @@ class Clock extends GameObject
   
   void update()
   {
-    if(frameCount % 120 == 0)
+    if(frameCount % 3 == 0)
     {
       minuteTwo++;
     }
@@ -126,6 +126,5 @@ class Clock extends GameObject
       audio.nightSong.rewind();
       audio.nightSong.pause();
     }
-    //audio.nightSong.setGain(audioVol);
   }
 }

@@ -56,7 +56,7 @@ class Player extends Entity
     money = 50;
     fireRate = 1.2;
     power = 350;
-    mass = 7;
+    mass = 4.5;
     multiplier = 1.0f;
     multiplierTime = 0;
     maxMultiplierTime = 400;
@@ -64,27 +64,33 @@ class Player extends Entity
   
   void render()
   {
-    ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime);
+    ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime,killCount);
     strokeWeight(5);
     pushMatrix();
     translate(pos.x, pos.y,+5);
     rotate(theta);
     fill(c);
     stroke(0);
-    //ellipse(0, 0, size, size);
+    if(gunEquipped)
+    {
+      stroke(#FFE37E);
+      strokeWeight(14);
+      line(+45, +47, 0, +90);
+      line(-45, +47, 0, +90);
+      stroke(0);
+      strokeWeight(13);
+      line(0, +90, 0, +140);
+      strokeWeight(5);
+    }
     rect(-50,0,45,45);
     rect(5,0,45,45);
     fill(255,0,0);
     pushMatrix();
     translate(0, 0, +1);
-    ellipseMode(CENTER);
     ellipse(0,+20,60,60);
     popMatrix();
     
-    if(gunEquipped)
-    {
-      line(0, 0, 0, size*1.5);
-    }
+    
     popMatrix();
   }
   
@@ -286,19 +292,19 @@ class Player extends Entity
         
         if(multiplier < 3.5)
         {
-          PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          PVector bp = PVector.sub(pos, PVector.mult(forward, size*2));
           Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
           gameObjects.add(b);
         }
         else
         {
-          PVector bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          PVector bp = PVector.sub(pos, PVector.mult(forward, size*2));
           Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 300);
           gameObjects.add(b);
-          bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          bp = PVector.sub(pos, PVector.mult(forward, size*2));
           b = new Bullet(bp.x, bp.y, theta - 0.3, 10, 4, 300);
           gameObjects.add(b);
-          bp = PVector.sub(pos, PVector.mult(forward, size*1.5));
+          bp = PVector.sub(pos, PVector.mult(forward, size*2));
           b = new Bullet(bp.x, bp.y, theta + 0.3, 10, 4, 300);
           gameObjects.add(b);
         }

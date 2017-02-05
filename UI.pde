@@ -11,17 +11,22 @@ class GUI extends GameObject
   {
   }
   void render(PVector pos, int ammo, int level, float health, int xp, float levelCap, 
-              int arrowAmmo, int money,float multiplier, float multiplierTime, float maxMultiplierTime)
+              int arrowAmmo, int money,float multiplier, float multiplierTime, float maxMultiplierTime,int killCount)
   {
       stroke(0);
       pushMatrix();
-      translate(0,0,+6);
+      translate(0,0,+5);
+      fill(0);
+      rect(pos.x - width/2 + 50, pos.y - height/2 + 50,300,30);
       fill(255, 0, 0);
-      rect(pos.x - width/2 + 20, pos.y - height/2 + 50,map(health,0,100,0,300),60); // health bar
+      rect(pos.x - width/2 + 50, pos.y - height/2 + 50,map(health,0,100,0,300),30); // health bar
+      
       fill(0);
       textSize(60);
-      text("Cashhh: " + money, pos.x - width/2 + 20, pos.y - height/2 + 200);
+      fill(#FFC905);
+      text("Cashhh: " + money, pos.x - width/2 + 50, pos.y - height/2 + 135);
       fill(#FF0011);
+      text("KillCount: " + killCount, pos.x - width/2 + 50, pos.y - height/2 + 200);
       
       text("A M M O :  " + ammo ,pos.x + width/2 - 300, pos.y + height/2 - 80 );//ammo
       fill(#DAE300);

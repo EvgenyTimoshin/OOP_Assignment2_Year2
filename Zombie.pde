@@ -20,18 +20,18 @@ class Zombie extends Enemy
   
   void render()
   {
-    fill(0,255,0,map(health,0,100,0,255));
+    fill(0,255,0,map(health,0,100,70,255));
     stroke(255,0,0);
     strokeWeight(4);
     rect(pos.x - size*1.2, pos.y - size*1.8,map(health,0,100,0,100),10);
     pushMatrix();
     translate(pos.x, pos.y,+4);
     rotate(theta);
-    //stroke(255,0,0);
     stroke(0);
     strokeWeight(5);
     ellipse(0, 0, size, size);
     pushMatrix();
+    fill(0,255,0,map(health,0,100,70,255));
     translate(0,0,-1);
      stroke(0);
     strokeWeight(5);
@@ -40,7 +40,6 @@ class Zombie extends Enemy
     popMatrix();
     
     popMatrix();
-    //rect(pos.x + width/2 - 40, pos.y + height/2 - 40, map(ammo,0,100,0,50), 5);
   }
   
   void update()

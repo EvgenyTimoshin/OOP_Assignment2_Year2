@@ -73,12 +73,12 @@ void draw()
   popMatrix();
   fill(255);
   
-  zombieSpawn();
-  //gunEnemySpawn();
+  //zombieSpawn();
+  gunEnemySpawn();
   //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
-  trader.render();
-  trader.update();
+  //trader.render();
+  //trader.update();
  //drawBuildingFloor();
   
   for (int i = gameObjects.size() - 1 ; i >= 0  ; i --)
