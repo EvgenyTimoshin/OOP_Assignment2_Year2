@@ -59,7 +59,7 @@ class Cash extends GameObject
         
      if(dist(player.pos.x, player.pos.y,pos.x,pos.y) < 180)
      {
-       pos.lerp(player.pos, 0.04);
+       pos.lerp(player.pos, 0.09);
      }
      
      timeToLive--;

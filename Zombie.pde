@@ -56,7 +56,7 @@ class Zombie extends Enemy
 void zombieSpawn()
 {
   
-  if(frameCount % 200 == 0)
+  if(frameCount % 120 == 0)
   {
     float angle = random(0,10);
     

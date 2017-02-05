@@ -7,6 +7,7 @@ void setup()
   fullScreen(P3D);
   camera();
   frameRate(60);
+  smooth(4);
   //noCursor();
   minim = new Minim(this);
   audio = new Audio();
@@ -90,7 +91,7 @@ void gameRunning()
   fill(255);
   
   zombieSpawn();
-  gunEnemySpawn();
+  //gunEnemySpawn();
   //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   //trader.render();

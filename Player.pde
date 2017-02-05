@@ -407,7 +407,7 @@ class Player extends Entity
    
    if(multiplierTime > 0)
    {
-     multiplierTime -= 0.8 * multiplier;
+     multiplierTime -= 0.5 * multiplier;
    }
    
   }//end update
