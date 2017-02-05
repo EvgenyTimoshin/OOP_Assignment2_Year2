@@ -1,4 +1,5 @@
 import ddf.minim.*;
+import java.*;
 
 void setup()
 {
@@ -43,7 +44,7 @@ void setup()
   audio.forestAmbience.play();
   background = loadImage("grass.jpg");
   background.resize(500, 500);
-  
+  highscore = loadStrings("data/highscore.txt");
 }
 
 Clock clock;
@@ -59,8 +60,23 @@ PImage background;
 ArrayList<GameObject>gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];
 float timeDelta = 1.0f / 60.0f;
+Boolean paused = false;
+int gameState = 1;
+String[] highscore;
 
 void draw()
+{
+  switch(gameState)
+  {
+    case 1: mainMenu();
+            break;
+    
+    case 2: gameRunning();
+            break;
+  }
+}
+
+void gameRunning()
 {
   frameRate(80);
   background(255);
@@ -73,14 +89,13 @@ void draw()
   popMatrix();
   fill(255);
   
-  //zombieSpawn();
-  gunEnemySpawn();
+  zombieSpawn();
+  //gunEnemySpawn();
   //ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   //trader.render();
   //trader.update();
  //drawBuildingFloor();
-  
   for (int i = gameObjects.size() - 1 ; i >= 0  ; i --)
   {
     GameObject go = gameObjects.get(i); 
@@ -88,4 +103,39 @@ void draw()
     go.render();    
   }  
   globalInput();
+}
+
+void mainMenu()
+{
+  background(0);
+  stroke(255, 0 , 0);
+  rect(width/2-200, height/2 , 400, 250);
+  fill(0, 255, 0 );
+  textSize(40);
+  text("SURVIVE",width/2 - 80,height/2 + 140);
+  
+  fill(255, 0, 0);
+  textSize(70);
+  text("HIGHSCORE", width/2 - 195, height/2 - 400);
+  fill(#53D322);
+  text(highscore[0], width/2 - 35, height/2 - 300);
+  textSize(20);
+  text("Date : " + highscore[1] + " / " + highscore[2] + " / " + highscore[3], width/2 - 80, height/2 - 250);
+  text("Time : "  + highscore[4] + " : " + highscore[5], width/2 - 60, height/2 - 220);
+  
+  if(mouseX < width/2 + 200 && mouseX > width/2 - 200
+     && mouseY > height/2 && mouseY < height/2  + 250)
+  {
+       fill(255, 0 , 0);
+       
+       if(mousePressed)
+       {
+         gameState = 2;
+       }
+  }
+  else
+  {
+    fill(0);
+  }
+  
 }

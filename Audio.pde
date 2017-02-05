@@ -11,9 +11,11 @@ class Audio
   AudioSnippet zombieSpotted;
   AudioPlayer forestAmbience;
   AudioSnippet coin;
+  AudioSnippet bite;
   
   Audio()
   {
+    bite = minim.loadSnippet("bite.mp3");
     coin = minim.loadSnippet("coin.mp3");
     gunShot = minim.loadSnippet("gunShot.mp3");
     death = minim.loadSnippet("death.mp3");

@@ -34,6 +34,14 @@ class Enemy extends Entity
     
     projectileCollision();
     wallCollision();
+    
+    if(dist(player.pos.x , player.pos.y, pos.x, pos.y) < size*1.6)
+    {
+      audio.bite.rewind();
+      audio.bite.play();
+      velocity.mult(-1.5);
+      player.health -= 5;
+    }
   }
   
   void checkDeath()

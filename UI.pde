@@ -29,7 +29,7 @@ class GUI extends GameObject
       text("KillCount: " + killCount, pos.x - width/2 + 50, pos.y - height/2 + 200);
       
       text("A M M O :  " + ammo ,pos.x + width/2 - 300, pos.y + height/2 - 80 );//ammo
-      fill(#DAE300);
+      fill(#FFC905);
       textSize(60);
       text("lvl: " + level ,pos.x - 50, pos.y + height/2 - 70);
       rect(pos.x - width/2 + 50, pos.y + height/2 - 50,map(xp,0,levelCap,0,width-100),20); /// xp bar
@@ -69,8 +69,6 @@ class GUI extends GameObject
     speedLevelUp--;
     cameraLevelUp--;
     
-    clock.render();
-    clock.update();
   }
   
   void showSpeedLevelUp()

@@ -64,6 +64,8 @@ class Player extends Entity
   
   void render()
   {
+    clock.render();
+    clock.update();
     ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime,killCount);
     strokeWeight(5);
     pushMatrix();
@@ -336,6 +338,9 @@ class Player extends Entity
     
     if(health < 0)
     {
+      String score = str(killCount) + ' ' + year() +  ' ' + month() + ' ' + day() + ' ' + hour() + ' ' + minute();
+      String[] list = split(score,' ');
+      saveStrings("data/highscore.txt",list);
       gameObjects.remove(this);
     }
       
