@@ -123,6 +123,10 @@ void mainMenu()
   text("Date : " + highscore[1] + " / " + highscore[2] + " / " + highscore[3], width/2 - 80, height/2 - 250);
   text("Time : "  + highscore[4] + " : " + highscore[5], width/2 - 60, height/2 - 220);
   
+  fill(#D3D322);
+  textSize(30);
+  text(" W, A, S, D to move \n R to swtich Weapon \n T to toggle torch \n Mouse to Aim + Shoot",30, 900);
+  
   if(mouseX < width/2 + 200 && mouseX > width/2 - 200
      && mouseY > height/2 && mouseY < height/2  + 250)
   {
