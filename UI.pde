@@ -11,7 +11,7 @@ class GUI extends GameObject
   {
   }
   void render(PVector pos, int ammo, int level, float health, int xp, float levelCap, 
-              int arrowAmmo, int money,float multiplier, float multiplierTime, float maxMultiplierTime,int killCount)
+              int arrowAmmo, int money,float multiplier, float multiplierTime, float maxMultiplierTime,int killCount, float magnetTimer)
   {
       stroke(0);
       pushMatrix();
@@ -27,6 +27,11 @@ class GUI extends GameObject
       text("Cashhh: " + money, pos.x - width/2 + 50, pos.y - height/2 + 135);
       fill(#FF0011);
       text("KillCount: " + killCount, pos.x - width/2 + 50, pos.y - height/2 + 200);
+      
+      if(magnetTimer > 0)
+      {
+        text("Magnet : " + (int)magnetTimer/60, pos.x - 100, pos.y - 300);
+      }
       
       text("A M M O :  " + ammo ,pos.x + width/2 - 300, pos.y + height/2 - 80 );//ammo
       fill(#FFC905);

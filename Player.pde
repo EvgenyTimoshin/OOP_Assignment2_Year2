@@ -23,6 +23,8 @@ class Player extends Entity
   float multiplierTime;
   float maxMultiplierTime;
   Boolean multiplierEnabled = false;
+  Boolean magnet = false;
+  float magnetTimer = 0;
   
   Player()
   {};
@@ -66,7 +68,7 @@ class Player extends Entity
   {
     clock.render();
     clock.update();
-    ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime,killCount);
+    ui.render(pos,ammo,level,health,xp,levelCap,arrowAmmo,money,multiplier,multiplierTime,maxMultiplierTime,killCount,magnetTimer);
     strokeWeight(5);
     pushMatrix();
     translate(pos.x, pos.y,+5);
@@ -410,6 +412,15 @@ class Player extends Entity
      multiplierTime -= 0.5 * multiplier;
    }
    
+   if(magnet && magnetTimer > 0)
+   {
+     magnetTimer--;
+   }
+   else
+   {
+     magnet = false;
+   }
+   
   }//end update
   
   ////////////////////////////////////////////////
@@ -432,5 +443,11 @@ class Player extends Entity
   {
     multiplierEnabled = true;
     multiplierTime += 120;
+  }
+  
+  void pickUpMagnet()
+  {
+    magnet = true;
+    magnetTimer += 3000;
   }
 }

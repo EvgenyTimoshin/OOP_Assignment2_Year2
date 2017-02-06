@@ -36,7 +36,7 @@ class Cash extends GameObject
   {
     if(size < 60 && grow)
     {
-      size += 0.5;
+      size += 1;
     }
     else
     {
@@ -45,7 +45,7 @@ class Cash extends GameObject
     
     if(grow == false && size > 40)
     {
-      size-=0.5;
+      size-=1;
     }
    
     theta += 0.05f;
@@ -57,7 +57,7 @@ class Cash extends GameObject
            audio.coin.play();
         }
         
-     if(dist(player.pos.x, player.pos.y,pos.x,pos.y) < 180)
+     if(dist(player.pos.x, player.pos.y,pos.x,pos.y) < 180 || player.magnet)
      {
        pos.lerp(player.pos, 0.09);
      }

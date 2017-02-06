@@ -56,14 +56,35 @@ class Zombie extends Enemy
 void zombieSpawn()
 {
   
-  if(frameCount % 120 == 0)
+  if(frameCount % spawnCount == 0)
   {
     float angle = random(0,10);
+    float horde = random(0,500);
     
-    float x = cos(angle) * 1200 + player.pos.x;
-    float y = sin(angle) * 1200 + player.pos.y;
-    
-    Zombie m = new Zombie(x, y, 0, random(30,70), 255);
-    gameObjects.add(m);
+    if(horde < 10)
+    {
+      spawnHorde(angle);
+    }
+    else
+    {
+      float x = cos(angle) * 1200 + player.pos.x;
+      float y = sin(angle) * 1200 + player.pos.y;
+      Zombie m = new Zombie(x, y, 0, random(30,70), 255);
+      gameObjects.add(m);
+    }
   }
+}
+
+void spawnHorde(float angle)
+{
+  float count = random(10, 20);
+      
+      for(int i = 0; i < count; i++)
+      {
+        float x = cos(angle) * 1200 + player.pos.x;
+        float y = sin(angle) * 1200 + player.pos.y;
+        Zombie m = new Zombie(x, y, 0, random(30,70), 255);
+        gameObjects.add(m);
+        angle += 0.2;
+      }
 }

@@ -18,8 +18,6 @@ void setup()
   player = new Player(width / 2, height / 2, 0, 50, color(0,0,255));
   gameObjects.add(player);
   clock = new Clock();
-  Gun gun = new Gun();
-  gameObjects.add(gun);
   bow = new Bow();
   torch = new Torch();
   trader = new Trader(200, 300);
@@ -46,6 +44,9 @@ void setup()
   background = loadImage("grass.jpg");
   background.resize(500, 500);
   highscore = loadStrings("data/highscore.txt");
+  
+  Magnet m = new Magnet(width/2, height/2);
+  gameObjects.add(m);
 }
 
 Clock clock;
@@ -64,6 +65,7 @@ float timeDelta = 1.0f / 60.0f;
 Boolean paused = false;
 int gameState = 1;
 String[] highscore;
+int spawnCount = 120;
 
 void draw()
 {
