@@ -39,7 +39,7 @@ class Player extends Entity
     this.theta = theta;
     this.size = size;
     this.health = 100;
-    this.ammo = 1000;
+    this.ammo = 50;
     this.c = c;
     cameraZoom = 30;
     level = 1;
@@ -404,12 +404,17 @@ class Player extends Entity
    else
    {
      multiplierEnabled = false;
-     multiplier = 1;
+     if(multiplier > 1)
+     {
+       multiplierEnabled = true;
+       multiplierTime = maxMultiplierTime / 4;
+       multiplier -= 0.5;
+     }
    }
    
    if(multiplierTime > 0)
    {
-     multiplierTime -= 0.5 * multiplier;
+     multiplierTime -= 0.35 * multiplier;
    }
    
    if(magnet && magnetTimer > 0)
@@ -448,6 +453,6 @@ class Player extends Entity
   void pickUpMagnet()
   {
     magnet = true;
-    magnetTimer += 3000;
+    magnetTimer += 1000;
   }
 }

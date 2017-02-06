@@ -44,9 +44,6 @@ void setup()
   background = loadImage("grass.jpg");
   background.resize(500, 500);
   highscore = loadStrings("data/highscore.txt");
-  
-  Magnet m = new Magnet(width/2, height/2);
-  gameObjects.add(m);
 }
 
 Clock clock;
@@ -65,7 +62,7 @@ float timeDelta = 1.0f / 60.0f;
 Boolean paused = false;
 int gameState = 1;
 String[] highscore;
-int spawnCount = 120;
+int spawnCount = 170;
 
 void draw()
 {
@@ -75,6 +72,10 @@ void draw()
             break;
     
     case 2: gameRunning();
+            if(frameCount % 3600 == 0)
+            {
+              spawnCount *= 0.8;
+            }
             break;
   }
 }
@@ -94,7 +95,7 @@ void gameRunning()
   
   zombieSpawn();
   //gunEnemySpawn();
-  //ammoSpawn();
+  ammoSpawn();
   //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
   //trader.render();
   //trader.update();

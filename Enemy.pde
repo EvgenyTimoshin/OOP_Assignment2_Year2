@@ -35,7 +35,7 @@ class Enemy extends Entity
     projectileCollision();
     wallCollision();
     
-    if(dist(player.pos.x , player.pos.y, pos.x, pos.y) < size*1.6)
+    if(dist(player.pos.x , player.pos.y, pos.x, pos.y) < size*1.9)
     {
       audio.bite.rewind();
       audio.bite.play();
@@ -57,6 +57,14 @@ class Enemy extends Entity
       player.showXp(4);
       player.killStreak();
       player.xp += 10;
+      
+      int magnetChance = (int)random(0,100);
+      
+      if(magnetChance < 10)
+      {
+        Magnet m = new Magnet(pos.x, pos.y);
+        gameObjects.add(m);
+      }
     }
   }
 }

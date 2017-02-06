@@ -59,9 +59,9 @@ void zombieSpawn()
   if(frameCount % spawnCount == 0)
   {
     float angle = random(0,10);
-    float horde = random(0,500);
+    float horde = random(0,100);
     
-    if(horde < 10)
+    if(horde < 8)
     {
       spawnHorde(angle);
     }

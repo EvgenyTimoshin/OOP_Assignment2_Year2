@@ -32,10 +32,12 @@ class Magnet extends GameObject
   {
     theta += 0.1f;
     
-    if(dist(player.pos.x, player.pos.y, pos.x, pos.y) < 90)
+    if(dist(player.pos.x, player.pos.y, pos.x, pos.y) < 160)
     {
       gameObjects.remove(this);
       player.pickUpMagnet();
+      pos.lerp(player.pos, 0.09);
     }
+    
   }
 }

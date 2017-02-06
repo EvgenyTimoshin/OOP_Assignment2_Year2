@@ -22,14 +22,23 @@ class Ammo extends GameObject
   void update()
   {
     theta += 0.01f;
+    
+    if(player.magnet || dist(player.pos.x,player.pos.y,pos.x,pos.y) < 180)
+    {
+      pos.lerp(player.pos, 0.09);
+    }
   }
 }
 
 void ammoSpawn()
 {
+  float angle = random(0,10);
+  float x = cos(angle) * 700 + player.pos.x;
+  float y = sin(angle) * 700 + player.pos.y;
+  
   if(frameCount % 320 == 0)
   {
-    Ammo i = new Ammo(random(0,width), random(0,height), random(10, 40));
+    Ammo i = new Ammo(x, y, random(10, 40));
     gameObjects.add(i);
   }
 }
