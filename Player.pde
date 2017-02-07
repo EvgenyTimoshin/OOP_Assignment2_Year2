@@ -98,103 +98,139 @@ class Player extends Entity
     popMatrix();
   }
   
-  Boolean north()
-  {
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
-      {  
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 2)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
-        {
-          stopMovement();
-          text("Collision NORTH",width/2, height/2);
-          return false;
-        }
-      }
-   }
-   return true;
-  }
-  
-  Boolean south()
-  {
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
-      {  
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 2))
-        {
-          stopMovement();
-          text("Collision SOUTH",width/2, height/2);
-          return false;
-        }
-      }
-   }
-   return true;
-  }
-  
-  Boolean west()
-  {
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
-      {  
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 2)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
-        {
-          stopMovement();
-          text("Collision WEST",width/2, height/2);
-          return false;
-        }
-      }
-   }
-   return true;
-  }
-  
-  Boolean east()
-  {
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Wall)
-      {  
-        Wall wall = (Wall) go;
-        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
-            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 2)
-            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
-            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
-        {
-          stopMovement();
-          text("Collision EAST",width/2, height/2);
-          return false;
-        }
-      }
-   }
-   return true;
-  }
-  
   void update()
   {
-    fireRate = 2 * multiplier;
-    
-    if(level % 100 == 0)
+   fireRate = 2 * multiplier;
+   input();
+   playerMovement();
+   ammoCollision();
+   xpControl();
+   camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
+   projectileCollision();
+   wallCollision();
+   multiplierUpdate();
+   checkDeath();
+   
+  }//end update
+  
+  ////////////////////////////////////////////////
+  
+  void playerMovement()
+  {
+    if(playerWallCollision == false)
     {
-      level = 0;
+      accel = PVector.div(force, mass);
+      velocity.add(PVector.mult(accel, timeDelta));
+      if(someKeyPressed == false)
+      {
+        velocity.x = velocity.x *0.80;
+        velocity.y = velocity.y * 0.80;
+      }
+      pos.add(PVector.mult(velocity, timeDelta));
+      force.x = force.y = 0;
+      velocity.mult(0.99f);
+      elapsed += timeDelta;
+    }//end collision
+  }
+  
+  void ammoCollision()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition with ammo pickups
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Ammo)
+      {
+        Ammo item = (Ammo) go;
+        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
+        {
+          ammo += size/5;
+          gameObjects.remove(item);
+        }
+      }
     }
-    
+  }
+  
+  void multiplierUpdate()
+  {
+   if(multiplierEnabled && multiplierTime > 0)
+   {
+      if(multiplierTime > maxMultiplierTime)
+      {
+        multiplier += 0.5;
+        maxMultiplierTime *= 1.2;
+        multiplierTime = 100;
+      }
+   }
+   else
+   {
+     multiplierEnabled = false;
+     if(multiplier > 1)
+     {
+         multiplierEnabled = true;
+         multiplierTime = maxMultiplierTime / 4;
+         multiplier -= 0.5;
+     }
+    }
+   
+     if(multiplierTime > 0)
+     {
+       multiplierTime -= 0.35 * multiplier;
+     }
+     
+     if(magnet && magnetTimer > 0)
+     {
+       magnetTimer--;
+     }
+     else
+     {
+       magnet = false;
+     }
+  }
+  
+  void showXp(int enemyType)
+  {
+    showXp = true;
+    displayCounter = 60;
+    this.enemyTypeKilled = enemyType;
+    killCount++;
+  }
+  
+  void stopMovement()
+  {
+    playerWallCollision = true;
+    velocity.mult(0);
+  }//end sopMovement
+  
+  void killStreak()
+  {
+    multiplierEnabled = true;
+    multiplierTime += 120;
+  }
+  
+  void pickUpMagnet()
+  {
+    magnet = true;
+    magnetTimer += 1000;
+  }
+  
+  void checkDeath()
+  {
+    if(health < 25)
+    {
+       audio.heartBeat.play();
+    }
+    if(health < 0)
+    {
+      String score = str(killCount) + ' ' + year() +  ' ' + month() + ' ' + day() + ' ' + hour() + ' ' + minute();
+      String[] list = split(score,' ');
+      saveStrings("data/highscore.txt",list);
+      gameObjects.remove(this);
+      gameState = 3;
+    }
+  }
+  
+  void input()
+  {
     someKeyPressed = false;
     
     if(controlling)
@@ -322,46 +358,16 @@ class Player extends Entity
           arrowAmmo--;
         }
       }
-      
-    if(playerWallCollision == false)
+  }
+  
+  void xpControl()
+  {
+    if(level % 100 == 0)
     {
-      accel = PVector.div(force, mass);
-      velocity.add(PVector.mult(accel, timeDelta));
-      if(someKeyPressed == false)
-      {
-        velocity.x = velocity.x *0.80;
-        velocity.y = velocity.y * 0.80;
-      }
-      pos.add(PVector.mult(velocity, timeDelta));
-      force.x = force.y = 0;
-      velocity.mult(0.99f);
-      elapsed += timeDelta;
-    }//end collision
-    
-    if(health < 0)
-    {
-      String score = str(killCount) + ' ' + year() +  ' ' + month() + ' ' + day() + ' ' + hour() + ' ' + minute();
-      String[] list = split(score,' ');
-      saveStrings("data/highscore.txt",list);
-      gameObjects.remove(this);
-      gameState = 3;
+      level = 0;
     }
-      
-    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition with ammo pickups
-    {
-      GameObject go = gameObjects.get(i);
-      if (go instanceof Ammo)
-      {
-        Ammo item = (Ammo) go;
-        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
-        {
-          ammo += size/5;
-          gameObjects.remove(item);
-        }
-      }
-   }
-   
-   if(xp > levelCap)
+    
+    if(xp > levelCap)
    {
      xp = 0;
      level++;
@@ -382,78 +388,93 @@ class Player extends Entity
      audio.levelUp.play();
      textSize(50);
    }
-   
-   camera(pos.x, pos.y, (height/2.0) / tan(PI*cameraZoom / 180.0 ), pos.x, pos.y, 0, 0, 1, 0);
-   
-   if(health < 25)
-   {
-     audio.heartBeat.play();
-   }
-   
-   projectileCollision();
-   wallCollision();
-   
-   if(multiplierEnabled && multiplierTime > 0)
-   {
-      if(multiplierTime > maxMultiplierTime)
-      {
-        multiplier += 0.5;
-        maxMultiplierTime *= 1.2;
-        multiplierTime = 100;
+  }
+  
+   Boolean north()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5 - 2)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          stopMovement();
+          text("Collision NORTH",width/2, height/2);
+          return false;
+        }
       }
    }
-   else
-   {
-     multiplierEnabled = false;
-     if(multiplier > 1)
-     {
-       multiplierEnabled = true;
-       multiplierTime = maxMultiplierTime / 4;
-       multiplier -= 0.5;
-     }
-   }
-   
-   if(multiplierTime > 0)
-   {
-     multiplierTime -= 0.35 * multiplier;
-   }
-   
-   if(magnet && magnetTimer > 0)
-   {
-     magnetTimer--;
-   }
-   else
-   {
-     magnet = false;
-   }
-   
-  }//end update
-  
-  ////////////////////////////////////////////////
-  
-  void showXp(int enemyType)
-  {
-    showXp = true;
-    displayCounter = 60;
-    this.enemyTypeKilled = enemyType;
-    killCount++;
+   return true;
   }
   
-  void stopMovement()
+  Boolean south()
   {
-    playerWallCollision = true;
-    velocity.mult(0);
-  }//end sopMovement
-  
-  void killStreak()
-  {
-    multiplierEnabled = true;
-    multiplierTime += 120;
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5 + 2))
+        {
+          stopMovement();
+          text("Collision SOUTH",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
   }
   
-  void pickUpMagnet()
+  Boolean west()
   {
-    magnet = true;
-    magnetTimer += 1000;
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2 - 2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          stopMovement();
+          text("Collision WEST",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
+  }
+  
+  Boolean east()
+  {
+    for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition between PLayer and wall
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Wall)
+      {  
+        Wall wall = (Wall) go;
+        if ((wall.pos.x + wall.wallWidth) >= (this.pos.x - size/2)
+            && (wall.pos.x) <= (this.pos.x + size * 0.5 + 2)
+            && (wall.pos.y + wall.wallHeight) >= (this.pos.y - size * 0.5)
+            && (wall.pos.y) <= (this.pos.y + this.size * 0.5))
+        {
+          stopMovement();
+          text("Collision EAST",width/2, height/2);
+          return false;
+        }
+      }
+   }
+   return true;
   }
 }
