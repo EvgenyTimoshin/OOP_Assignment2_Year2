@@ -49,7 +49,6 @@ class Entity extends GameObject implements Biological
             }
           }
           
-         
           if(this instanceof Enemy && b instanceof Arrow)
           {
             this.bleed(b.theta+radians(180));
@@ -105,7 +104,6 @@ class Entity extends GameObject implements Biological
   void render()
   {
   }
-  
   
   void bleed(float theta)
   {

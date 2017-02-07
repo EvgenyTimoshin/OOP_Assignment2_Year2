@@ -24,8 +24,7 @@ class Magnet extends GameObject
         rect(0-40,0,20,15);
       popMatrix();
     popMatrix();
-    
-    
+   
   }
   
   void update()

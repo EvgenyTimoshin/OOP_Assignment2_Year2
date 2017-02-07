@@ -20,16 +20,15 @@ void setup()
   bow = new Bow();
   torch = new Torch();
   trader = new Trader(200, 300);
-   
-  Wall wall = new Wall(-width*2,-height*2,width*4, 20);
+ Wall wall = new Wall(-width*2,-height*2,width*4, 20);
   gameObjects.add(wall);
+  /*
   Wall wall2 = new Wall(width*2,-height*2,20, height*4);
   gameObjects.add(wall2);
   Wall wall3 =new Wall(-width*2, height*2, width*4, 20);
   gameObjects.add(wall3);
   Wall wall4 = new Wall(-width*2, -height*2, 20, height*4);
-  gameObjects.add(wall4);
-  
+  gameObjects.add(wall4);*/
   font = loadFont("Zombie-Noize-48.vlw");
   audio.forestAmbience.play();
   background = loadImage("grass.jpg");
@@ -71,6 +70,5 @@ void draw()
             
     case 3: state.gameOver();
             break;
-  
   }         
 }

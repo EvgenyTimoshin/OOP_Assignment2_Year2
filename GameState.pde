@@ -43,7 +43,7 @@ class GameState
     fill(#53D322);
     text(highscore[0], width/2 - 35, height/2 - 300);
     textSize(20);
-    text("Date : " + highscore[1] + " / " + highscore[2] + " / " + highscore[3], width/2 - 80, height/2 - 250);
+    text("Date : " + highscore[1] + " / " + highscore[2] + " / " + highscore[3], width/2 - 85, height/2 - 250);
     text("Time : "  + highscore[4] + " : " + highscore[5], width/2 - 60, height/2 - 220);
     
     fill(#D3D322);
@@ -73,12 +73,12 @@ class GameState
     background(0);
     fill(255, 0, 0);
     textSize(70);
-    text("SCORE", width/2 - 123, height/2 - 400);
+    text("SCORE", width/2 - 80, height/2 - 400);
     fill(#53D322);
-    text(player.killCount, width/2 - 30, height/2 - 300);
-    textSize(20);
-    text("Date : " + day() + " / " + month() + " / " + year(), width/2 - 90, height/2 - 100);
-    text("Time : "  + hour() + " : " + minute(), width/2 - 70, height/2 );
+    text(player.killCount, width/2 - 15, height/2 - 300);
+    textSize(50);
+    text("Date : " + day() + " / " + month() + " / " + year(), width/2 - 128, height/2 - 150);
+    text("Time : "  + hour() + " : " + minute(), width/2 - 90, height/2 );
     
     if(mouseX < width/2 + 100 && mouseX > width/2 - 150 && mouseY > height/2 + 100 && mouseY < height/2 + 300)
     {
@@ -88,24 +88,25 @@ class GameState
         setup();
         gameState = 2;
       }
-       pushMatrix();
-        translate(0,0,+10);
-        textSize(27);
-        text("Click outside to quit",width/2 - 130, height/2 + 200);
-      popMatrix();
-      
-      fill(255, 0 ,0 );
-    }
-    else
-    {
-      
-      fill(255);
+     fill(255);
       pushMatrix();
         translate(0,0,+10);
         textSize(50);
-        text("Start Again",width/2 - 130, height/2 + 200);
+        text("Start Again",width/2 - 105, height/2 + 200);
       popMatrix();
       fill(0);
+    }
+    else
+    {
+         pushMatrix();
+        translate(0,0,+10);
+        textSize(27);
+        text("Click outside to quit",width/2 - 110, height/2 + 200);
+      popMatrix();
+      fill(0);
+      
+      
+      
       if(mousePressed)
       {
         exit();

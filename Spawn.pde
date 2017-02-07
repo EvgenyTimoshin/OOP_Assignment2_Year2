@@ -12,6 +12,7 @@ class Spawn
   
   void update()
   {
+    println(frameCount);
     ammoSpawn();
     
     if(trading)
@@ -19,8 +20,9 @@ class Spawn
       trader.render();
       trader.update();
     }
-    else if(frameCount % 6000 == 0)
+    else if(frameCount % 4500 == 0)
     {
+      player.controlling = true;
       military = true;
     }
     
@@ -143,7 +145,7 @@ class Spawn
     float y = sin(angle) * 700 + player.pos.y;
     trader = new Trader(x , y);
     trading = true;
-    tradingTimer = 1800;
+    tradingTimer = 2000;
     military = false;
     
     clearEnemies();
