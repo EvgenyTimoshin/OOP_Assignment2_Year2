@@ -13,8 +13,8 @@ class Clock extends GameObject
   
   Clock()
   {
-    this.hrOne = 1;
-    this.hrTwo = 2;
+    this.hrOne = 2;
+    this.hrTwo = 3;
     this.minuteOne = 0;
     this.minuteTwo = 0;
     this.dayLight = 0;
@@ -23,7 +23,6 @@ class Clock extends GameObject
   
   void render()
   {
-    
     noStroke();
     fill(0,dayLight);
     pushMatrix();
@@ -82,6 +81,7 @@ class Clock extends GameObject
       dayCount++;
       hrOne = 0;
       hrTwo = 0;
+      spawn.traderArrival();
     }
     
     if(hrOne == 1)

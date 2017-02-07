@@ -35,9 +35,11 @@ void setup()
   background = loadImage("grass.jpg");
   background.resize(500, 500);
   highscore = loadStrings("data/highscore.txt");
-  gameState = 1;
+  gameState = 3;
+  spawn = new Spawn();
 }
 
+Spawn spawn;
 Clock clock;
 Player player;
 Trader trader;
@@ -54,7 +56,6 @@ float timeDelta = 1.0f / 60.0f;
 Boolean paused = false;
 int gameState = 1;
 String[] highscore;
-int spawnCount = 170;
 
 void draw()
 {

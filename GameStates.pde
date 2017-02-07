@@ -11,18 +11,8 @@ void gameRunning()
   popMatrix();
   fill(255);
   
-  if(frameCount % 3600 == 0)
-  {
-    spawnCount *= 0.8;
-  }
+  spawn.update();
   
-  zombieSpawn();
-  //gunEnemySpawn();
-  ammoSpawn();
-  //text(dist(player.pos.x,player.pos.y,width,height),width/2,height/2 + 100);
-  //trader.render();
-  //trader.update();
- //drawBuildingFloor();
   for (int i = gameObjects.size() - 1 ; i >= 0  ; i --)
   {
     GameObject go = gameObjects.get(i); 
@@ -74,7 +64,7 @@ void mainMenu()
 void gameOver()
 {
   pushMatrix();
-  
+  translate(player.pos.x - width/2,player.pos.y - height/2,+5);
   background(0);
   fill(255, 0, 0);
   textSize(70);

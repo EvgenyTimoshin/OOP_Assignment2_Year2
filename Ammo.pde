@@ -29,16 +29,3 @@ class Ammo extends GameObject
     }
   }
 }
-
-void ammoSpawn()
-{
-  float angle = random(0,10);
-  float x = cos(angle) * 700 + player.pos.x;
-  float y = sin(angle) * 700 + player.pos.y;
-  
-  if(frameCount % 320 == 0)
-  {
-    Ammo i = new Ammo(x, y, random(10, 40));
-    gameObjects.add(i);
-  }
-}

@@ -9,12 +9,11 @@ class GunEnemy extends Enemy
     force = new PVector(0, 0);
     this.theta = theta;
     this.size = size;
-    this.health = 100;
+    this.health = 250;
     this.c = c;
-    health = 100;
     stuck = false;
-    spotted = false;
-    mass = 2;
+    spotted = true;
+    mass = 4.5;
     distanceFromPlayer = 201;
     fireRate = 2;
   }
@@ -22,7 +21,7 @@ class GunEnemy extends Enemy
   void render()
   {
     fill(0,0,255);
-    rect(pos.x - size, pos.y - size*1.2,map(health,0,100,0,100),10);
+    rect(pos.x - size, pos.y - size*1.2,map(health,0,250,0,100),10);
     pushMatrix();
     translate(pos.x, pos.y,+4);
     rotate(theta);
@@ -42,7 +41,7 @@ class GunEnemy extends Enemy
       forward.x = sin(theta);
       forward.y = -cos(theta);
       PVector bp = PVector.sub(pos, PVector.mult(forward, size + 5));
-      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 160);
+      Bullet b = new Bullet(bp.x, bp.y, theta, 10, 4, 250);
       gameObjects.add(b);
     }
     
@@ -52,17 +51,3 @@ class GunEnemy extends Enemy
    movement();
 }
 }//end class
-
-void gunEnemySpawn()
-{
-  if(frameCount % 60 == 0)
-  {
-    float angle = random(0,10);
-    
-    float x = cos(angle) * 1200 + player.pos.x;
-    float y = sin(angle) * 1200 + player.pos.y;
-    
-    GunEnemy g = new GunEnemy(x, y, 0, 50, 255);
-    gameObjects.add(g);
-  }
-}

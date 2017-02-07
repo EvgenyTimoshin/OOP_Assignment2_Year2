@@ -52,8 +52,24 @@ class Enemy extends Entity
       audio.death.setGain(-10);
       audio.death.play();
       gameObjects.remove(this);
-      Cash c = new Cash(pos.x, pos.y);
-      gameObjects.add(c);
+      if(this instanceof Zombie)
+      {
+        Cash c = new Cash(pos.x, pos.y);
+        gameObjects.add(c);
+      }
+      else
+      {
+        Cash c = new Cash(pos.x, pos.y);
+        gameObjects.add(c);
+        c = new Cash(pos.x + 10, pos.y);
+        gameObjects.add(c);
+        c = new Cash(pos.x + 10, pos.y + 10);
+        gameObjects.add(c);
+        c = new Cash(pos.x - 10, pos.y + 10);
+        gameObjects.add(c);
+        c = new Cash(pos.x - 10, pos.y - 10);
+        gameObjects.add(c);
+      }
       player.showXp(4);
       player.killStreak();
       player.xp += 10;

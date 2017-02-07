@@ -14,7 +14,7 @@ class Arrow extends Bullet
   void render()
   {
     pushMatrix();
-    translate(pos.x, pos.y, +4);
+    translate(pos.x, pos.y, +5);
     fill(255);
     rotate(theta);
     stroke(#553000);
