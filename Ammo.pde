@@ -11,11 +11,11 @@ class Ammo extends GameObject
   
   void render()
   {
-    fill(random(255), random(255), random(255));
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(theta);
-    triangle(0 , 0, size, -size, -size, -size);
+    fill(#5D3909);
+    rect(0,0,50,35);
     popMatrix();
   }
   

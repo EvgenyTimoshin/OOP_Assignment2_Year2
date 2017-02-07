@@ -30,7 +30,7 @@ class GUI extends GameObject
       
       if(magnetTimer > 0)
       {
-        text("Magnet : " + (int)magnetTimer/60, pos.x - 100, pos.y - 300);
+        text("Magnet : " + (int)magnetTimer/60, pos.x - 100, pos.y - 230);
       }
       
       text("A M M O :  " + ammo ,pos.x + width/2 - 300, pos.y + height/2 - 80 );//ammo

@@ -13,8 +13,8 @@ class Clock extends GameObject
   
   Clock()
   {
-    this.hrOne = 2;
-    this.hrTwo = 3;
+    this.hrOne = 1;
+    this.hrTwo = 5;
     this.minuteOne = 0;
     this.minuteTwo = 0;
     this.dayLight = 0;

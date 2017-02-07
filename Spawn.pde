@@ -30,9 +30,15 @@ class Spawn
       trader.render();
       trader.update();
       tradingTimer--;
-      fill(0, 0, 255);
       textSize(60);
-      text("Trade Time Left : " + tradingTimer/60, player.pos.x - 250, player.pos.y - 350);
+      pushMatrix();
+        translate(0,0,+6);
+        fill(0,50);
+        stroke(0);
+        rect(player.pos.x - 260, player.pos.y - 410, 500, 90);
+        fill(0, 0, 255);
+        text("Trade Time Left : " + tradingTimer/60, player.pos.x - 210, player.pos.y - 350);
+      popMatrix();
     }
     else
     {
@@ -137,8 +143,22 @@ class Spawn
     float y = sin(angle) * 700 + player.pos.y;
     trader = new Trader(x , y);
     trading = true;
-    tradingTimer = 1200;
+    tradingTimer = 1800;
     military = false;
+    
+    clearEnemies();
+  }
+  
+  void clearEnemies()
+  {
+    for(int i = 0; i < gameObjects.size(); i++)
+    {
+      GameObject g = gameObjects.get(i);
+      if(g instanceof Enemy)
+      {
+        gameObjects.remove(g);
+      }
+    }
   }
   
 }//end class

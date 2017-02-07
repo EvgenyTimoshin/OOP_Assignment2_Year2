@@ -35,10 +35,12 @@ void setup()
   background = loadImage("grass.jpg");
   background.resize(500, 500);
   highscore = loadStrings("data/highscore.txt");
-  gameState = 3;
+  gameState = 1;
   spawn = new Spawn();
+  state = new GameState();
 }
 
+GameState state;
 Spawn spawn;
 Clock clock;
 Player player;
@@ -61,13 +63,13 @@ void draw()
 {
   switch(gameState)
   {
-    case 1: mainMenu();
+    case 1: state.mainMenu();
             break;
     
-    case 2: gameRunning();
+    case 2: state.gameRunning();
             break;
             
-    case 3: gameOver();
+    case 3: state.gameOver();
             break;
   
   }         

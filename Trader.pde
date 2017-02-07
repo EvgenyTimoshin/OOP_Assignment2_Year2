@@ -36,7 +36,10 @@ class Trader extends GameObject
     
     if(trading)
     {
-      tradeMenu();
+      pushMatrix();
+        translate(0,0,+7);
+        tradeMenu();
+      popMatrix();
     }
   }
   
