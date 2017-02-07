@@ -239,7 +239,7 @@ class Player extends Entity
   {
     if(health < 25)
     {
-       audio.heartBeat.play();
+      // audio.heartBeat.play();
     }
     if(health < 0)
     {
