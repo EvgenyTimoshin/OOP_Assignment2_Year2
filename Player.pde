@@ -147,6 +147,28 @@ class Player extends Entity
           gameObjects.remove(item);
         }
       }
+      if(go instanceof Health)
+      {
+        Health h = (Health) go;
+        if (dist(go.pos.x, go.pos.y, this.pos.x, this.pos.y) < size)
+        {
+          audio.coin.rewind();
+          audio.coin.play();
+          ammo += size/5;
+          gameObjects.remove(h);
+          if(health < 100);
+          {
+            if(health + 25 > 100)
+            {
+              health = 100;
+            }
+            else
+            {
+              health += 25;
+            }
+          }
+        }
+      }
     }
   }
   

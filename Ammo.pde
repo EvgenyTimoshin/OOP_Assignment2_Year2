@@ -12,6 +12,7 @@ class Ammo extends GameObject
   void render()
   {
     pushMatrix();
+    noStroke();
     translate(pos.x,pos.y);
     rotate(theta);
     fill(#5D3909);

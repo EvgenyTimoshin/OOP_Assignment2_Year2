@@ -74,12 +74,17 @@ class Enemy extends Entity
       player.killStreak();
       player.xp += 10;
       
-      int magnetChance = (int)random(0,100);
+      int spawnChance = (int)random(0,100);
       
-      if(magnetChance < 10)
+      if(spawnChance < 10)
       {
         Magnet m = new Magnet(pos.x, pos.y);
         gameObjects.add(m);
+      }
+      else if(spawnChance > 95)
+      {
+        Health h = new Health(pos.x, pos.y);
+        gameObjects.add(h);
       }
     }
   }

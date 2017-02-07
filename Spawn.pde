@@ -129,7 +129,7 @@ class Spawn
     float x = cos(angle) * 700 + player.pos.x;
     float y = sin(angle) * 700 + player.pos.y;
     
-    if(frameCount % 320 == 0)
+    if(frameCount % 400 == 0)
     {
       Ammo i = new Ammo(x, y, random(10, 40));
       gameObjects.add(i);
@@ -160,5 +160,6 @@ class Spawn
       }
     }
   }
+  
   
 }//end class

@@ -21,7 +21,7 @@ class Arrow extends Bullet
     strokeWeight(2);
     line(0, - size, 0, 20);
     fill(#818181);
-    stroke(#818181);
+    stroke(#0A0907);
     triangle(0, - size-6, 6, -size, -6, -size);
     strokeWeight(1);
     popMatrix();
