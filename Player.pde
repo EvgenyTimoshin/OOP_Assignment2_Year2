@@ -196,7 +196,7 @@ class Player extends Entity
    
      if(multiplierTime > 0)
      {
-       multiplierTime -= 0.35 * multiplier;
+       multiplierTime -= 0.28 * multiplier;
      }
      
      if(magnet && magnetTimer > 0)
