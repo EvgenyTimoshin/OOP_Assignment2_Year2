@@ -344,6 +344,7 @@ class Player extends Entity
       String[] list = split(score,' ');
       saveStrings("data/highscore.txt",list);
       gameObjects.remove(this);
+      gameState = 3;
     }
       
     for(int i = 0 ; i < gameObjects.size() ; i ++)//Checks for collition with ammo pickups

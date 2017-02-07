@@ -8,7 +8,6 @@ void setup()
   camera();
   frameRate(60);
   smooth(4);
-  //noCursor();
   minim = new Minim(this);
   audio = new Audio();
   /////////////////////
@@ -21,12 +20,7 @@ void setup()
   bow = new Bow();
   torch = new Torch();
   trader = new Trader(200, 300);
-  
-  /*for(int i = 0; i < 1080; i += 350)
-  {
-    createBuilding(i , 300, 300, 10);
-  }*/
-  
+   
   Wall wall = new Wall(-width*2,-height*2,width*4, 20);
   gameObjects.add(wall);
   Wall wall2 = new Wall(width*2,-height*2,20, height*4);
@@ -37,13 +31,11 @@ void setup()
   gameObjects.add(wall4);
   
   font = loadFont("Zombie-Noize-48.vlw");
-  ///////////
-  //Sounds
-  ////////
   audio.forestAmbience.play();
   background = loadImage("grass.jpg");
   background.resize(500, 500);
   highscore = loadStrings("data/highscore.txt");
+  gameState = 3;
 }
 
 Clock clock;
@@ -72,12 +64,12 @@ void draw()
             break;
     
     case 2: gameRunning();
-            if(frameCount % 3600 == 0)
-            {
-              spawnCount *= 0.8;
-            }
             break;
-  }
+            
+    case 3: gameOver();
+            break;
+  
+}         
 }
 
 void gameRunning()
@@ -92,6 +84,11 @@ void gameRunning()
   rect(-width*2,-height*2,width*4,height*4);
   popMatrix();
   fill(255);
+  
+  if(frameCount % 3600 == 0)
+  {
+    spawnCount *= 0.8;
+  }
   
   zombieSpawn();
   //gunEnemySpawn();
@@ -146,5 +143,54 @@ void mainMenu()
   {
     fill(0);
   }
+}
+
+void gameOver()
+{
+  pushMatrix();
   
+  background(0);
+  fill(255, 0, 0);
+  textSize(70);
+  text("SCORE", width/2 - 123, height/2 - 400);
+  fill(#53D322);
+  text(player.killCount, width/2 - 30, height/2 - 300);
+  textSize(20);
+  text("Date : " + day() + " / " + month() + " / " + year(), width/2 - 90, height/2 - 100);
+  text("Time : "  + hour() + " : " + minute(), width/2 - 70, height/2 );
+  
+  if(mouseX < width/2 + 100 && mouseX > width/2 - 150 && mouseY > height/2 + 100 && mouseY < height/2 + 300)
+  {
+    if(mousePressed)
+    {
+      gameObjects.clear();
+      setup();
+      gameState = 2;
+    }
+     pushMatrix();
+      translate(0,0,+10);
+      textSize(27);
+      text("Click outside to quit",width/2 - 130, height/2 + 200);
+    popMatrix();
+    
+    fill(255, 0 ,0 );
+  }
+  else
+  {
+    
+    fill(255);
+    pushMatrix();
+      translate(0,0,+10);
+      textSize(50);
+      text("Start Again",width/2 - 130, height/2 + 200);
+    popMatrix();
+    fill(0);
+    if(mousePressed)
+    {
+      exit();
+    }
+  }
+  stroke(255,0,0);
+  rect(width/2 - 150, height/2 + 100, 300, 200);
+  popMatrix();
 }

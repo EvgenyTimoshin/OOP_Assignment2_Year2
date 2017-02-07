@@ -83,7 +83,20 @@ class Entity extends GameObject implements Biological
           velocity.mult(-1);
         }
       }
+      if(go instanceof Enemy && this instanceof Enemy && this != go && !(this instanceof Player))
+      {
+        Enemy e = (Enemy) go;
+        if(dist(e.pos.x, e.pos.y, pos.x, pos.y) < size + 2)
+        {
+          this.avoid();
+        }
+      }
    }
+  }
+  
+  void avoid()
+  {
+    velocity.mult(-1);
   }
   
   void update()
