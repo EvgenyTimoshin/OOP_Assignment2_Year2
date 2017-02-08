@@ -4,6 +4,8 @@ My Top Down Shooter Zombie Game : For Object Orriented Programming in Processing
 
 Video Link to Demo of Game:
 
+[![Video](http://img.youtube.com/vi/4krfBdfA2_k/0.jpg)](https://www.youtube.com/watch?v=4krfBdfA2_k)
+
 # Game Guide and Explanation
 
 To run this game instal minim libraray for processing to use sounds. Run this game in FullScreen() or 1920 x 1080 for optimal scaling.
@@ -26,20 +28,20 @@ When the program launches you are presented with a simple Game menu which displa
   
  
  #Parts of the Program to Note
-   - This game was written using the following OOP concepts : PolyMorphism, Inheritance and interfaces. The GameObject class is an abstract that class that most other classes in the program extend. Inheritence is used everywhere and interfaces are implemented. This allows for alot of code reuse and efficiency. (View Code)
+   - This game was written using the following OOP concepts : **PolyMorphism, Inheritance and interfaces.** The GameObject class is an abstract that class that most other classes in the program extend. **Inheritence is used everywhere and interfaces are implemented. This allows for alot of code reuse and efficiency. (View Code)**
   - All of the enities in the game implement Bilogical interface, which allows all of them to bleed on projectile impact
-  - The blood effects in the game are completley procedural and random every time creating a really nice and satisfying effect
-  - Almost everything has bit of animation to it or a physics feel making the game feel dyanmic 
-  - Enemies will not overlap but collide with eachother and bounce of eachother, the faster they collide the further theyll bounce
+  - The **blood effects** in the game are completley **procedural and random every time** creating a really nice and satisfying effect
+  - Almost everything has bit of animation to it or a physics feel making the game feel **dyanmic** 
+  - **Enemies** will not overlap but collide with eachother and **bounce of eachother**, the faster they collide the further theyll bounce
   - They will also interact in a similiar fashion when they bite the player
   - Military troops can kill the zombies and the player with their fire power, this creates fun dynamic gameplay
   - The Military Troops will follow the Player and shoot towards his direction
   - The power ups spawnning is random and dynamic
-  - The multiplier on the right side of the screen the way it looks, and functions in gameplay is really cool! proud of that
+  - The **multiplier** on the right side of the screen the way it looks, and functions in gameplay is really cool! **proud of that**
   - The level and xp bar is pretty cool too
   - The torch effect and night effect looks pretty cool but is a very easy trick, a dark slightly see through rectangle with a noFill() arc on the same layer
   - The camera follows the player around and changes as the player levels up
   - The bow extends GameObject but also interfaces Weapon which allows it to Fire and Reload
-  - The bow is one of my faveourite features of the game
+  - **The bow is one of my faveourite features of the game**
   - The minim library was used to provide sound effects to the game creating a more full game experience.
-  - I/O is used to record the highscore of the player and display it from a text file
+  - **I/O is used to record the highscore of the player and display it from a text file**
